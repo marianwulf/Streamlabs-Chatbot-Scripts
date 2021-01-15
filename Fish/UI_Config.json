@@ -1,0 +1,370 @@
+﻿{
+  "output_file": "settings.json",
+    "OnlyLive": {
+    "type": "checkbox",
+    "value": false,
+  	"label": "Only when live",
+    "tooltip": "Command is only active when stream is live",
+  	"group": "General"
+  },
+    "Command": {
+    "type": "textbox",
+    "value": "!fish",
+  	"label": "Command Name",
+    "tooltip": "The command the bot will respond to",
+  	"group": "General"
+  },
+  "Cost": {
+    "type": "numberbox",
+  	"label": "Cost",
+    "value": 0,
+    "tooltip": "Cost to use the command",
+  	"group": "General"
+  },
+    "Permission": {
+    "type": "dropdown",
+    "value": "Everyone",
+    "items": ["Everyone","Regular","Subscriber","GameWisp Subscriber","User_Specific","Min_Rank","Min_Points","Min_Hours","Moderator","Editor","Caster"],
+    "label": "Permission level",
+    "tooltip": "Set the permission level for the command",
+    "group": "General"
+  },
+    "PermissionInfo": {
+    "type": "textbox",
+    "value": "",
+    "label": "Permission level info",
+    "tooltip": "Set the user, rank or tier for permission",
+    "group": "General"
+  },
+  "Usage": {
+    "type": "dropdown",
+    "value": "Stream Chat",
+    "items": ["Stream Chat","Stream Whisper","Stream Both","Discord Chat","Discord Whisper","Discord Both","Chat Both","Whisper Both","All"],
+    "label": "Usage",
+    "tooltip": "Usage for where the script can be used!",
+    "group": "General"
+  },
+    "UseCD": {
+    "type": "checkbox",
+    "value": false,
+  	"label": "Use Cooldown Messages",
+    "tooltip": "Enable/Disable cooldown messages",
+  	"group": "Cooldown"
+  },
+    "Cooldown": {
+    "type": "numberbox",
+  	"label": "Cooldown (seconds)",
+    "value": 0,
+    "tooltip": "Cooldown in seconds.",
+  	"group": "Cooldown"
+  },
+    "OnCooldown": {
+    "type": "textbox",
+    "value": "{0} the command is still on cooldown for {1} seconds!",
+  	"label": "Cooldown Response",
+    "tooltip": "The message that the bot will display when the command is on cooldown. \r\n {0} = user \r\n {1} = time remaining",
+  	"group": "Cooldown"
+  },
+    "UserCooldown": {
+    "type": "numberbox",
+  	"label": "User Cooldown (seconds)",
+    "value": 10,
+    "tooltip": "User cooldown in seconds.",
+  	"group": "Cooldown"
+  },
+    "OnUserCooldown": {
+    "type": "textbox",
+    "value": "{0} the command is still on user cooldown for {1} seconds!",
+  	"label": "User Cooldown Response",
+    "tooltip": "The message that the bot will display when the command is on user cooldown. \r\n {0} = user \r\n {1} = time remaining",
+  	"group": "Cooldown"
+  },
+  "CasterCD": {
+    "type": "checkbox",
+    "value": true,
+  	"label": "Caster ignores cooldown",
+    "tooltip": "Enable/Disable cooldown for caster",
+  	"group": "Cooldown"
+  },
+  "Timeout": {
+    "type": "checkbox",
+    "value": false,
+  	"label": "Timeout users who fail",
+    "tooltip": "If enabled viewers that tries to fish and fail will get timed out. Only available for Twitch ",
+  	"group": "Outcomes"
+  },
+  "TL": {
+    "type": "numberbox",
+  	"label": "Timeout length",
+    "value": 60,
+    "tooltip": "Length for the timeout if users fail to fish",
+  	"group": "Outcomes"
+  },
+    "NotEnoughResponse": {
+    "type": "textbox",
+    "value": "{0} you don't have enough {1} to attempt this! You will need atleast {2} {1}.",
+    "label": "Not enough currency response",
+    "tooltip": "Message sent when user doesn't have enough points \r\n {0} = user \r\n {1} = Currencyname \r\n {1} = amount of points",
+    "group": "Responses"
+  },
+  "PermissionResponse": {
+    "type": "textbox",
+    "value": "{0} -> only {1} ({2}) and higher can use this command",
+    "label": "Permission denied response",
+    "tooltip": "Message sent when user doesn't select any valid wire. \r\n{0} = user \r\n{1} = permission\r\n{2} = permission info",
+    "group": "Responses"
+  },
+  "B1Name": {
+    "type": "textbox",
+    "value": "Loserforelle",
+  	"label": "Name",
+    "tooltip": "Name from the Boss",
+  	"group": "Boss1"
+  },
+  "B1WinChance": {
+    "type": "numberbox",
+    "value": 80,
+  	"label": "Win Chance",
+    "tooltip": "Chance to Win in %",
+  	"group": "Boss1"
+  },
+  "B1Win": {
+    "type": "numberbox",
+    "value": 7,
+  	"label": "Win Points",
+    "tooltip": "Points that you gain for winning",
+  	"group": "Boss1"
+  },
+  "B1Lose": {
+    "type": "numberbox",
+    "value": 3,
+  	"label": "Lose Points",
+    "tooltip": "Points that you lose for losing",
+  	"group": "Boss1"
+  },
+  "B1StartText": {
+    "type": "textbox",
+    "value": "{0} du trittst gegen [Weiß] Loserforelle an. Viel Glück!",
+  	"label": "Start Text",
+    "tooltip": "Text that will be posted before the fight begins",
+  	"group": "Boss1"
+  },
+  "B1WinText": {
+    "type": "textbox",
+    "value": "{0} du hast {1} {2} gewonnen! .... und stinkst LUL.",
+  	"label": "Win Text",
+    "tooltip": "Text that will be posted after you win",
+  	"group": "Boss1"
+  },
+  "B1LoseText": {
+    "type": "textbox",
+    "value": "{0} du hast {1} {2} verloren! Loserforelle macht ihrem Namen alle Ehre. (Noobfilter)",
+  	"label": "Lose Text",
+    "tooltip": "Text that will be posted after you lose",
+  	"group": "Boss1"
+  },
+  "B2Name": {
+    "type": "textbox",
+    "value": "Öderkarpfen",
+  	"label": "Name",
+    "tooltip": "Name from the Boss",
+  	"group": "Boss2"
+  },
+  "B2WinChance": {
+    "type": "numberbox",
+    "value": 60,
+  	"label": "Win Chance",
+    "tooltip": "Chance to Win in %",
+  	"group": "Boss2"
+  },
+  "B2Win": {
+    "type": "numberbox",
+    "value": 15,
+  	"label": "Win Points",
+    "tooltip": "Points that you gain for winning",
+  	"group": "Boss2"
+  },
+  "B2Lose": {
+    "type": "numberbox",
+    "value": 15,
+  	"label": "Lose Points",
+    "tooltip": "Points that you lose for losing",
+  	"group": "Boss2"
+  },
+  "B2StartText": {
+    "type": "textbox",
+    "value": "{0} du trittst gegen [Grün] Öderkarpfen an. Viel Glück!",
+  	"label": "Start Text",
+    "tooltip": "Text that will be posted before the fight begins",
+  	"group": "Boss2"
+  },
+  "B2WinText": {
+    "type": "textbox",
+    "value": "{0} du hast {1} {2} gewonnen!",
+  	"label": "Win Text",
+    "tooltip": "Text that will be posted after you win",
+  	"group": "Boss2"
+  },
+  "B2LoseText": {
+    "type": "textbox",
+    "value": "{0} du hast {1} {2} verloren!",
+  	"label": "Lose Text",
+    "tooltip": "Text that will be posted after you lose",
+  	"group": "Boss2"
+  },
+  "B3Name": {
+    "type": "textbox",
+    "value": "Parketthering",
+  	"label": "Name",
+    "tooltip": "Name from the Boss",
+  	"group": "Boss3"
+  },
+  "B3WinChance": {
+    "type": "numberbox",
+    "value": 40,
+  	"label": "Win Chance",
+    "tooltip": "Chance to Win in %",
+  	"group": "Boss3"
+  },
+  "B3Win": {
+    "type": "numberbox",
+    "value": 30,
+  	"label": "Win Points",
+    "tooltip": "Points that you gain for winning",
+  	"group": "Boss3"
+  },
+  "B3Lose": {
+    "type": "numberbox",
+    "value": 18,
+  	"label": "Lose Points",
+    "tooltip": "Points that you lose for losing",
+  	"group": "Boss3"
+  },
+  "B3StartText": {
+    "type": "textbox",
+    "value": "{0} du trittst gegen [Blau] Parketthering an. Viel Glück!",
+  	"label": "Start Text",
+    "tooltip": "Text that will be posted before the fight begins",
+  	"group": "Boss3"
+  },
+  "B3WinText": {
+    "type": "textbox",
+    "value": "{0} du hast {1} {2} gewonnen!",
+  	"label": "Win Text",
+    "tooltip": "Text that will be posted after you win",
+  	"group": "Boss3"
+  },
+  "B3LoseText": {
+    "type": "textbox",
+    "value": "{0} du hast {1} {2} verloren!",
+  	"label": "Lose Text",
+    "tooltip": "Text that will be posted after you lose",
+  	"group": "Boss3"
+  },
+    "B4Name": {
+    "type": "textbox",
+    "value": "Geilerhecht",
+  	"label": "Name",
+    "tooltip": "Name from the Boss",
+  	"group": "Boss4"
+  },
+  "B4WinChance": {
+    "type": "numberbox",
+    "value": 20,
+  	"label": "Win Chance",
+    "tooltip": "Chance to Win in %",
+  	"group": "Boss4"
+  },
+  "B4Win": {
+    "type": "numberbox",
+    "value": 40,
+  	"label": "Win Points",
+    "tooltip": "Points that you gain for winning",
+  	"group": "Boss4"
+  },
+  "B4Lose": {
+    "type": "numberbox",
+    "value": 13,
+  	"label": "Lose Points",
+    "tooltip": "Points that you lose for losing",
+  	"group": "Boss4"
+  },
+  "B4StartText": {
+    "type": "textbox",
+    "value": "{0} du trittst gegen [Lila] Geilerhecht an. Viel Glück!",
+  	"label": "Start Text",
+    "tooltip": "Text that will be posted before the fight begins",
+  	"group": "Boss4"
+  },
+  "B4WinText": {
+    "type": "textbox",
+    "value": "{0} du hast {1} {2} gewonnen!",
+  	"label": "Win Text",
+    "tooltip": "Text that will be posted after you win",
+  	"group": "Boss4"
+  },
+  "B4LoseText": {
+    "type": "textbox",
+    "value": "{0} du hast {1} {2} verloren!",
+  	"label": "Lose Text",
+    "tooltip": "Text that will be posted after you lose",
+  	"group": "Boss4"
+  },
+  "B5Name": {
+    "type": "textbox",
+    "value": "Saltyrohrtopus",
+  	"label": "Name",
+    "tooltip": "Name from the Boss",
+  	"group": "Boss5"
+  },
+  "B5WinChance": {
+    "type": "numberbox",
+    "value": 10,
+  	"label": "Win Chance",
+    "tooltip": "Chance to Win in %",
+  	"group": "Boss5"
+  },
+  "B5Win": {
+    "type": "numberbox",
+    "value": 80,
+  	"label": "Win Points",
+    "tooltip": "Points that you gain for winning",
+  	"group": "Boss5"
+  },
+  "B5Lose": {
+    "type": "numberbox",
+    "value": 15,
+  	"label": "Lose Points",
+    "tooltip": "Points that you lose for losing",
+  	"group": "Boss5"
+  },
+  "B5StartText": {
+    "type": "textbox",
+    "value": "{0} du trittst gegen [Gold] Saltyrohrtopus an. Viel Glück!",
+  	"label": "Start Text",
+    "tooltip": "Text that will be posted before the fight begins",
+  	"group": "Boss5"
+  },
+  "B5WinText": {
+    "type": "textbox",
+    "value": "{0} du hast {1} {2} gewonnen!",
+  	"label": "Win Text",
+    "tooltip": "Text that will be posted after you win",
+  	"group": "Boss5"
+  },
+  "B5LoseText": {
+    "type": "textbox",
+    "value": "{0} du hast {1} {2} verloren!",
+  	"label": "Lose Text",
+    "tooltip": "Text that will be posted after you lose",
+  	"group": "Boss5"
+  },
+    "BtnDefaults": {
+    "type": "button",
+    "label": "Restore Default Settings",
+    "tooltip": "Reset settings back to defaults.\r\nReload Scripts afterwards to see the changes in the user interface!",
+    "function": "SetDefaults",
+    "wsevent": "",
+    "group": ""
+  }
+}
