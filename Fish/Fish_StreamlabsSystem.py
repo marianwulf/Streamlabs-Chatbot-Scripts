@@ -185,7 +185,7 @@ def Execute(data):
             
             Parent.RemovePoints(data.User, data.UserName, MySet.Cost)
             
-            selectedboss = Parent.GetRandom(0,5)
+            selectedboss = Parent.GetRandom(0,len(Boss))
             selectedwin = Parent.GetRandom(1,101)
             
             Boss = Boss[selectedboss]
