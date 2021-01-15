@@ -4,11 +4,26 @@
   - Enable/Disable using the command when the stream is offline
   - Enable/Disable cooldown / user cooldown
   - Enable/Disable cooldown / user cooldown messages
-  - Enable/Disable timeout user on fail
+  - Enable/Disable timeout user on failed robbing attempt
   - Customisable command name
   - Customisable cost for using the command
   - Customisable robbing rewards (min-max)
   - Customisable permission for using the command
   - Customisable cooldown / user cooldown timers
+  - Customisable timeout amount
+  - Customisable user blacklist
+  - Customisable response messages
+  
+## [Fish Minigame](https://github.com/marianwulf/Streamlabs-Chatbot-Scripts/tree/main/Fish)
+  - Enable/Disable using the command when the stream is offline
+  - Enable/Disable cooldown / user cooldown
+  - Enable/Disable cooldown / user cooldown messages
+  - Enable/Disable timeout user on failed fishing attempt
+  - Customisable command name
+  - Costumisable fish names, win chances and win/lose amounts
+  - Customisable cost for using the command
+  - Customisable permission for using the command
+  - Customisable cooldown / user cooldown timers
+  - Customisable timeout amount
   - Customisable user blacklist
   - Customisable response messages
