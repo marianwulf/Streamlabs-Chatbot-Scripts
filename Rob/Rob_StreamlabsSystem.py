@@ -138,7 +138,7 @@ def Execute(data):
             if IsOnCooldown(data):
                 return
                 
-            userblacklist = MySet.Blacklist.lower().split(',')
+            userblacklist = MySet.Blacklist.lower().replace(" ","").split(',')
             targetname = data.GetParam(1).lower().replace('@', '')
             
             if targetname in userblacklist:

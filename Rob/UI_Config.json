@@ -111,7 +111,7 @@
     "type": "textbox",
     "value": "Streamlabs,Saltyrohrtopus,Nightbot,Anotherttvviewer,Soundalerts,Bebiyoda",
   	"label": "Blacklisted User",
-    "tooltip": "List Users that can not be robbed. Seperated with comma. No Spaces!",
+    "tooltip": "List Users that can not be robbed. Seperated with comma.",
   	"group": "Outcomes"
   },
   "BlacklistResponse": {
