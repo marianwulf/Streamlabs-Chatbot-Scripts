@@ -18,13 +18,14 @@ from array import *
 ScriptName = "Hunt"
 Website = "https://www.twitch.tv/maroxtv"
 Creator = "Marox"
-Version = "1.0.0"
+Version = "1.1.0"
 Description = "Hunt command"
 #---------------------------------------
 # Versions
 #---------------------------------------
 """ Releases (open README.txt for full release notes)
 1.0.0 - Initial Release
+1.1.0 - other users can join the hunt
 """
 #---------------------------------------
 # Variables
