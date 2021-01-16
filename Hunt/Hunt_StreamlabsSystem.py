@@ -83,6 +83,8 @@ class Settings:
             self.B1StartText = "{0} du trittst gegen [Weiß] Feigeratte an. Viel Glück!"
             self.B1WinText = "{0} du hast {1} {2} gewonnen!"
             self.B1LoseText = "{0} du hast {1} {2} verloren!"
+            self.B1AddWinChancePerAttendee = 0
+            self.B1AddWinPointsPerAttendee = 0
             self.B2Name = "Üblesstinktier"
             self.B2WinChance = 60
             self.B2Win = 15
@@ -90,6 +92,8 @@ class Settings:
             self.B2StartText = "{0} du trittst gegen [Grün] Üblesstinktier an. Viel Glück!"
             self.B2WinText = "{0} du hast {1} {2} gewonnen!"
             self.B2LoseText = "{0} du hast {1} {2} verloren!"
+            self.B2AddWinChancePerAttendee = 0
+            self.B2AddWinPointsPerAttendee = 0
             self.B3Name = "Geilesau"
             self.B3WinChance = 40
             self.B3Win = 30
@@ -97,6 +101,8 @@ class Settings:
             self.B3StartText = "{0} du trittst gegen [Blau] Geilesau an. Viel Glück!"
             self.B3WinText = "{0} du hast {1} {2} gewonnen!"
             self.B3LoseText = "{0} du hast {1} {2} verloren!"
+            self.B3AddWinChancePerAttendee = 0
+            self.B3AddWinPointsPerAttendee = 0
             self.B4Name = "Jauerbär"
             self.B4WinChance = 20
             self.B4Win = 40
@@ -104,6 +110,8 @@ class Settings:
             self.B4StartText = "{0} du trittst gegen [Lila] Jauerbär an. Viel Glück!"
             self.B4WinText = "{0} du hast {1} {2} gewonnen!"
             self.B4LoseText = "{0} du hast {1} {2} verloren!"
+            self.B4AddWinChancePerAttendee = 0
+            self.B4AddWinPointsPerAttendee = 0
             self.B5Name = "Maroxotant"
             self.B5WinChance = 10
             self.B5Win = 80
@@ -111,6 +119,8 @@ class Settings:
             self.B5StartText = "{0} du trittst gegen [Gold] Maroxotant an. Viel Glück!"
             self.B5WinText = "{0} du hast {1} {2} gewonnen!"
             self.B5LoseText = "{0} du hast {1} {2} verloren!"
+            self.B5AddWinChancePerAttendee = 0
+            self.B5AddWinPointsPerAttendee = 0
             self.highestlose = 0
 
     # Reload settings on save through UI
@@ -195,11 +205,11 @@ def Execute(data):
             else:
                 
                 # define bosses
-                MySet.Boss = [[MySet.B1Name, MySet.B1WinChance, MySet.B1Win, MySet.B1Lose, MySet.B1StartText.format(data.UserName), MySet.B1WinText.format(data.UserName, MySet.B1Win, Parent.GetCurrencyName()), MySet.B1LoseText.format(data.UserName, MySet.B1Lose, Parent.GetCurrencyName())], \
-                            [MySet.B2Name, MySet.B2WinChance, MySet.B2Win, MySet.B2Lose, MySet.B2StartText.format(data.UserName), MySet.B2WinText.format(data.UserName, MySet.B2Win, Parent.GetCurrencyName()), MySet.B2LoseText.format(data.UserName, MySet.B2Lose, Parent.GetCurrencyName())], \
-                            [MySet.B3Name, MySet.B3WinChance, MySet.B3Win, MySet.B3Lose, MySet.B3StartText.format(data.UserName), MySet.B3WinText.format(data.UserName, MySet.B3Win, Parent.GetCurrencyName()), MySet.B3LoseText.format(data.UserName, MySet.B3Lose, Parent.GetCurrencyName())], \
-                            [MySet.B4Name, MySet.B4WinChance, MySet.B4Win, MySet.B4Lose, MySet.B4StartText.format(data.UserName), MySet.B4WinText.format(data.UserName, MySet.B4Win, Parent.GetCurrencyName()), MySet.B4LoseText.format(data.UserName, MySet.B4Lose, Parent.GetCurrencyName())], \
-                            [MySet.B5Name, MySet.B5WinChance, MySet.B5Win, MySet.B5Lose, MySet.B5StartText.format(data.UserName), MySet.B5WinText.format(data.UserName, MySet.B5Win, Parent.GetCurrencyName()), MySet.B5LoseText.format(data.UserName, MySet.B5Lose, Parent.GetCurrencyName())]]            
+                MySet.Boss = [[MySet.B1Name, MySet.B1WinChance, MySet.B1Win, MySet.B1Lose, MySet.B1StartText.format(data.UserName), MySet.B1WinText.format(data.UserName, MySet.B1Win, Parent.GetCurrencyName()), MySet.B1LoseText.format(data.UserName, MySet.B1Lose, Parent.GetCurrencyName()), B1AddWinChancePerAttendee, B1AddWinPointsPerAttendee)], \
+                            [MySet.B2Name, MySet.B2WinChance, MySet.B2Win, MySet.B2Lose, MySet.B2StartText.format(data.UserName), MySet.B2WinText.format(data.UserName, MySet.B2Win, Parent.GetCurrencyName()), MySet.B2LoseText.format(data.UserName, MySet.B2Lose, Parent.GetCurrencyName()), B2AddWinChancePerAttendee, B2AddWinPointsPerAttendee], \
+                            [MySet.B3Name, MySet.B3WinChance, MySet.B3Win, MySet.B3Lose, MySet.B3StartText.format(data.UserName), MySet.B3WinText.format(data.UserName, MySet.B3Win, Parent.GetCurrencyName()), MySet.B3LoseText.format(data.UserName, MySet.B3Lose, Parent.GetCurrencyName()), B3AddWinChancePerAttendee, B3AddWinPointsPerAttendee], \
+                            [MySet.B4Name, MySet.B4WinChance, MySet.B4Win, MySet.B4Lose, MySet.B4StartText.format(data.UserName), MySet.B4WinText.format(data.UserName, MySet.B4Win, Parent.GetCurrencyName()), MySet.B4LoseText.format(data.UserName, MySet.B4Lose, Parent.GetCurrencyName()), B4AddWinChancePerAttendee, B4AddWinPointsPerAttendee], \
+                            [MySet.B5Name, MySet.B5WinChance, MySet.B5Win, MySet.B5Lose, MySet.B5StartText.format(data.UserName), MySet.B5WinText.format(data.UserName, MySet.B5Win, Parent.GetCurrencyName()), MySet.B5LoseText.format(data.UserName, MySet.B5Lose, Parent.GetCurrencyName()), B5AddWinChancePerAttendee, B5AddWinPointsPerAttendee]]            
             
                 MySet.highestlose = MySet.B1Lose
             
@@ -273,7 +283,7 @@ def Execute(data):
 
                 # add user to game and notify
                 MySet.ActiveGameAttendees.append(data.User)
-                message = MySet.JoinedFightResponse.format(data,UserName, MySet.Boss[0])
+                message = MySet.JoinedFightResponse.format(data.UserName, MySet.Boss[0])
                 SendResp(data, message)
             
             else:
