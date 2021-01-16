@@ -14,6 +14,13 @@
     "tooltip": "The command the bot will respond to",
   	"group": "General"
   },
+    "JoinCommand": {
+    "type": "textbox",
+    "value": "!joinhunt",
+  	"label": "Command Name",
+    "tooltip": "The command to join the hunt",
+  	"group": "General"
+  },
   "Cost": {
     "type": "numberbox",
   	"label": "Cost",
@@ -49,6 +56,20 @@
     "value": false,
   	"label": "Use Cooldown Messages",
     "tooltip": "Enable/Disable cooldown messages",
+  	"group": "Cooldown"
+  },
+  "ActiveGameTime": {
+    "type": "numberbox",
+  	"label": "Game time (seconds)",
+    "value": 60,
+    "tooltip": "Game time to join the hunt (in seconds).",
+  	"group": "Cooldown"
+  },
+  "NoActiveGameResponse": {
+    "type": "textbox",
+    "value": "{0} there is no hunt currently active. Type {1} to begin hunting.",
+  	"label": "No Active Game Response",
+    "tooltip": "The message that the bot will display when no game is active. \r\n {0} = user \r\n {1} = join command",
   	"group": "Cooldown"
   },
     "Cooldown": {
@@ -112,6 +133,20 @@
     "value": "{0} -> only {1} ({2}) and higher can use this command",
     "label": "Permission denied response",
     "tooltip": "Message sent when user doesn't select any valid wire. \r\n{0} = user \r\n{1} = permission\r\n{2} = permission info",
+    "group": "Responses"
+  },
+  "JoinedFightResponse": {
+    "type": "textbox",
+    "value": "{0} you joined the hunt against {1}!",
+    "label": "Join Fight response",
+    "tooltip": "Message sent when user joins the fight \r\n{0} = user \r\n{1} = target",
+    "group": "Responses"
+  },
+  "AlreadyJoinedFight": {
+    "type": "textbox",
+    "value": "{0} you already joined the hunt!",
+    "label": "Already Joined Fight response",
+    "tooltip": "Message sent when user already joined the fight \r\n{0} = user",
     "group": "Responses"
   },
   "B1Name": {
