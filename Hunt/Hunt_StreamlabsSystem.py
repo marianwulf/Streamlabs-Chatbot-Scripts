@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 # pylint: disable=invalid-name
-"""Rob command, replica of the textbased version."""
+"""Hunt command"""
 #---------------------------------------
 # Libraries and references
 #---------------------------------------
@@ -10,6 +10,7 @@ import json
 import os
 import winsound
 import ctypes
+import time
 from array import *
 #---------------------------------------
 # [Required] Script information
@@ -45,6 +46,7 @@ class Settings:
         else: #set variables if no custom settings file is found
             self.OnlyLive = False
             self.Command = "!hunt"
+            self.JoinCommand = "!joinhunt"
             self.Cost = 0
             self.Permission = "Everyone"
             self.PermissionInfo = ""
@@ -55,6 +57,8 @@ class Settings:
             self.UserCooldown = 10
             self.OnUserCooldown = "{0} the command is still on user cooldown for {1} seconds!"
             self.CasterCD = True
+            self.ActiveGameTimer = None
+            self.ActiveGameResponse = "{0} the hunt against {1} is currently active. Type {2} in the next {3} seconds to join the fight."
             self.NotEnoughResponse = "{0} you don't have enough {1} to attempt this! You will need atleast {2} {1}."
             self.PermissionResponse = "{0} -> only {1} ({2}) and higher can use this command"
             self.Timeout = False
@@ -162,7 +166,12 @@ def Execute(data):
             if IsOnCooldown(data):
                 return
 
-            
+            if MySet.ActiveGameTimer is not None:
+                if MySet.ActiveGameTimer < time.time():
+                    MySet.ActiveGameTimer = None
+                else:
+                    message = MySet.ActiveGameResponse.format(data.UserName, "todo: active boss", MySet.JoinCommand, str(round(MySet.ActiveGameTimer - time.time())))
+
             
             Boss = [[MySet.B1Name, MySet.B1WinChance, MySet.B1Win, MySet.B1Lose, MySet.B1StartText.format(data.UserName), MySet.B1WinText.format(data.UserName, MySet.B1Win, Parent.GetCurrencyName()), MySet.B1LoseText.format(data.UserName, MySet.B1Lose, Parent.GetCurrencyName())], \
                     [MySet.B2Name, MySet.B2WinChance, MySet.B2Win, MySet.B2Lose, MySet.B2StartText.format(data.UserName), MySet.B2WinText.format(data.UserName, MySet.B2Win, Parent.GetCurrencyName()), MySet.B2LoseText.format(data.UserName, MySet.B2Lose, Parent.GetCurrencyName())], \
