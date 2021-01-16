@@ -57,12 +57,15 @@ class Settings:
             self.UserCooldown = 10
             self.OnUserCooldown = "{0} the command is still on user cooldown for {1} seconds!"
             self.CasterCD = True
-            self.ActiveGameTimer = None
+            self.ActiveGame = False
+            self.ActiveGameEnd = None
+            self.ActiveGameTime = 60
             self.ActiveGameResponse = "{0} the hunt against {1} is currently active. Type {2} in the next {3} seconds to join the fight."
             self.NotEnoughResponse = "{0} you don't have enough {1} to attempt this! You will need atleast {2} {1}."
             self.PermissionResponse = "{0} -> only {1} ({2}) and higher can use this command"
             self.Timeout = False
             self.TL = 60
+            self.Boss = []
             self.B1Name = "Feigeratte"
             self.B1WinChance = 80
             self.B1Win = 7
@@ -165,59 +168,63 @@ def Execute(data):
 
             if IsOnCooldown(data):
                 return
-
-            if MySet.ActiveGameTimer is not None:
-                if MySet.ActiveGameTimer < time.time():
-                    MySet.ActiveGameTimer = None
-                else:
-                    message = MySet.ActiveGameResponse.format(data.UserName, "todo: active boss", MySet.JoinCommand, str(round(MySet.ActiveGameTimer - time.time())))
-
+                    
+            if MySet.ActiveGame:
             
-            Boss = [[MySet.B1Name, MySet.B1WinChance, MySet.B1Win, MySet.B1Lose, MySet.B1StartText.format(data.UserName), MySet.B1WinText.format(data.UserName, MySet.B1Win, Parent.GetCurrencyName()), MySet.B1LoseText.format(data.UserName, MySet.B1Lose, Parent.GetCurrencyName())], \
-                    [MySet.B2Name, MySet.B2WinChance, MySet.B2Win, MySet.B2Lose, MySet.B2StartText.format(data.UserName), MySet.B2WinText.format(data.UserName, MySet.B2Win, Parent.GetCurrencyName()), MySet.B2LoseText.format(data.UserName, MySet.B2Lose, Parent.GetCurrencyName())], \
-                    [MySet.B3Name, MySet.B3WinChance, MySet.B3Win, MySet.B3Lose, MySet.B3StartText.format(data.UserName), MySet.B3WinText.format(data.UserName, MySet.B3Win, Parent.GetCurrencyName()), MySet.B3LoseText.format(data.UserName, MySet.B3Lose, Parent.GetCurrencyName())], \
-                    [MySet.B4Name, MySet.B4WinChance, MySet.B4Win, MySet.B4Lose, MySet.B4StartText.format(data.UserName), MySet.B4WinText.format(data.UserName, MySet.B4Win, Parent.GetCurrencyName()), MySet.B4LoseText.format(data.UserName, MySet.B4Lose, Parent.GetCurrencyName())], \
-                    [MySet.B5Name, MySet.B5WinChance, MySet.B5Win, MySet.B5Lose, MySet.B5StartText.format(data.UserName), MySet.B5WinText.format(data.UserName, MySet.B5Win, Parent.GetCurrencyName()), MySet.B5LoseText.format(data.UserName, MySet.B5Lose, Parent.GetCurrencyName())]]            
-            
-            highestlose = MySet.B1Lose
-            
-            for BossIT in Boss:
-                if BossIT[3] > highestlose:
-                    highestlose = BossIT[3]
-            
-            if not Parent.RemovePoints(data.User, data.UserName, highestlose + MySet.Cost):
-                message = MySet.NotEnoughResponse.format(data.UserName, Parent.GetCurrencyName(), highestlose + MySet.Cost)
+                message = MySet.ActiveGameResponse.format(data.UserName, MySet.Boss[0], MySet.JoinCommand, str(round(MySet.ActiveGameEnd - time.time())))
                 SendResp(data, message)
                 return
-            Parent.AddPoints(data.User, data.UserName, highestlose + MySet.Cost)
-            
-            Parent.RemovePoints(data.User, data.UserName, MySet.Cost)
-            
-            selectedboss = Parent.GetRandom(0,len(Boss))
-            selectedwin = Parent.GetRandom(1,101)
-            
-            Boss = Boss[selectedboss]
-            
-            message = Boss[4]
-            SendResp(data, message)
-            
-            if selectedwin <= Boss[1]:
-                Parent.AddPoints(data.User, data.UserName, Boss[2])
-                message = Boss[5]
-                SendResp(data, message)
-                AddCooldown(data)
-                return
-            elif selectedwin > Boss[1]:
-                Parent.RemovePoints(data.User, data.UserName, Boss[3])
-                message = Boss[6]
-                SendResp(data, message)
-                AddCooldown(data)
-                if MySet.Timeout:
-                    Parent.SendStreamMessage("/timeout {0} {1}".format(data.User, MySet.TL))
-                return
+                
             else:
-                message = "Hunt hat nen Bug :("
+            
+                MySet.Boss = [[MySet.B1Name, MySet.B1WinChance, MySet.B1Win, MySet.B1Lose, MySet.B1StartText.format(data.UserName), MySet.B1WinText.format(data.UserName, MySet.B1Win, Parent.GetCurrencyName()), MySet.B1LoseText.format(data.UserName, MySet.B1Lose, Parent.GetCurrencyName())], \
+                            [MySet.B2Name, MySet.B2WinChance, MySet.B2Win, MySet.B2Lose, MySet.B2StartText.format(data.UserName), MySet.B2WinText.format(data.UserName, MySet.B2Win, Parent.GetCurrencyName()), MySet.B2LoseText.format(data.UserName, MySet.B2Lose, Parent.GetCurrencyName())], \
+                            [MySet.B3Name, MySet.B3WinChance, MySet.B3Win, MySet.B3Lose, MySet.B3StartText.format(data.UserName), MySet.B3WinText.format(data.UserName, MySet.B3Win, Parent.GetCurrencyName()), MySet.B3LoseText.format(data.UserName, MySet.B3Lose, Parent.GetCurrencyName())], \
+                            [MySet.B4Name, MySet.B4WinChance, MySet.B4Win, MySet.B4Lose, MySet.B4StartText.format(data.UserName), MySet.B4WinText.format(data.UserName, MySet.B4Win, Parent.GetCurrencyName()), MySet.B4LoseText.format(data.UserName, MySet.B4Lose, Parent.GetCurrencyName())], \
+                            [MySet.B5Name, MySet.B5WinChance, MySet.B5Win, MySet.B5Lose, MySet.B5StartText.format(data.UserName), MySet.B5WinText.format(data.UserName, MySet.B5Win, Parent.GetCurrencyName()), MySet.B5LoseText.format(data.UserName, MySet.B5Lose, Parent.GetCurrencyName())]]            
+            
+                highestlose = MySet.B1Lose
+            
+                for BossIT in MySet.Boss:
+                    if BossIT[3] > highestlose:
+                        highestlose = BossIT[3]
+            
+                if not Parent.RemovePoints(data.User, data.UserName, highestlose + MySet.Cost):
+                    message = MySet.NotEnoughResponse.format(data.UserName, Parent.GetCurrencyName(), highestlose + MySet.Cost)
+                    SendResp(data, message)
+                    return
+                Parent.AddPoints(data.User, data.UserName, highestlose + MySet.Cost)
+            
+                Parent.RemovePoints(data.User, data.UserName, MySet.Cost)
+            
+                MySet.ActiveGame = True
+                MySet.ActiveGameEnd = time.time() + MySet.ActiveGameTime
+                
+                selectedboss = Parent.GetRandom(0,len(MySet.Boss))
+                selectedwin = Parent.GetRandom(1,101)
+            
+                MySet.Boss = MySet.Boss[selectedboss]
+            
+                message = MySet.Boss[4]
                 SendResp(data, message)
+            
+                if selectedwin <= MySet.Boss[1]:
+                    Parent.AddPoints(data.User, data.UserName, MySet.Boss[2])
+                    message = MySet.Boss[5]
+                    SendResp(data, message)
+                    AddCooldown(data)
+                    return
+                elif selectedwin > MySet.Boss[1]:
+                    Parent.RemovePoints(data.User, data.UserName, MySet.Boss[3])
+                    message = MySet.Boss[6]
+                    SendResp(data, message)
+                    AddCooldown(data)
+                    if MySet.Timeout:
+                        Parent.SendStreamMessage("/timeout {0} {1}".format(data.User, MySet.TL))
+                    return
+                else:
+                    message = "Hunt hat nen Bug :("
+                    SendResp(data, message)
 
 def Tick():
     """Required tick function"""
