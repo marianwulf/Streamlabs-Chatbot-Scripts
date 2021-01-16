@@ -298,21 +298,25 @@ def Tick():
         # check if user wins against boss
         if UserWinValue <= MySet.Boss[1]:
             for ActiveGameAttendeesIT in MySet.ActiveGameAttendees:
+                # Add won points to account and add cooldown to users
                 Parent.AddPoints(ActiveGameAttendeesIT, ActiveGameAttendeesIT, MySet.Boss[2])
                 Parent.AddUserCooldown(ScriptName, MySet.Command, ActiveGameAttendeesIT, MySet.UserCooldown)
                 Parent.AddUserCooldown(ScriptName, MySet.JoinCommand, ActiveGameAttendeesIT, MySet.UserCooldown)
             message = MySet.Boss[5]
             Parent.SendStreamMessage(message)
+            # clean up attendees array
             del MySet.ActiveGameAttendees[:]
             Parent.AddCooldown(ScriptName, MySet.Command, MySet.Cooldown)
             return
         elif UserWinValue > MySet.Boss[1]:
+            # Remove lost points from account and add cooldown to users
             for ActiveGameAttendeesIT in MySet.ActiveGameAttendees:
-                Parent.AddPoints(ActiveGameAttendeesIT, ActiveGameAttendeesIT, MySet.Boss[3])
+                Parent.RemovePoints(ActiveGameAttendeesIT, ActiveGameAttendeesIT, MySet.Boss[3])
                 Parent.AddUserCooldown(ScriptName, MySet.Command, ActiveGameAttendeesIT, MySet.UserCooldown)
                 Parent.AddUserCooldown(ScriptName, MySet.JoinCommand, ActiveGameAttendeesIT, MySet.UserCooldown)
             message = MySet.Boss[6]
             Parent.SendStreamMessage(message)
+            # clean up attendees array
             del MySet.ActiveGameAttendees[:]
             Parent.AddCooldown(ScriptName, MySet.Command, MySet.Cooldown)
             if MySet.Timeout:
