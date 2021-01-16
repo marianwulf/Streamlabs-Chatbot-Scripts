@@ -58,9 +58,13 @@ class Settings:
             self.OnUserCooldown = "{0} the command is still on user cooldown for {1} seconds!"
             self.CasterCD = True
             self.ActiveGame = False
+            self.ActiveGameAttendees = []
             self.ActiveGameEnd = None
             self.ActiveGameTime = 60
             self.ActiveGameResponse = "{0} the hunt against {1} is currently active. Type {2} in the next {3} seconds to join the fight."
+            self.NoActiveGameResponse = "{0} there is no hunt currently active. Type {1} to begin hunting."
+            self.JoinedFightResponse = "{0} you joined the hunt against {1}!"
+            self.AlreadyJoinedFight = "{0} you already joined the hunt!"
             self.NotEnoughResponse = "{0} you don't have enough {1} to attempt this! You will need atleast {2} {1}."
             self.PermissionResponse = "{0} -> only {1} ({2}) and higher can use this command"
             self.Timeout = False
@@ -101,6 +105,7 @@ class Settings:
             self.B5StartText = "{0} du trittst gegen [Gold] Maroxotant an. Viel Glück!"
             self.B5WinText = "{0} du hast {1} {2} gewonnen!"
             self.B5LoseText = "{0} du hast {1} {2} verloren!"
+            self.highestlose = 0
 
     # Reload settings on save through UI
     def ReloadSettings(self, data):
@@ -183,29 +188,70 @@ def Execute(data):
                             [MySet.B4Name, MySet.B4WinChance, MySet.B4Win, MySet.B4Lose, MySet.B4StartText.format(data.UserName), MySet.B4WinText.format(data.UserName, MySet.B4Win, Parent.GetCurrencyName()), MySet.B4LoseText.format(data.UserName, MySet.B4Lose, Parent.GetCurrencyName())], \
                             [MySet.B5Name, MySet.B5WinChance, MySet.B5Win, MySet.B5Lose, MySet.B5StartText.format(data.UserName), MySet.B5WinText.format(data.UserName, MySet.B5Win, Parent.GetCurrencyName()), MySet.B5LoseText.format(data.UserName, MySet.B5Lose, Parent.GetCurrencyName())]]            
             
-                highestlose = MySet.B1Lose
+                MySet.highestlose = MySet.B1Lose
             
                 for BossIT in MySet.Boss:
-                    if BossIT[3] > highestlose:
-                        highestlose = BossIT[3]
+                    if BossIT[3] > MySet.highestlose:
+                        MySet.highestlose = BossIT[3]
             
-                if not Parent.RemovePoints(data.User, data.UserName, highestlose + MySet.Cost):
-                    message = MySet.NotEnoughResponse.format(data.UserName, Parent.GetCurrencyName(), highestlose + MySet.Cost)
+                if not Parent.RemovePoints(data.User, data.UserName, MySet.highestlose + MySet.Cost):
+                    message = MySet.NotEnoughResponse.format(data.UserName, Parent.GetCurrencyName(), MySet.highestlose + MySet.Cost)
                     SendResp(data, message)
                     return
-                Parent.AddPoints(data.User, data.UserName, highestlose + MySet.Cost)
+                Parent.AddPoints(data.User, data.UserName, MySet.highestlose + MySet.Cost)
             
                 Parent.RemovePoints(data.User, data.UserName, MySet.Cost)
             
                 MySet.ActiveGame = True
                 MySet.ActiveGameEnd = time.time() + MySet.ActiveGameTime
+                MySet.ActiveGameAttendees.append(data.User)
                 
                 selectedboss = Parent.GetRandom(0,len(MySet.Boss))
                 MySet.Boss = MySet.Boss[selectedboss]
             
                 message = MySet.Boss[4]
                 SendResp(data, message)
+                
+    elif data.IsChatMessage() and data.GetParam(0).lower() == MySet.JoinCommand.lower():
+    
+        if not IsFromValidSource(data, MySet.Usage):
+            return
+
+        if not Parent.HasPermission(data.User, MySet.Permission, MySet.PermissionInfo):
+            message = MySet.PermissionResponse.format(data.User, MySet.Permission, MySet.PermissionInfo)
+            SendResp(data, message)
+
+        if not HasPermission(data):
+            return
+
+        if not MySet.OnlyLive or Parent.IsLive():
+
+            if IsOnCooldown(data):
+                return
             
+            if MySet.ActiveGame:
+            
+                if not Parent.RemovePoints(data.User, data.UserName, MySet.highestlose + MySet.Cost):
+                    message = MySet.NotEnoughResponse.format(data.UserName, Parent.GetCurrencyName(), MySet.highestlose + MySet.Cost)
+                    SendResp(data, message)
+                    return
+                Parent.AddPoints(data.User, data.UserName, MySet.highestlose + MySet.Cost)
+                
+                if data.User in MySet.ActiveGameAttendees:
+                    message = MySet.AlreadyJoinedFight.format(data.UserName, MySet.Boss[0])
+                    SendResp(data, message)
+                    return
+            
+                Parent.RemovePoints(data.User, data.UserName, MySet.Cost)
+                
+                MySet.ActiveGameAttendees.append(data.User)
+                message = MySet.JoinedFightResponse.format(data,UserName, MySet.Boss[0])
+                SendResp(data, message)
+            
+            else:
+                message = MySet.NoActiveGameResponse.format(data.UserName, MySet.Command)
+                SendResp(data, message)
+                return
 
 
 def Tick():
@@ -215,20 +261,23 @@ def Tick():
         MySet.ActiveGame = False
         MySet.ActiveGameEnd = None
         
-        """TODO: Über Teilnehmer Array laufen """
         selectedwin = Parent.GetRandom(1,101)
         
         if selectedwin <= MySet.Boss[1]:
-            Parent.AddPoints(data.User, data.UserName, MySet.Boss[2])
+            for ActiveGameAttendeesIT in MySet.ActiveGameAttendees:
+                Parent.AddPoints(ActiveGameAttendeesIT, ActiveGameAttendeesIT, MySet.Boss[2])
             message = MySet.Boss[5]
-            SendResp(data, message)
-            AddCooldown(data)
+            Parent.SendStreamMessage(message)
+            del MySet.ActiveGameAttendees[:]
+            # AddCooldown(data)
             return
         elif selectedwin > MySet.Boss[1]:
-            Parent.RemovePoints(data.User, data.UserName, MySet.Boss[3])
+            for ActiveGameAttendeesIT in MySet.ActiveGameAttendees:
+                Parent.AddPoints(ActiveGameAttendeesIT, ActiveGameAttendeesIT, MySet.Boss[3])
             message = MySet.Boss[6]
-            SendResp(data, message)
-            AddCooldown(data)
+            Parent.SendStreamMessage(message)
+            del MySet.ActiveGameAttendees[:]
+            # AddCooldown(data)
             if MySet.Timeout:
                 Parent.SendStreamMessage("/timeout {0} {1}".format(data.User, MySet.TL))
                 return
@@ -241,7 +290,7 @@ def Tick():
 #---------------------------------------
 def SendResp(data, sendMessage):
     """Sends message to Stream or discord chat depending on settings"""
-
+    
     if not data.IsFromDiscord() and not data.IsWhisper():
         Parent.SendStreamMessage(sendMessage)
 
