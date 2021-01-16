@@ -201,33 +201,40 @@ def Execute(data):
                 MySet.ActiveGameEnd = time.time() + MySet.ActiveGameTime
                 
                 selectedboss = Parent.GetRandom(0,len(MySet.Boss))
-                selectedwin = Parent.GetRandom(1,101)
-            
                 MySet.Boss = MySet.Boss[selectedboss]
             
                 message = MySet.Boss[4]
                 SendResp(data, message)
             
-                if selectedwin <= MySet.Boss[1]:
-                    Parent.AddPoints(data.User, data.UserName, MySet.Boss[2])
-                    message = MySet.Boss[5]
-                    SendResp(data, message)
-                    AddCooldown(data)
-                    return
-                elif selectedwin > MySet.Boss[1]:
-                    Parent.RemovePoints(data.User, data.UserName, MySet.Boss[3])
-                    message = MySet.Boss[6]
-                    SendResp(data, message)
-                    AddCooldown(data)
-                    if MySet.Timeout:
-                        Parent.SendStreamMessage("/timeout {0} {1}".format(data.User, MySet.TL))
-                    return
-                else:
-                    message = "Hunt hat nen Bug :("
-                    SendResp(data, message)
+
 
 def Tick():
     """Required tick function"""
+    
+    if MySet.ActiveGame and time.time() >= MySet.ActiveGameEnd:
+        MySet.ActiveGame = False
+        MySet.ActiveGameEnd = None
+        
+        """TODO: Über Teilnehmer Array laufen """
+        selectedwin = Parent.GetRandom(1,101)
+        
+        if selectedwin <= MySet.Boss[1]:
+            Parent.AddPoints(data.User, data.UserName, MySet.Boss[2])
+            message = MySet.Boss[5]
+            SendResp(data, message)
+            AddCooldown(data)
+            return
+        elif selectedwin > MySet.Boss[1]:
+            Parent.RemovePoints(data.User, data.UserName, MySet.Boss[3])
+            message = MySet.Boss[6]
+            SendResp(data, message)
+            AddCooldown(data)
+            if MySet.Timeout:
+                Parent.SendStreamMessage("/timeout {0} {1}".format(data.User, MySet.TL))
+                return
+            else:
+                message = "Hunt hat nen Bug :("
+                SendResp(data, message)
 
 #---------------------------------------
 # [Optional] Functions for usage handling
