@@ -65,13 +65,6 @@
     "tooltip": "Game time to join the hunt (in seconds).",
   	"group": "Cooldown"
   },
-  "NoActiveGameResponse": {
-    "type": "textbox",
-    "value": "{0} there is no hunt currently active. Type {1} to begin hunting.",
-  	"label": "No Active Game Response",
-    "tooltip": "The message that the bot will display when no game is active. \r\n {0} = user \r\n {1} = join command",
-  	"group": "Cooldown"
-  },
     "Cooldown": {
     "type": "numberbox",
   	"label": "Cooldown (seconds)",
@@ -134,6 +127,20 @@
     "label": "Permission denied response",
     "tooltip": "Message sent when user doesn't select any valid wire. \r\n{0} = user \r\n{1} = permission\r\n{2} = permission info",
     "group": "Responses"
+  },
+    "ActiveGameResponse": {
+    "type": "textbox",
+    "value": "{0} the hunt against {1} is currently active. Type {2} in the next {3} seconds to join the fight.",
+  	"label": "Active Game Response",
+    "tooltip": "The message that the bot will display when a game is active. \r\n {0} = user \r\n {1} = target \r\n {2} = join command \r\n {1} = time left",
+  	"group": "Responses"
+  },
+  "NoActiveGameResponse": {
+    "type": "textbox",
+    "value": "{0} there is no hunt currently active. Type {1} to begin hunting.",
+  	"label": "No Active Game Response",
+    "tooltip": "The message that the bot will display when no game is active. \r\n {0} = user \r\n {1} = join command",
+  	"group": "Responses"
   },
   "JoinedFightResponse": {
     "type": "textbox",
