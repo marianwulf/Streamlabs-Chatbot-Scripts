@@ -266,18 +266,22 @@ def Tick():
         if selectedwin <= MySet.Boss[1]:
             for ActiveGameAttendeesIT in MySet.ActiveGameAttendees:
                 Parent.AddPoints(ActiveGameAttendeesIT, ActiveGameAttendeesIT, MySet.Boss[2])
+                Parent.AddUserCooldown(ScriptName, MySet.Command, ActiveGameAttendeesIT, MySet.UserCooldown)
+                Parent.AddUserCooldown(ScriptName, MySet.JoinCommand, ActiveGameAttendeesIT, MySet.UserCooldown)
             message = MySet.Boss[5]
             Parent.SendStreamMessage(message)
             del MySet.ActiveGameAttendees[:]
-            # AddCooldown(data)
+            Parent.AddCooldown(ScriptName, MySet.Command, MySet.Cooldown)
             return
         elif selectedwin > MySet.Boss[1]:
             for ActiveGameAttendeesIT in MySet.ActiveGameAttendees:
                 Parent.AddPoints(ActiveGameAttendeesIT, ActiveGameAttendeesIT, MySet.Boss[3])
+                Parent.AddUserCooldown(ScriptName, MySet.Command, ActiveGameAttendeesIT, MySet.UserCooldown)
+                Parent.AddUserCooldown(ScriptName, MySet.JoinCommand, ActiveGameAttendeesIT, MySet.UserCooldown)
             message = MySet.Boss[6]
             Parent.SendStreamMessage(message)
             del MySet.ActiveGameAttendees[:]
-            # AddCooldown(data)
+            Parent.AddCooldown(ScriptName, MySet.Command, MySet.Cooldown)
             if MySet.Timeout:
                 Parent.SendStreamMessage("/timeout {0} {1}".format(data.User, MySet.TL))
                 return
