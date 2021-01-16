@@ -163,11 +163,15 @@ def Init():
 
 def Execute(data):
     """Required Execute data function"""
+
+    # check if command is command
     if data.IsChatMessage() and data.GetParam(0).lower() == MySet.Command.lower():
 
+        # If command is not from valid source -> quit
         if not IsFromValidSource(data, MySet.Usage):
             return
 
+        # if client has no permission -> quit
         if not Parent.HasPermission(data.User, MySet.Permission, MySet.PermissionInfo):
             message = MySet.PermissionResponse.format(data.User, MySet.Permission, MySet.PermissionInfo)
             SendResp(data, message)
@@ -175,19 +179,22 @@ def Execute(data):
         if not HasPermission(data):
             return
 
+        # check on onlylive setting or if user is live
         if not MySet.OnlyLive or Parent.IsLive():
 
+            # quit on cooldown
             if IsOnCooldown(data):
                 return
                     
+            # send message about active hunt if one is active
             if MySet.ActiveGame:
-            
                 message = MySet.ActiveGameResponse.format(data.UserName, MySet.Boss[0], MySet.JoinCommand, str(round(MySet.ActiveGameEnd - time.time())))
                 SendResp(data, message)
                 return
                 
             else:
-            
+                
+                # define bosses
                 MySet.Boss = [[MySet.B1Name, MySet.B1WinChance, MySet.B1Win, MySet.B1Lose, MySet.B1StartText.format(data.UserName), MySet.B1WinText.format(data.UserName, MySet.B1Win, Parent.GetCurrencyName()), MySet.B1LoseText.format(data.UserName, MySet.B1Lose, Parent.GetCurrencyName())], \
                             [MySet.B2Name, MySet.B2WinChance, MySet.B2Win, MySet.B2Lose, MySet.B2StartText.format(data.UserName), MySet.B2WinText.format(data.UserName, MySet.B2Win, Parent.GetCurrencyName()), MySet.B2LoseText.format(data.UserName, MySet.B2Lose, Parent.GetCurrencyName())], \
                             [MySet.B3Name, MySet.B3WinChance, MySet.B3Win, MySet.B3Lose, MySet.B3StartText.format(data.UserName), MySet.B3WinText.format(data.UserName, MySet.B3Win, Parent.GetCurrencyName()), MySet.B3LoseText.format(data.UserName, MySet.B3Lose, Parent.GetCurrencyName())], \
@@ -200,6 +207,7 @@ def Execute(data):
                     if BossIT[3] > MySet.highestlose:
                         MySet.highestlose = BossIT[3]
             
+                # check if user has more points than highest possible lost
                 if not Parent.RemovePoints(data.User, data.UserName, MySet.highestlose + MySet.Cost):
                     message = MySet.NotEnoughResponse.format(data.UserName, Parent.GetCurrencyName(), MySet.highestlose + MySet.Cost)
                     SendResp(data, message)
@@ -208,21 +216,27 @@ def Execute(data):
             
                 Parent.RemovePoints(data.User, data.UserName, MySet.Cost)
             
+                # enable hunt
                 MySet.ActiveGame = True
                 MySet.ActiveGameEnd = time.time() + MySet.ActiveGameTime
                 MySet.ActiveGameAttendees.append(data.User)
                 
+                # choose random boss
                 selectedboss = Parent.GetRandom(0,len(MySet.Boss))
                 MySet.Boss = MySet.Boss[selectedboss]
             
+                # send boss start message
                 message = MySet.Boss[4]
                 SendResp(data, message)
-                
+
+    #check if command is join command      
     elif data.IsChatMessage() and data.GetParam(0).lower() == MySet.JoinCommand.lower():
     
+        # If command is not from valid source -> quit
         if not IsFromValidSource(data, MySet.Usage):
             return
 
+        # if client has no permission -> quit
         if not Parent.HasPermission(data.User, MySet.Permission, MySet.PermissionInfo):
             message = MySet.PermissionResponse.format(data.User, MySet.Permission, MySet.PermissionInfo)
             SendResp(data, message)
@@ -230,31 +244,40 @@ def Execute(data):
         if not HasPermission(data):
             return
 
+        # check on onlylive setting or if user is live
         if not MySet.OnlyLive or Parent.IsLive():
 
+             # quit on cooldown
             if IsOnCooldown(data):
                 return
             
+            # check if hunt is active 
             if MySet.ActiveGame:
             
+                # check if user has more points than highest possible lost
                 if not Parent.RemovePoints(data.User, data.UserName, MySet.highestlose + MySet.Cost):
                     message = MySet.NotEnoughResponse.format(data.UserName, Parent.GetCurrencyName(), MySet.highestlose + MySet.Cost)
                     SendResp(data, message)
                     return
                 Parent.AddPoints(data.User, data.UserName, MySet.highestlose + MySet.Cost)
                 
+                # check if user already joined and send message if
                 if data.User in MySet.ActiveGameAttendees:
                     message = MySet.AlreadyJoinedFight.format(data.UserName, MySet.Boss[0])
                     SendResp(data, message)
                     return
             
+                # subtract usage costs
                 Parent.RemovePoints(data.User, data.UserName, MySet.Cost)
                 
+
+                # add user to game and notify
                 MySet.ActiveGameAttendees.append(data.User)
                 message = MySet.JoinedFightResponse.format(data,UserName, MySet.Boss[0])
                 SendResp(data, message)
             
             else:
+                # notify that no game is active 
                 message = MySet.NoActiveGameResponse.format(data.UserName, MySet.Command)
                 SendResp(data, message)
                 return
