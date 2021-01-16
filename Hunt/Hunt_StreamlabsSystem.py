@@ -43,6 +43,11 @@ class Settings:
         if settingsFile and os.path.isfile(settingsFile):
             with codecs.open(settingsFile, encoding='utf-8-sig', mode='r') as f:
                 self.__dict__ = json.load(f, encoding='utf-8-sig')
+                # load variables that do not need to be customisable from the ui
+                self.ActiveGame = False
+                self.ActiveGameAttendees = []
+                self.ActiveGameEnd = None
+                self.Boss = []
 
         else: #set variables if no custom settings file is found
             self.OnlyLive = False
@@ -286,9 +291,9 @@ def Tick():
             if MySet.Timeout:
                 Parent.SendStreamMessage("/timeout {0} {1}".format(data.User, MySet.TL))
                 return
-            else:
-                message = "Hunt hat nen Bug :("
-                SendResp(data, message)
+        else:
+            message = "Hunt hat nen Bug :("
+            Parent.SendStreamMessage(message)
 
 #---------------------------------------
 # [Optional] Functions for usage handling
