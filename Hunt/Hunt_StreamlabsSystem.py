@@ -286,13 +286,17 @@ def Execute(data):
 def Tick():
     """Required tick function"""
     
+    # check if game time if over
     if MySet.ActiveGame and time.time() >= MySet.ActiveGameEnd:
+
+        #reset game times
         MySet.ActiveGame = False
         MySet.ActiveGameEnd = None
         
-        selectedwin = Parent.GetRandom(1,101)
+        UserWinValue = Parent.GetRandom(1,101)
         
-        if selectedwin <= MySet.Boss[1]:
+        # check if user wins against boss
+        if UserWinValue <= MySet.Boss[1]:
             for ActiveGameAttendeesIT in MySet.ActiveGameAttendees:
                 Parent.AddPoints(ActiveGameAttendeesIT, ActiveGameAttendeesIT, MySet.Boss[2])
                 Parent.AddUserCooldown(ScriptName, MySet.Command, ActiveGameAttendeesIT, MySet.UserCooldown)
@@ -302,7 +306,7 @@ def Tick():
             del MySet.ActiveGameAttendees[:]
             Parent.AddCooldown(ScriptName, MySet.Command, MySet.Cooldown)
             return
-        elif selectedwin > MySet.Boss[1]:
+        elif UserWinValue > MySet.Boss[1]:
             for ActiveGameAttendeesIT in MySet.ActiveGameAttendees:
                 Parent.AddPoints(ActiveGameAttendeesIT, ActiveGameAttendeesIT, MySet.Boss[3])
                 Parent.AddUserCooldown(ScriptName, MySet.Command, ActiveGameAttendeesIT, MySet.UserCooldown)
