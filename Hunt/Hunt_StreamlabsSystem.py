@@ -17,7 +17,7 @@ from array import *
 #---------------------------------------
 ScriptName = "Hunt"
 Website = "https://www.twitch.tv/maroxtv"
-Creator = "Marox"
+Creator = "Marox, Dennis"
 Version = "1.1.0"
 Description = "Hunt command"
 #---------------------------------------
