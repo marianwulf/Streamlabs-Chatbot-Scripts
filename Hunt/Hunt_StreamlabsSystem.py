@@ -17,7 +17,7 @@ from array import *
 #---------------------------------------
 ScriptName = "Hunt"
 Website = "https://github.com/marianwulf"
-Creator = "Marox, Dennis"
+Creator = "Marox"
 Version = "1.1.0"
 Description = "Hunt command"
 #---------------------------------------
