@@ -81,7 +81,7 @@ class Settings:
             self.B1Win = 7
             self.B1Lose = 3
             self.B1StartText = "{0} du trittst gegen [Weiß] Feigeratte an. Viel Glück!"
-            self.B1WinText = "{0} du hast {1} {2} gewonnen!"
+            self.B1WinText = "{0} und seine {1} Crewmitglieder haben insgesamt {2} {3} gewonnen! Somit hat jeder {4} {3} bekommen."
             self.B1LoseText = "{0} du hast {1} {2} verloren!"
             self.B1AddWinChancePerAttendee = 0
             self.B1AddWinPointsPerAttendee = 0
@@ -90,7 +90,7 @@ class Settings:
             self.B2Win = 15
             self.B2Lose = 15
             self.B2StartText = "{0} du trittst gegen [Grün] Üblesstinktier an. Viel Glück!"
-            self.B2WinText = "{0} du hast {1} {2} gewonnen!"
+            self.B2WinText = "{0} und seine {1} Crewmitglieder haben insgesamt {2} {3} gewonnen! Somit hat jeder {4} {3} bekommen."
             self.B2LoseText = "{0} du hast {1} {2} verloren!"
             self.B2AddWinChancePerAttendee = 0
             self.B2AddWinPointsPerAttendee = 0
@@ -99,7 +99,7 @@ class Settings:
             self.B3Win = 30
             self.B3Lose = 18
             self.B3StartText = "{0} du trittst gegen [Blau] Geilesau an. Viel Glück!"
-            self.B3WinText = "{0} du hast {1} {2} gewonnen!"
+            self.B3WinText = "{0} und seine {1} Crewmitglieder haben insgesamt {2} {3} gewonnen! Somit hat jeder {4} {3} bekommen."
             self.B3LoseText = "{0} du hast {1} {2} verloren!"
             self.B3AddWinChancePerAttendee = 0
             self.B3AddWinPointsPerAttendee = 0
@@ -108,7 +108,7 @@ class Settings:
             self.B4Win = 40
             self.B4Lose = 13
             self.B4StartText = "{0} du trittst gegen [Lila] Jauerbär an. Viel Glück!"
-            self.B4WinText = "{0} du hast {1} {2} gewonnen!"
+            self.B4WinText = "{0} und seine {1} Crewmitglieder haben insgesamt {2} {3} gewonnen! Somit hat jeder {4} {3} bekommen."
             self.B4LoseText = "{0} du hast {1} {2} verloren!"
             self.B4AddWinChancePerAttendee = 0
             self.B4AddWinPointsPerAttendee = 0
@@ -117,7 +117,7 @@ class Settings:
             self.B5Win = 80
             self.B5Lose = 15
             self.B5StartText = "{0} du trittst gegen [Gold] Maroxotant an. Viel Glück!"
-            self.B5WinText = "{0} du hast {1} {2} gewonnen!"
+            self.B5WinText = "{0} und seine {1} Crewmitglieder haben insgesamt {2} {3} gewonnen! Somit hat jeder {4} {3} bekommen."
             self.B5LoseText = "{0} du hast {1} {2} verloren!"
             self.B5AddWinChancePerAttendee = 0
             self.B5AddWinPointsPerAttendee = 0
@@ -317,6 +317,8 @@ def Tick():
                 Parent.AddPoints(ActiveGameAttendeesIT, ActiveGameAttendeesIT, MySet.Boss[2])
                 Parent.AddUserCooldown(ScriptName, MySet.Command, ActiveGameAttendeesIT, MySet.UserCooldown)
                 Parent.AddUserCooldown(ScriptName, MySet.JoinCommand, ActiveGameAttendeesIT, MySet.UserCooldown)
+            # todo: update WinText with information about the attendees
+            # WinText.format(data.UserName, len(MySet.ActiveGameAttendees)-1, MySet.B1Win, Parent.GetCurrencyName(), MySet.Boss[2]/len(MySet.ActiveGameAttendees))
             message = MySet.Boss[5]
             Parent.SendStreamMessage(message)
             # clean up attendees array
