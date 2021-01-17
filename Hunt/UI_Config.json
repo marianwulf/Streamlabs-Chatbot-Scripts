@@ -14,6 +14,20 @@
     "tooltip": "The command the bot will respond to",
   	"group": "General"
   },
+    "JoinCommand": {
+    "type": "textbox",
+    "value": "!joinhunt",
+  	"label": "Command Name",
+    "tooltip": "The command to join the hunt",
+  	"group": "General"
+  },
+  "MinAttendees": {
+    "type": "numberbox",
+  	"label": "Min Attendees",
+    "value": 0,
+    "tooltip": "Min Attendees to succeed",
+  	"group": "General"
+  },
   "Cost": {
     "type": "numberbox",
   	"label": "Cost",
@@ -49,6 +63,13 @@
     "value": false,
   	"label": "Use Cooldown Messages",
     "tooltip": "Enable/Disable cooldown messages",
+  	"group": "Cooldown"
+  },
+  "ActiveGameTime": {
+    "type": "numberbox",
+  	"label": "Game time (seconds)",
+    "value": 60,
+    "tooltip": "Game time to join the hunt (in seconds).",
   	"group": "Cooldown"
   },
     "Cooldown": {
@@ -104,14 +125,49 @@
     "type": "textbox",
     "value": "{0} you don't have enough {1} to attempt this! You will need atleast {2} {1}.",
     "label": "Not enough currency response",
-    "tooltip": "Message sent when user doesn't have enough points \r\n {0} = user \r\n {1} = Currencyname \r\n {1} = amount of points",
+    "tooltip": "Message sent when user doesn't have enough points \r\n {0} = user \r\n {1} = currency name \r\n {2} = amount of points",
     "group": "Responses"
   },
   "PermissionResponse": {
     "type": "textbox",
     "value": "{0} -> only {1} ({2}) and higher can use this command",
     "label": "Permission denied response",
-    "tooltip": "Message sent when user doesn't select any valid wire. \r\n{0} = user \r\n{1} = permission\r\n{2} = permission info",
+    "tooltip": "Message sent when user doesn't select any valid wire. \r\n {0} = user \r\n {1} = permission \r\n {2} = permission info",
+    "group": "Responses"
+  },
+    "ActiveGameResponse": {
+    "type": "textbox",
+    "value": "{0} the hunt against {1} is currently active. Type {2} in the next {3} seconds to join the fight.",
+  	"label": "Active Game Response",
+    "tooltip": "The message that the bot will display when a game is active. \r\n {0} = user \r\n {1} = target \r\n {2} = join command \r\n {3} = time left",
+  	"group": "Responses"
+  },
+  "NoActiveGameResponse": {
+    "type": "textbox",
+    "value": "{0} there is no hunt currently active. Type {1} to begin hunting.",
+  	"label": "No Active Game Response",
+    "tooltip": "The message that the bot will display when no game is active. \r\n {0} = user \r\n {1} = join command",
+  	"group": "Responses"
+  },
+  "MinAttendeesResponse": {
+    "type": "textbox",
+    "value": "{0} not enough people joined the hunt, so it was aborted.",
+  	"label": "Min Attendees Response",
+    "tooltip": "The message that the bot will display when there are not enough attendees \r\n {0} = user",
+  	"group": "Responses"
+  },
+  "JoinedFightResponse": {
+    "type": "textbox",
+    "value": "{0} you joined the hunt against {1}! Attendees: {2} - Win Chance {3} - Total Win Points {4} - Win Points per User {5}",
+    "label": "Join Fight response",
+    "tooltip": "Message sent when user joins the fight \r\n {0} = user \r\n {1} = target \r\n {2} = attendees \r\n {3} = win chance \r\n {4} = total win points \r\n {5} = win points per attendee",
+    "group": "Responses"
+  },
+  "AlreadyJoinedFight": {
+    "type": "textbox",
+    "value": "{0} you already joined the hunt!",
+    "label": "Already Joined Fight response",
+    "tooltip": "Message sent when user already joined the fight \r\n {0} = user",
     "group": "Responses"
   },
   "B1Name": {
@@ -142,25 +198,39 @@
     "tooltip": "Points that you lose for losing",
   	"group": "Boss1"
   },
+  "B1AddWinChancePerAttendee": {
+    "type": "numberbox",
+    "value": 0,
+  	"label": "Added Win Chance per Attendee",
+    "tooltip": "Added Win Chance per Attendee",
+  	"group": "Boss1"
+  },
+  "B1AddWinPointsPerAttendee": {
+    "type": "numberbox",
+    "value": 0,
+  	"label": "Added Win Points per Attendee",
+    "tooltip": "Added Win Points per Attendee",
+  	"group": "Boss1"
+  },
   "B1StartText": {
     "type": "textbox",
-    "value": "{0} du trittst gegen [Weiß] Feigeratte an. Viel Glück!",
+    "value": "{0} du trittst gegen [Weiß] Feigeratte an. Win Chance {1} - Total Win Points {2} - Added Win Chance per Attendee {3} - Added Win Points per Attendee {4}! Viel Glück!",
   	"label": "Start Text",
-    "tooltip": "Text that will be posted before the fight begins",
+    "tooltip": "Text that will be posted before the fight begins \r\n {0} = user \r\n {1} = win chance \r\n {2} = total win points \r\n {3} = added win chance per attendee \r\n {4} = added win points per attendee",
   	"group": "Boss1"
   },
   "B1WinText": {
     "type": "textbox",
-    "value": "{0} du hast {1} {2} gewonnen!",
+    "value": "{0} und seine {1} Crewmitglieder haben insgesamt {2} {3} gewonnen! Somit hat jeder {4} {3} bekommen.",
   	"label": "Win Text",
-    "tooltip": "Text that will be posted after you win",
+    "tooltip": "Text that will be posted after you win \r\n {0} = user \r\n {1} = amount attendees \r\n {2} = total win points \r\n {3} = currency \r\n {4} = win per attendee",
   	"group": "Boss1"
   },
   "B1LoseText": {
     "type": "textbox",
     "value": "{0} du hast {1} {2} verloren!",
   	"label": "Lose Text",
-    "tooltip": "Text that will be posted after you lose",
+    "tooltip": "Text that will be posted after you lose \r\n {0} = user \r\n {1} = amount of points \r\n {2} = currency name",
   	"group": "Boss1"
   },
   "B2Name": {
@@ -191,25 +261,39 @@
     "tooltip": "Points that you lose for losing",
   	"group": "Boss2"
   },
+  "B2AddWinChancePerAttendee": {
+    "type": "numberbox",
+    "value": 0,
+  	"label": "Added Win Chance per Attendee",
+    "tooltip": "Added Win Chance per Attendee",
+  	"group": "Boss2"
+  },
+  "B2AddWinPointsPerAttendee": {
+    "type": "numberbox",
+    "value": 0,
+  	"label": "Added Win Points per Attendee",
+    "tooltip": "Added Win Points per Attendee",
+  	"group": "Boss2"
+  },
   "B2StartText": {
     "type": "textbox",
-    "value": "{0} du trittst gegen [Grün] Üblesstinktier an. Viel Glück!",
+    "value": "{0} du trittst gegen [Grün] Üblesstinktier an. Win Chance {1} - Total Win Points {2} - Added Win Chance per Attendee {3} - Added Win Points per Attendee {4}! Viel Glück!",
   	"label": "Start Text",
-    "tooltip": "Text that will be posted before the fight begins",
+    "tooltip": "Text that will be posted before the fight begins \r\n {0} = user \r\n {1} = win chance \r\n {2} = total win points \r\n {3} = added win chance per attendee \r\n {4} = added win points per attendee",
   	"group": "Boss2"
   },
   "B2WinText": {
     "type": "textbox",
-    "value": "{0} du hast {1} {2} gewonnen!",
+    "value": "{0} und seine {1} Crewmitglieder haben insgesamt {2} {3} gewonnen! Somit hat jeder {4} {3} bekommen.",
   	"label": "Win Text",
-    "tooltip": "Text that will be posted after you win",
+    "tooltip": "Text that will be posted after you win \r\n {0} = user \r\n {1} = amount attendees \r\n {2} = total win points \r\n {3} = currency \r\n {4} = win per attendee",
   	"group": "Boss2"
   },
   "B2LoseText": {
     "type": "textbox",
     "value": "{0} du hast {1} {2} verloren!",
   	"label": "Lose Text",
-    "tooltip": "Text that will be posted after you lose",
+    "tooltip": "Text that will be posted after you lose \r\n {0} = user \r\n {1} = amount of points \r\n {2} = currency name",
   	"group": "Boss2"
   },
   "B3Name": {
@@ -240,25 +324,39 @@
     "tooltip": "Points that you lose for losing",
   	"group": "Boss3"
   },
+  "B3AddWinChancePerAttendee": {
+    "type": "numberbox",
+    "value": 0,
+  	"label": "Added Win Chance per Attendee",
+    "tooltip": "Added Win Chance per Attendee",
+  	"group": "Boss3"
+  },
+  "B3AddWinPointsPerAttendee": {
+    "type": "numberbox",
+    "value": 0,
+  	"label": "Added Win Points per Attendee",
+    "tooltip": "Added Win Points per Attendee",
+  	"group": "Boss3"
+  },
   "B3StartText": {
     "type": "textbox",
-    "value": "{0} du trittst gegen [Blau] Geilesau an. Viel Glück!",
+    "value": "{0} du trittst gegen [Blau] Geilesau an. Win Chance {1} - Total Win Points {2} - Added Win Chance per Attendee {3} - Added Win Points per Attendee {4}! Viel Glück!",
   	"label": "Start Text",
-    "tooltip": "Text that will be posted before the fight begins",
+    "tooltip": "Text that will be posted before the fight begins \r\n {0} = user \r\n {1} = win chance \r\n {2} = total win points \r\n {3} = added win chance per attendee \r\n {4} = added win points per attendee",
   	"group": "Boss3"
   },
   "B3WinText": {
     "type": "textbox",
-    "value": "{0} du hast {1} {2} gewonnen!",
+    "value": "{0} und seine {1} Crewmitglieder haben insgesamt {2} {3} gewonnen! Somit hat jeder {4} {3} bekommen.",
   	"label": "Win Text",
-    "tooltip": "Text that will be posted after you win",
+    "tooltip": "Text that will be posted after you win \r\n {0} = user \r\n {1} = amount attendees \r\n {2} = total win points \r\n {3} = currency \r\n {4} = win per attendee",
   	"group": "Boss3"
   },
   "B3LoseText": {
     "type": "textbox",
     "value": "{0} du hast {1} {2} verloren!",
   	"label": "Lose Text",
-    "tooltip": "Text that will be posted after you lose",
+    "tooltip": "Text that will be posted after you lose \r\n {0} = user \r\n {1} = amount of points \r\n {2} = currency name",
   	"group": "Boss3"
   },
     "B4Name": {
@@ -289,25 +387,39 @@
     "tooltip": "Points that you lose for losing",
   	"group": "Boss4"
   },
+  "B4AddWinChancePerAttendee": {
+    "type": "numberbox",
+    "value": 0,
+  	"label": "Added Win Chance per Attendee",
+    "tooltip": "Added Win Chance per Attendee",
+  	"group": "Boss4"
+  },
+  "B4AddWinPointsPerAttendee": {
+    "type": "numberbox",
+    "value": 0,
+  	"label": "Added Win Points per Attendee",
+    "tooltip": "Added Win Points per Attendee",
+  	"group": "Boss4"
+  },
   "B4StartText": {
     "type": "textbox",
-    "value": "{0} du trittst gegen [Lila] Jauerbär an. Viel Glück!",
+    "value": "{0} du trittst gegen [Lila] Jauerbär an. Win Chance {1} - Total Win Points {2} - Added Win Chance per Attendee {3} - Added Win Points per Attendee {4}! Viel Glück!",
   	"label": "Start Text",
-    "tooltip": "Text that will be posted before the fight begins",
+    "tooltip": "Text that will be posted before the fight begins \r\n {0} = user \r\n {1} = win chance \r\n {2} = total win points \r\n {3} = added win chance per attendee \r\n {4} = added win points per attendee",
   	"group": "Boss4"
   },
   "B4WinText": {
     "type": "textbox",
-    "value": "{0} du hast {1} {2} gewonnen!",
+    "value": "{0} und seine {1} Crewmitglieder haben insgesamt {2} {3} gewonnen! Somit hat jeder {4} {3} bekommen.",
   	"label": "Win Text",
-    "tooltip": "Text that will be posted after you win",
+    "tooltip": "Text that will be posted after you win \r\n {0} = user \r\n {1} = amount attendees \r\n {2} = total win points \r\n {3} = currency \r\n {4} = win per attendee",
   	"group": "Boss4"
   },
   "B4LoseText": {
     "type": "textbox",
     "value": "{0} du hast {1} {2} verloren!",
   	"label": "Lose Text",
-    "tooltip": "Text that will be posted after you lose",
+    "tooltip": "Text that will be posted after you lose \r\n {0} = user \r\n {1} = amount of points \r\n {2} = currency name",
   	"group": "Boss4"
   },
   "B5Name": {
@@ -338,25 +450,39 @@
     "tooltip": "Points that you lose for losing",
   	"group": "Boss5"
   },
+  "B5AddWinChancePerAttendee": {
+    "type": "numberbox",
+    "value": 0,
+  	"label": "Added Win Chance per Attendee",
+    "tooltip": "Added Win Chance per Attendee",
+  	"group": "Boss5"
+  },
+  "B5AddWinPointsPerAttendee": {
+    "type": "numberbox",
+    "value": 0,
+  	"label": "Added Win Points per Attendee",
+    "tooltip": "Added Win Points per Attendee",
+  	"group": "Boss5"
+  },
   "B5StartText": {
     "type": "textbox",
-    "value": "{0} du trittst gegen [Gold] Maroxotant an. Viel Glück!",
+    "value": "{0} du trittst gegen [Gold] Maroxotant an. Win Chance {1} - Total Win Points {2} - Added Win Chance per Attendee {3} - Added Win Points per Attendee {4}! Viel Glück!",
   	"label": "Start Text",
-    "tooltip": "Text that will be posted before the fight begins",
+    "tooltip": "Text that will be posted before the fight begins \r\n {0} = user \r\n {1} = win chance \r\n {2} = total win points \r\n {3} = added win chance per attendee \r\n {4} = added win points per attendee",
   	"group": "Boss5"
   },
   "B5WinText": {
     "type": "textbox",
-    "value": "{0} du hast {1} {2} gewonnen!",
+    "value": "{0} und seine {1} Crewmitglieder haben insgesamt {2} {3} gewonnen! Somit hat jeder {4} {3} bekommen.",
   	"label": "Win Text",
-    "tooltip": "Text that will be posted after you win",
+    "tooltip": "Text that will be posted after you win \r\n {0} = user \r\n {1} = amount attendees \r\n {2} = total win points \r\n {3} = currency \r\n {4} = win per attendee",
   	"group": "Boss5"
   },
   "B5LoseText": {
     "type": "textbox",
     "value": "{0} du hast {1} {2} verloren!",
   	"label": "Lose Text",
-    "tooltip": "Text that will be posted after you lose",
+    "tooltip": "Text that will be posted after you lose \r\n {0} = user \r\n {1} = amount of points \r\n {2} = currency name",
   	"group": "Boss5"
   },
     "BtnDefaults": {
