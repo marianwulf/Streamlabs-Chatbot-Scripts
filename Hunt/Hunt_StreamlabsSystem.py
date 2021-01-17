@@ -286,17 +286,23 @@ def Execute(data):
                 MySet.Boss[1] += MySet.Boss[7]
                 # recalculate win points after adding new attendee
                 MySet.Boss[2] += MySet.Boss[8]
-                
-                # todo: update WinText with information about the attendees
-                # teststring = BXWinText.replace(X, MySet.selectedboss + 1)
-                # teststring = "B" + (MySet.selectedboss + 1) + "WinText"
-                # MySet.Boss[5] = MySet.vars()[teststring].format(data.UserName, len(MySet.ActiveGameAttendees)-1, MySet.Boss[2], Parent.GetCurrencyName(), MySet.Boss[2]/len(MySet.ActiveGameAttendees))
-           
-                
+                       
                 # add user to game and notify
                 MySet.ActiveGameAttendees.append(data.User)
                 message = MySet.JoinedFightResponse.format(data.UserName, MySet.Boss[0], len(MySet.ActiveGameAttendees), MySet.Boss[1], MySet.Boss[2], MySet.Boss[2]/len(MySet.ActiveGameAttendees))
-                SendResp(data, message)       
+                SendResp(data, message)  
+
+                # update WinText message
+                if MySet.selectedboss == 0:
+                    MySet.Boss[5] = MySet.B1WinText.format(MySet.ActiveGameAttendees[0], len(MySet.ActiveGameAttendees)-1, MySet.Boss[2], Parent.GetCurrencyName(), MySet.Boss[2]/len(MySet.ActiveGameAttendees))
+                elif MySet.selectedboss == 1:
+                    MySet.Boss[5] = MySet.B2WinText.format(MySet.ActiveGameAttendees[0], len(MySet.ActiveGameAttendees)-1, MySet.Boss[2], Parent.GetCurrencyName(), MySet.Boss[2]/len(MySet.ActiveGameAttendees))
+                elif MySet.selectedboss == 2:
+                    MySet.Boss[5] = MySet.B3WinText.format(MySet.ActiveGameAttendees[0], len(MySet.ActiveGameAttendees)-1, MySet.Boss[2], Parent.GetCurrencyName(), MySet.Boss[2]/len(MySet.ActiveGameAttendees))
+                elif MySet.selectedboss == 3:
+                    MySet.Boss[5] = MySet.B4WinText.format(MySet.ActiveGameAttendees[0], len(MySet.ActiveGameAttendees)-1, MySet.Boss[2], Parent.GetCurrencyName(), MySet.Boss[2]/len(MySet.ActiveGameAttendees))
+                elif MySet.selectedboss == 4:
+                    MySet.Boss[5] = MySet.B5WinText.format(MySet.ActiveGameAttendees[0], len(MySet.ActiveGameAttendees)-1, MySet.Boss[2], Parent.GetCurrencyName(), MySet.Boss[2]/len(MySet.ActiveGameAttendees))     
             
             else:
                 # notify that no game is active 
