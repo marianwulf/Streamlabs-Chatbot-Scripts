@@ -288,7 +288,7 @@ def Execute(data):
                 
                 # add user to game and notify
                 MySet.ActiveGameAttendees.append(data.User)
-                message = MySet.JoinedFightResponse.format(data.UserName, MySet.Boss[0], len(MySet.ActiveGameAttendees), MySet.Boss[1], MySet.Boss[2], MySet[2]/len(MySet.ActiveGameAttendees))
+                message = MySet.JoinedFightResponse.format(data.UserName, MySet.Boss[0], len(MySet.ActiveGameAttendees), MySet.Boss[1], MySet.Boss[2], MySet.Boss[2]/len(MySet.ActiveGameAttendees))
                 SendResp(data, message)       
             
             else:
