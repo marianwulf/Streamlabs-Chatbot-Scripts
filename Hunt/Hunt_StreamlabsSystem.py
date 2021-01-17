@@ -48,6 +48,7 @@ class Settings:
                 self.ActiveGameAttendees = []
                 self.ActiveGameEnd = None
                 self.Boss = []
+                self.selectedboss = 0
 
         else: #set variables if no custom settings file is found
             self.OnlyLive = False
@@ -205,11 +206,11 @@ def Execute(data):
             else:
                 
                 # define bosses
-                MySet.Boss = [[MySet.B1Name, MySet.B1WinChance, MySet.B1Win, MySet.B1Lose, MySet.B1StartText.format(data.UserName), MySet.B1WinText.format(data.UserName, MySet.B1Win, Parent.GetCurrencyName()), MySet.B1LoseText.format(data.UserName, MySet.B1Lose, Parent.GetCurrencyName()), B1AddWinChancePerAttendee, B1AddWinPointsPerAttendee)], \
-                            [MySet.B2Name, MySet.B2WinChance, MySet.B2Win, MySet.B2Lose, MySet.B2StartText.format(data.UserName), MySet.B2WinText.format(data.UserName, MySet.B2Win, Parent.GetCurrencyName()), MySet.B2LoseText.format(data.UserName, MySet.B2Lose, Parent.GetCurrencyName()), B2AddWinChancePerAttendee, B2AddWinPointsPerAttendee], \
-                            [MySet.B3Name, MySet.B3WinChance, MySet.B3Win, MySet.B3Lose, MySet.B3StartText.format(data.UserName), MySet.B3WinText.format(data.UserName, MySet.B3Win, Parent.GetCurrencyName()), MySet.B3LoseText.format(data.UserName, MySet.B3Lose, Parent.GetCurrencyName()), B3AddWinChancePerAttendee, B3AddWinPointsPerAttendee], \
-                            [MySet.B4Name, MySet.B4WinChance, MySet.B4Win, MySet.B4Lose, MySet.B4StartText.format(data.UserName), MySet.B4WinText.format(data.UserName, MySet.B4Win, Parent.GetCurrencyName()), MySet.B4LoseText.format(data.UserName, MySet.B4Lose, Parent.GetCurrencyName()), B4AddWinChancePerAttendee, B4AddWinPointsPerAttendee], \
-                            [MySet.B5Name, MySet.B5WinChance, MySet.B5Win, MySet.B5Lose, MySet.B5StartText.format(data.UserName), MySet.B5WinText.format(data.UserName, MySet.B5Win, Parent.GetCurrencyName()), MySet.B5LoseText.format(data.UserName, MySet.B5Lose, Parent.GetCurrencyName()), B5AddWinChancePerAttendee, B5AddWinPointsPerAttendee]]            
+                MySet.Boss = [[MySet.B1Name, MySet.B1WinChance, MySet.B1Win, MySet.B1Lose, MySet.B1StartText.format(data.UserName), MySet.B1WinText.format(data.UserName, MySet.B1Win, Parent.GetCurrencyName()), MySet.B1LoseText.format(data.UserName, MySet.B1Lose, Parent.GetCurrencyName()), MySet.B1AddWinChancePerAttendee, MySet.B1AddWinPointsPerAttendee], \
+                            [MySet.B2Name, MySet.B2WinChance, MySet.B2Win, MySet.B2Lose, MySet.B2StartText.format(data.UserName), MySet.B2WinText.format(data.UserName, MySet.B2Win, Parent.GetCurrencyName()), MySet.B2LoseText.format(data.UserName, MySet.B2Lose, Parent.GetCurrencyName()), MySet.B2AddWinChancePerAttendee, MySet.B2AddWinPointsPerAttendee], \
+                            [MySet.B3Name, MySet.B3WinChance, MySet.B3Win, MySet.B3Lose, MySet.B3StartText.format(data.UserName), MySet.B3WinText.format(data.UserName, MySet.B3Win, Parent.GetCurrencyName()), MySet.B3LoseText.format(data.UserName, MySet.B3Lose, Parent.GetCurrencyName()), MySet.B3AddWinChancePerAttendee, MySet.B3AddWinPointsPerAttendee], \
+                            [MySet.B4Name, MySet.B4WinChance, MySet.B4Win, MySet.B4Lose, MySet.B4StartText.format(data.UserName), MySet.B4WinText.format(data.UserName, MySet.B4Win, Parent.GetCurrencyName()), MySet.B4LoseText.format(data.UserName, MySet.B4Lose, Parent.GetCurrencyName()), MySet.B4AddWinChancePerAttendee, MySet.B4AddWinPointsPerAttendee], \
+                            [MySet.B5Name, MySet.B5WinChance, MySet.B5Win, MySet.B5Lose, MySet.B5StartText.format(data.UserName), MySet.B5WinText.format(data.UserName, MySet.B5Win, Parent.GetCurrencyName()), MySet.B5LoseText.format(data.UserName, MySet.B5Lose, Parent.GetCurrencyName()), MySet.B5AddWinChancePerAttendee, MySet.B5AddWinPointsPerAttendee]]            
             
                 MySet.highestlose = MySet.B1Lose
             
@@ -232,8 +233,8 @@ def Execute(data):
                 MySet.ActiveGameAttendees.append(data.User)
                 
                 # choose random boss
-                selectedboss = Parent.GetRandom(0,len(MySet.Boss))
-                MySet.Boss = MySet.Boss[selectedboss]
+                MySet.selectedboss = Parent.GetRandom(0,len(MySet.Boss))
+                MySet.Boss = MySet.Boss[MySet.selectedboss]
             
                 # send boss start message
                 message = MySet.Boss[4]
@@ -286,6 +287,12 @@ def Execute(data):
                 # recalculate win points after adding new attendee
                 MySet.Boss[2] += MySet.Boss[8]
                 
+                # todo: update WinText with information about the attendees
+                # teststring = BXWinText.replace(X, MySet.selectedboss + 1)
+                # teststring = "B" + (MySet.selectedboss + 1) + "WinText"
+                # MySet.Boss[5] = MySet.vars()[teststring].format(data.UserName, len(MySet.ActiveGameAttendees)-1, MySet.Boss[2], Parent.GetCurrencyName(), MySet.Boss[2]/len(MySet.ActiveGameAttendees))
+           
+                
                 # add user to game and notify
                 MySet.ActiveGameAttendees.append(data.User)
                 message = MySet.JoinedFightResponse.format(data.UserName, MySet.Boss[0], len(MySet.ActiveGameAttendees), MySet.Boss[1], MySet.Boss[2], MySet.Boss[2]/len(MySet.ActiveGameAttendees))
@@ -317,8 +324,6 @@ def Tick():
                 Parent.AddPoints(ActiveGameAttendeesIT, ActiveGameAttendeesIT, MySet.Boss[2]/len(MySet.ActiveGameAttendees))
                 Parent.AddUserCooldown(ScriptName, MySet.Command, ActiveGameAttendeesIT, MySet.UserCooldown)
                 Parent.AddUserCooldown(ScriptName, MySet.JoinCommand, ActiveGameAttendeesIT, MySet.UserCooldown)
-            # todo: update WinText with information about the attendees
-            # WinText.format(data.UserName, len(MySet.ActiveGameAttendees)-1, MySet.B1Win, Parent.GetCurrencyName(), MySet.Boss[2]/len(MySet.ActiveGameAttendees))
             message = MySet.Boss[5]
             Parent.SendStreamMessage(message)
             # clean up attendees array
