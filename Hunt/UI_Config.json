@@ -23,7 +23,7 @@
   },
   "MinAttendees": {
     "type": "numberbox",
-  	"label": "Cost",
+  	"label": "Min Attendees",
     "value": 0,
     "tooltip": "Min Attendees to succeed",
   	"group": "General"
