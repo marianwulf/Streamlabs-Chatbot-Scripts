@@ -285,6 +285,11 @@ def Execute(data):
                 MySet.ActiveGameAttendees.append(data.User)
                 message = MySet.JoinedFightResponse.format(data.UserName, MySet.Boss[0])
                 SendResp(data, message)
+                
+                # recalculate win chance after adding new attendee
+                MySet.Boss[1] += MySet.Boss[7]
+                # recalculate win points after adding new attendee
+                MySet.Boss[2] += MySet.Boss[8]
             
             else:
                 # notify that no game is active 
