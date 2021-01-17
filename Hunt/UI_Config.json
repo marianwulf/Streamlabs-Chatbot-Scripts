@@ -198,6 +198,20 @@
     "tooltip": "Points that you lose for losing",
   	"group": "Boss1"
   },
+  "B1AddWinChancePerAttendee": {
+    "type": "numberbox",
+    "value": 0,
+  	"label": "Added Win Chance per Attendee",
+    "tooltip": "Added Win Chance per Attendee",
+  	"group": "Boss1"
+  },
+  "B1AddWinPointsPerAttendee": {
+    "type": "numberbox",
+    "value": 0,
+  	"label": "Added Win Points per Attendee",
+    "tooltip": "Added Win Points per Attendee",
+  	"group": "Boss1"
+  },
   "B1StartText": {
     "type": "textbox",
     "value": "{0} du trittst gegen [Weiß] Feigeratte an. Win Chance {1} - Total Win Points {2} - Added Win Chance per Attendee {3} - Added Win Points per Attendee {4}! Viel Glück!",
@@ -245,6 +259,20 @@
     "value": 15,
   	"label": "Lose Points",
     "tooltip": "Points that you lose for losing",
+  	"group": "Boss2"
+  },
+  "B2AddWinChancePerAttendee": {
+    "type": "numberbox",
+    "value": 0,
+  	"label": "Added Win Chance per Attendee",
+    "tooltip": "Added Win Chance per Attendee",
+  	"group": "Boss2"
+  },
+  "B2AddWinPointsPerAttendee": {
+    "type": "numberbox",
+    "value": 0,
+  	"label": "Added Win Points per Attendee",
+    "tooltip": "Added Win Points per Attendee",
   	"group": "Boss2"
   },
   "B2StartText": {
@@ -296,6 +324,20 @@
     "tooltip": "Points that you lose for losing",
   	"group": "Boss3"
   },
+  "B3AddWinChancePerAttendee": {
+    "type": "numberbox",
+    "value": 0,
+  	"label": "Added Win Chance per Attendee",
+    "tooltip": "Added Win Chance per Attendee",
+  	"group": "Boss3"
+  },
+  "B3AddWinPointsPerAttendee": {
+    "type": "numberbox",
+    "value": 0,
+  	"label": "Added Win Points per Attendee",
+    "tooltip": "Added Win Points per Attendee",
+  	"group": "Boss3"
+  },
   "B3StartText": {
     "type": "textbox",
     "value": "{0} du trittst gegen [Blau] Geilesau an. Win Chance {1} - Total Win Points {2} - Added Win Chance per Attendee {3} - Added Win Points per Attendee {4}! Viel Glück!",
@@ -345,6 +387,20 @@
     "tooltip": "Points that you lose for losing",
   	"group": "Boss4"
   },
+  "B4AddWinChancePerAttendee": {
+    "type": "numberbox",
+    "value": 0,
+  	"label": "Added Win Chance per Attendee",
+    "tooltip": "Added Win Chance per Attendee",
+  	"group": "Boss4"
+  },
+  "B4AddWinPointsPerAttendee": {
+    "type": "numberbox",
+    "value": 0,
+  	"label": "Added Win Points per Attendee",
+    "tooltip": "Added Win Points per Attendee",
+  	"group": "Boss4"
+  },
   "B4StartText": {
     "type": "textbox",
     "value": "{0} du trittst gegen [Lila] Jauerbär an. Win Chance {1} - Total Win Points {2} - Added Win Chance per Attendee {3} - Added Win Points per Attendee {4}! Viel Glück!",
@@ -392,6 +448,20 @@
     "value": 15,
   	"label": "Lose Points",
     "tooltip": "Points that you lose for losing",
+  	"group": "Boss5"
+  },
+  "B5AddWinChancePerAttendee": {
+    "type": "numberbox",
+    "value": 0,
+  	"label": "Added Win Chance per Attendee",
+    "tooltip": "Added Win Chance per Attendee",
+  	"group": "Boss5"
+  },
+  "B5AddWinPointsPerAttendee": {
+    "type": "numberbox",
+    "value": 0,
+  	"label": "Added Win Points per Attendee",
+    "tooltip": "Added Win Points per Attendee",
   	"group": "Boss5"
   },
   "B5StartText": {
