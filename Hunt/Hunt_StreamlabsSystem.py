@@ -238,7 +238,7 @@ def Execute(data):
                 MySet.ActiveGame = True
                 MySet.ActiveGameEnd = time.time() + MySet.ActiveGameTime
                 MySet.ActiveGameAttendees.append(data.User)
-                MySet.BossStarterUserName = data.User
+                MySet.BossStarterUserName = data.UserName
                 
                 # choose random boss
                 MySet.selectedboss = Parent.GetRandom(0,len(MySet.Boss))
@@ -338,8 +338,8 @@ def Tick():
         if len(MySet.ActiveGameAttendees) < MySet.MinAttendees:
             del MySet.ActiveGameAttendees[:]
             Parent.AddCooldown(ScriptName, MySet.Command, MySet.Cooldown)
-            message = MySet.MinAttendeesResponse.format(data.User)
-            SendResp(data, message)
+            message = MySet.MinAttendeesResponse.format(MySet.BossStarterUserName)
+            Parent.SendStreamMessage(message)
             return
 
         # check if user wins against boss
