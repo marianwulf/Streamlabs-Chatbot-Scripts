@@ -69,7 +69,7 @@ class Settings:
             self.ActiveGameTime = 60
             self.ActiveGameResponse = "{0} the hunt against {1} is currently active. Type {2} in the next {3} seconds to join the fight."
             self.NoActiveGameResponse = "{0} there is no hunt currently active. Type {1} to begin hunting."
-            self.JoinedFightResponse = "{0} you joined the hunt against {1}!"
+            self.JoinedFightResponse = "{0} you joined the hunt against {1}! Attendees: {2} - Win Chance {3} - Total Win Points {4} - Win Points per User {5}"
             self.AlreadyJoinedFight = "{0} you already joined the hunt!"
             self.NotEnoughResponse = "{0} you don't have enough {1} to attempt this! You will need atleast {2} {1}."
             self.PermissionResponse = "{0} -> only {1} ({2}) and higher can use this command"
@@ -280,16 +280,16 @@ def Execute(data):
                 # subtract usage costs
                 Parent.RemovePoints(data.User, data.UserName, MySet.Cost)
                 
-
-                # add user to game and notify
-                MySet.ActiveGameAttendees.append(data.User)
-                message = MySet.JoinedFightResponse.format(data.UserName, MySet.Boss[0])
-                SendResp(data, message)
                 
                 # recalculate win chance after adding new attendee
                 MySet.Boss[1] += MySet.Boss[7]
                 # recalculate win points after adding new attendee
                 MySet.Boss[2] += MySet.Boss[8]
+                
+                # add user to game and notify
+                MySet.ActiveGameAttendees.append(data.User)
+                message = MySet.JoinedFightResponse.format(data.UserName, MySet.Boss[0], len(MySet.ActiveGameAttendees), MySet.Boss[1], MySet.Boss[2], MySet[2]/len(MySet.ActiveGameAttendees))
+                SendResp(data, message)       
             
             else:
                 # notify that no game is active 
