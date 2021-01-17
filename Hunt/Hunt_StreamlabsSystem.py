@@ -18,7 +18,7 @@ from array import *
 ScriptName = "Hunt"
 Website = "https://github.com/marianwulf"
 Creator = "Marox"
-Version = "1.2.1"
+Version = "1.2.2"
 Description = "Hunt command"
 #---------------------------------------
 # Versions
@@ -28,6 +28,7 @@ Description = "Hunt command"
 1.1.0 - other users can join the hunt
 1.2.0 - add winchance & winpoints per attendee
 1.2.1 - minimum attendees to succeed
+1.2.2 - visual bugfix - max 100% win chance
 """
 #---------------------------------------
 # Variables
@@ -290,7 +291,10 @@ def Execute(data):
                 
                 
                 # recalculate win chance after adding new attendee
-                MySet.Boss[1] += MySet.Boss[7]
+                if MySet.Boss[1] + MySet.Boss[7] < 100:
+                    MySet.Boss[1] += MySet.Boss[7]
+                else:
+                    MySet.Boss[1] = 100
                 # recalculate win points after adding new attendee
                 MySet.Boss[2] += MySet.Boss[8]
                        
