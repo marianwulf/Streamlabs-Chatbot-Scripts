@@ -18,7 +18,7 @@ from array import *
 ScriptName = "Hunt"
 Website = "https://github.com/marianwulf"
 Creator = "Marox"
-Version = "1.1.0"
+Version = "1.2.0"
 Description = "Hunt command"
 #---------------------------------------
 # Versions
@@ -26,6 +26,7 @@ Description = "Hunt command"
 """ Releases (open README.txt for full release notes)
 1.0.0 - Initial Release
 1.1.0 - other users can join the hunt
+1.2.0 - add winchance & winpoints per attendee
 """
 #---------------------------------------
 # Variables
