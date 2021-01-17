@@ -21,6 +21,13 @@
     "tooltip": "The command to join the hunt",
   	"group": "General"
   },
+  "MinAttendees": {
+    "type": "numberbox",
+  	"label": "Cost",
+    "value": 0,
+    "tooltip": "Min Attendees to succeed",
+  	"group": "General"
+  },
   "Cost": {
     "type": "numberbox",
   	"label": "Cost",
@@ -140,6 +147,13 @@
     "value": "{0} there is no hunt currently active. Type {1} to begin hunting.",
   	"label": "No Active Game Response",
     "tooltip": "The message that the bot will display when no game is active. \r\n {0} = user \r\n {1} = join command",
+  	"group": "Responses"
+  },
+  "MinAttendeesResponse": {
+    "type": "textbox",
+    "value": "{0} not enough people joined the hunt, so it was aborted.",
+  	"label": "Min Attendees Response",
+    "tooltip": "The message that the bot will display when there are not enough attendees \r\n {0} = user",
   	"group": "Responses"
   },
   "JoinedFightResponse": {

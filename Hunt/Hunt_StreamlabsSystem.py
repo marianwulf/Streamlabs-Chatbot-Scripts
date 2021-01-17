@@ -18,7 +18,7 @@ from array import *
 ScriptName = "Hunt"
 Website = "https://github.com/marianwulf"
 Creator = "Marox"
-Version = "1.2.0"
+Version = "1.2.1"
 Description = "Hunt command"
 #---------------------------------------
 # Versions
@@ -27,6 +27,7 @@ Description = "Hunt command"
 1.0.0 - Initial Release
 1.1.0 - other users can join the hunt
 1.2.0 - add winchance & winpoints per attendee
+1.2.1 - minimum attendees to succeed
 """
 #---------------------------------------
 # Variables
@@ -57,6 +58,7 @@ class Settings:
             self.Command = "!hunt"
             self.JoinCommand = "!joinhunt"
             self.Cost = 0
+            self.MinAttendees = 0
             self.Permission = "Everyone"
             self.PermissionInfo = ""
             self.Usage = "Stream Chat"
@@ -73,6 +75,7 @@ class Settings:
             self.BossStarterUserName = ""
             self.ActiveGameResponse = "{0} the hunt against {1} is currently active. Type {2} in the next {3} seconds to join the fight."
             self.NoActiveGameResponse = "{0} there is no hunt currently active. Type {1} to begin hunting."
+            self.MinAttendeesResponse = "{0} not enough people joined the hunt, so it was aborted."
             self.JoinedFightResponse = "{0} you joined the hunt against {1}! Attendees: {2} - Win Chance {3} - Total Win Points {4} - Win Points per User {5}"
             self.AlreadyJoinedFight = "{0} you already joined the hunt!"
             self.NotEnoughResponse = "{0} you don't have enough {1} to attempt this! You will need atleast {2} {1}."
@@ -327,6 +330,14 @@ def Tick():
         
         UserWinValue = Parent.GetRandom(1,101)
         
+        # check if ActiveGameAttendees is lower than MinAttendees
+        if len(MySet.ActiveGameAttendees) < MySet.MinAttendees:
+            del MySet.ActiveGameAttendees[:]
+            Parent.AddCooldown(ScriptName, MySet.Command, MySet.Cooldown)
+            message = MySet.MinAttendeesResponse.format(data.User)
+            SendResp(data, message)
+            return
+
         # check if user wins against boss
         if UserWinValue <= MySet.Boss[1]:
             for ActiveGameAttendeesIT in MySet.ActiveGameAttendees:
