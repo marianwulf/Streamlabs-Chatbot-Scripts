@@ -220,11 +220,8 @@ def Execute(data):
                         MySet.HighestLose = BossIT[3]
             
                 # check if user has more points than highest possible lost
-                if not Parent.RemovePoints(data.User, data.UserName, MySet.HighestLose + MySet.Cost):
-                    message = MySet.NotEnoughResponse.replace("$username", data.UserName).replace("$currency", Parent.GetCurrencyName()).replace("$points", str(MySet.HighestLose + MySet.Cost))
-                    SendResp(data, message)
+                if not HasEnoughPoints(data, MySet.HighestLose + MySet.Cost):
                     return
-                Parent.AddPoints(data.User, data.UserName, MySet.HighestLose + MySet.Cost)
             
                 Parent.RemovePoints(data.User, data.UserName, MySet.Cost)
             
@@ -264,11 +261,8 @@ def Execute(data):
             if MySet.ActiveGame:
             
                 # check if user has more points than highest possible lost
-                if not Parent.RemovePoints(data.User, data.UserName, MySet.HighestLose + MySet.Cost):
-                    message = MySet.NotEnoughResponse.replace("$username", data.UserName).replace("$currency", Parent.GetCurrencyName()).replace("$points", str(MySet.HighestLose + MySet.Cost))
-                    SendResp(data, message)
+                if not HasEnoughPoints(data, MySet.HighestLose + MySet.Cost):
                     return
-                Parent.AddPoints(data.User, data.UserName, MySet.HighestLose + MySet.Cost)
                 
                 # check if user already joined and send message if
                 if data.User in MySet.ActiveGameAttendees:
@@ -467,3 +461,12 @@ def AddCooldown(data):
     else:
         Parent.AddUserCooldown(ScriptName, MySet.Command, data.User, MySet.UserCooldown)
         Parent.AddCooldown(ScriptName, MySet.Command, MySet.Cooldown)
+
+def HasEnoughPoints(data, points):
+    """Return true if user has enough points for the command and false if user doesn't"""
+    if not Parent.RemovePoints(data.User, data.UserName, points):
+        message = MySet.NotEnoughResponse.replace("$username", data.UserName).replace("$currency", Parent.GetCurrencyName()).replace("$points", str(points))
+        SendResp(data, message)
+        return False
+    Parent.AddPoints(data.User, data.UserName, points)
+    return True

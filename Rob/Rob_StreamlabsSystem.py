@@ -166,11 +166,9 @@ def Execute(data):
             value = Parent.GetRandom(MySet.Min,MySet.Max)
             
             
-            if not Parent.RemovePoints(data.User, data.UserName, MySet.Max + MySet.Cost):
-                message = MySet.NotEnoughResponse.replace("$username", data.UserName).replace("$currency", Parent.GetCurrencyName()).replace("$points", str(MySet.Max + MySet.Cost))
-                SendResp(data, message)
+            # check if user has more points than highest possible lost
+            if not HasEnoughPoints(data, MySet.Max + MySet.Cost):
                 return
-            Parent.AddPoints(data.User, data.UserName, MySet.Max + MySet.Cost)
             
             if not Parent.RemovePoints(targetname, targetname, value):
                 message = MySet.TargetNotEnoughResponse.replace("$username", data.UserName).replace("$targetname", data.GetParam(1)).replace("$currency", Parent.GetCurrencyName())
@@ -309,3 +307,12 @@ def AddCooldown(data):
     else:
         Parent.AddUserCooldown(ScriptName, MySet.Command, data.User, MySet.UserCooldown)
         Parent.AddCooldown(ScriptName, MySet.Command, MySet.Cooldown)
+
+def HasEnoughPoints(data, points):
+    """Return true if user has enough points for the command and false if user doesn't"""
+    if not Parent.RemovePoints(data.User, data.UserName, points):
+        message = MySet.NotEnoughResponse.replace("$username", data.UserName).replace("$currency", Parent.GetCurrencyName()).replace("$points", str(points))
+        SendResp(data, message)
+        return False
+    Parent.AddPoints(data.User, data.UserName, points)
+    return True

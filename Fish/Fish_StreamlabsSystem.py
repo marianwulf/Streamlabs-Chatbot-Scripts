@@ -172,11 +172,9 @@ def Execute(data):
                 if BossIT[3] > highestlose:
                     highestlose = BossIT[3]
             
-            if not Parent.RemovePoints(data.User, data.UserName, highestlose + MySet.Cost):
-                message = MySet.NotEnoughResponse.replace("$username", data.UserName).replace("$currency", Parent.GetCurrencyName()).replace("$points", str(highestlose + MySet.Cost))
-                SendResp(data, message)
+            # check if user has more points than highest possible lost
+            if not HasEnoughPoints(data, highestlose + MySet.Cost):
                 return
-            Parent.AddPoints(data.User, data.UserName, highestlose + MySet.Cost)
             
             Parent.RemovePoints(data.User, data.UserName, MySet.Cost)
             
@@ -313,3 +311,12 @@ def AddCooldown(data):
     else:
         Parent.AddUserCooldown(ScriptName, MySet.Command, data.User, MySet.UserCooldown)
         Parent.AddCooldown(ScriptName, MySet.Command, MySet.Cooldown)
+
+def HasEnoughPoints(data, points):
+    """Return true if user has enough points for the command and false if user doesn't"""
+    if not Parent.RemovePoints(data.User, data.UserName, points):
+        message = MySet.NotEnoughResponse.replace("$username", data.UserName).replace("$currency", Parent.GetCurrencyName()).replace("$points", str(points))
+        SendResp(data, message)
+        return False
+    Parent.AddPoints(data.User, data.UserName, points)
+    return True

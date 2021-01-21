@@ -373,8 +373,8 @@ def AddCooldown(data):
 def HasEnoughPoints(data, points):
     """Return true if user has enough points for the command and false if user doesn't"""
     if not Parent.RemovePoints(data.User, data.UserName, points):
-                    message = MySet.NotEnoughResponse.replace("$username", data.UserName).replace("$currency", Parent.GetCurrencyName()).replace("$points", str(points))
-                    SendResp(data, message)
-                    return False
+        message = MySet.NotEnoughResponse.replace("$username", data.UserName).replace("$currency", Parent.GetCurrencyName()).replace("$points", str(points))
+        SendResp(data, message)
+        return False
     Parent.AddPoints(data.User, data.UserName, points)
     return True
