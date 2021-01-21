@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 # pylint: disable=invalid-name
-"""Rob command, replica of the textbased version."""
+"""Fish command"""
 #---------------------------------------
 # Libraries and references
 #---------------------------------------
