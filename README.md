@@ -1,29 +1,13 @@
 # Streamlabs-Chatbot-Scripts
 
-## [Rob Minigame](https://github.com/marianwulf/Streamlabs-Chatbot-Scripts/tree/main/Rob)
-  - Enable/Disable using the command when the stream is offline
-  - Enable/Disable cooldown / user cooldown
-  - Enable/Disable cooldown / user cooldown messages
-  - Enable/Disable timeout user on failed robbing attempt
-  - Customisable command name
-  - Customisable cost for using the command
-  - Customisable robbing rewards (min-max)
-  - Customisable permission for using the command
-  - Customisable cooldown / user cooldown timers
-  - Customisable timeout amount
-  - Customisable user blacklist
-  - Customisable response messages
-  
+## [Bomb Minigame](https://github.com/marianwulf/Streamlabs-Chatbot-Scripts/tree/main/Bomb)
+Multiplayer PVP - use customisable command to pass the bomb to another random target in the viewerlist. If it explodes the bomb holder will lose the defined value and the last holder will get an customisable amount of it. You can adjust all values and responses in the UI.
+
 ## [Fish Minigame](https://github.com/marianwulf/Streamlabs-Chatbot-Scripts/tree/main/Fish)
-  - Enable/Disable using the command when the stream is offline
-  - Enable/Disable cooldown / user cooldown
-  - Enable/Disable cooldown / user cooldown messages
-  - Enable/Disable timeout user on failed fishing attempt
-  - Customisable command name
-  - Costumisable fish names, win chances and win/lose amounts
-  - Customisable cost for using the command
-  - Customisable permission for using the command
-  - Customisable cooldown / user cooldown timers
-  - Customisable timeout amount
-  - Customisable user blacklist
-  - Customisable response messages
+Singleplayer PVE - use customisable command to fish 1 of 5 defined fishes. If the random value is inside the defined win chance you can win points, otherwise you lose them. You can adjust all values and responses in the UI.
+
+## [Hunt Minigame](https://github.com/marianwulf/Streamlabs-Chatbot-Scripts/tree/main/Hunt)
+Multiplayer PVE - use customisable command to fight against 1 of 5 defined bosses. Other players can join the hunt to increase customisable win chances and amounts. You can adjust all values and responses in the UI.
+
+## [Rob Minigame](https://github.com/marianwulf/Streamlabs-Chatbot-Scripts/tree/main/Rob)
+Singleplayer PVP - use customisable command to rob another choosen target in the viewerlist. Classic 50 / 50 chance to gain or give some points. You can adjust all values and responses in the UI.
