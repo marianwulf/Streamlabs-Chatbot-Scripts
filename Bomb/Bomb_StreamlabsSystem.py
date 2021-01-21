@@ -230,7 +230,6 @@ def Execute(data):
 
 def Tick():
     """Required tick function"""
-    
 
     # check if game time if over
     if MySet.ActiveGame and time.time() >= MySet.ActiveGameEnd:
@@ -242,6 +241,26 @@ def Tick():
         # get current points from the bomb holder and set the amount that will be lost
         targetcurrentpoints = int(Parent.GetPoints(MySet.BombHolder.lower()))
         randompoints = Parent.GetRandom(MySet.Min, MySet.Max + 1)
+
+        # if current points are lower than the points that will be lost trigger another response
+        if targetcurrentpoints < randompoints:
+            Parent.RemovePoints(MySet.BombHolder.lower(), MySet.BombHolder, targetcurrentpoints)
+            Parent.AddPoints(MySet.LastBombHolder.lower(), MySet.LastBombHolder, int((randompoints*MySet.WinPointsPercentage)/100))
+            message = MySet.TargetLostNotEnough.replace("$winner", MySet.LastBombHolder).replace("$loser", MySet.BombHolder).replace("$pointswon", str(int((randompoints*MySet.WinPointsPercentage)/100))).replace("$pointslost", str(targetcurrentpoints)).replace("$currency", Parent.GetCurrencyName())
+            Parent.SendStreamMessage(message)
+            Parent.AddCooldown(ScriptName, MySet.Command, MySet.Cooldown)
+            if MySet.Timeout:
+                    Parent.SendStreamMessage("/timeout {0} {1}".format(MySet.BombHolder.lower(), MySet.TL))
+            return
+        else:
+            Parent.RemovePoints(MySet.BombHolder.lower(), MySet.BombHolder, randompoints)
+            Parent.AddPoints(MySet.LastBombHolder.lower(), MySet.LastBombHolder, int((randompoints*MySet.WinPointsPercentage)/100))
+            message = MySet.TargetLost.replace("$winner", MySet.LastBombHolder).replace("$loser", MySet.BombHolder).replace("$pointswon", str(int((randompoints*MySet.WinPointsPercentage)/100))).replace("$pointslost", str(randompoints)).replace("$currency", Parent.GetCurrencyName())
+            Parent.SendStreamMessage(message)
+            Parent.AddCooldown(ScriptName, MySet.Command, MySet.Cooldown)
+            if MySet.Timeout:
+                    Parent.SendStreamMessage("/timeout {0} {1}".format(MySet.BombHolder.lower(), MySet.TL))
+            return
 
 #---------------------------------------
 # [Optional] Functions for usage handling
@@ -359,4 +378,3 @@ def HasEnoughPoints(data, points):
                     return False
     Parent.AddPoints(data.User, data.UserName, points)
     return True
-    
