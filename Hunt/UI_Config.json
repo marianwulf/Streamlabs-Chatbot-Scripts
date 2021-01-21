@@ -79,11 +79,11 @@
     "tooltip": "Cooldown in seconds.",
   	"group": "Cooldown"
   },
-    "OnCooldown": {
+  "OnCooldown": {
     "type": "textbox",
-    "value": "{0} the command is still on cooldown for {1} seconds!",
+    "value": "$username the command is still on cooldown for $cooldown seconds!",
   	"label": "Cooldown Response",
-    "tooltip": "The message that the bot will display when the command is on cooldown. \r\n {0} = user \r\n {1} = time remaining",
+    "tooltip": "The message that the bot will display when the command is on cooldown. \r\n $username \r\n $cooldown",
   	"group": "Cooldown"
   },
     "UserCooldown": {
@@ -93,11 +93,11 @@
     "tooltip": "User cooldown in seconds.",
   	"group": "Cooldown"
   },
-    "OnUserCooldown": {
+  "OnUserCooldown": {
     "type": "textbox",
-    "value": "{0} the command is still on user cooldown for {1} seconds!",
+    "value": "$username the command is still on user cooldown for $cooldown seconds!",
   	"label": "User Cooldown Response",
-    "tooltip": "The message that the bot will display when the command is on user cooldown. \r\n {0} = user \r\n {1} = time remaining",
+    "tooltip": "The message that the bot will display when the command is on user cooldown. \r\n $username \r\n $cooldown",
   	"group": "Cooldown"
   },
   "CasterIgnoreCD": {
@@ -111,7 +111,7 @@
     "type": "checkbox",
     "value": false,
   	"label": "Timeout users who fail",
-    "tooltip": "If enabled viewers that tries to fish and fail will get timed out. Only available for Twitch ",
+    "tooltip": "If enabled the hunt starter that tries to hunt and fail will get timed out. Only available for Twitch ",
   	"group": "Outcomes"
   },
   "TL": {
@@ -121,18 +121,18 @@
     "tooltip": "Length for the timeout if users fail to fish",
   	"group": "Outcomes"
   },
-    "NotEnoughResponse": {
+  "NotEnoughResponse": {
     "type": "textbox",
-    "value": "{0} you don't have enough {1} to attempt this! You will need atleast {2} {1}.",
+    "value": "$username you don't have enough $currency to attempt this! You will need atleast $points $currency.",
     "label": "Not enough currency response",
-    "tooltip": "Message sent when user doesn't have enough points \r\n {0} = user \r\n {1} = currency name \r\n {2} = amount of points",
+    "tooltip": "Message sent when user doesn't have enough points \r\n $username \r\n $currency \r\n $points",
     "group": "Responses"
   },
   "PermissionResponse": {
     "type": "textbox",
-    "value": "{0} -> only {1} ({2}) and higher can use this command",
+    "value": "$username -> only $permission ($permissioninfo) and higher can use this command",
     "label": "Permission denied response",
-    "tooltip": "Message sent when user doesn't select any valid wire. \r\n {0} = user \r\n {1} = permission \r\n {2} = permission info",
+    "tooltip": "Message sent when user doesn't select any valid wire. \r\n $username \r\n $permission \r\n $permissioninfo",
     "group": "Responses"
   },
     "ActiveGameResponse": {
@@ -172,9 +172,9 @@
   },
   "B1Name": {
     "type": "textbox",
-    "value": "Feigeratte",
+    "value": "Rat",
   	"label": "Name",
-    "tooltip": "Name from the Boss",
+    "tooltip": "Name of the Boss",
   	"group": "Boss1"
   },
   "B1WinChance": {
@@ -214,30 +214,30 @@
   },
   "B1StartText": {
     "type": "textbox",
-    "value": "{0} du trittst gegen [Weiß] Feigeratte an. Win Chance {1} - Total Win Points {2} - Added Win Chance per Attendee {3} - Added Win Points per Attendee {4}! Viel Glück!",
+    "value": "$username you started a hunt against a $targetname. Win Chance: $winchance% - Total Win Points: $points - Added Win Chance per Attendee: $addedwinchance - Added Win Points per Attendee: $addedwinpoints! Everybody can join the hunt with $joincommand. Good Luck!",
   	"label": "Start Text",
-    "tooltip": "Text that will be posted before the fight begins \r\n {0} = user \r\n {1} = win chance \r\n {2} = total win points \r\n {3} = added win chance per attendee \r\n {4} = added win points per attendee",
+    "tooltip": "Text that will be posted before the fight begins \r\n $username \r\n $targetname \r\n $winchance \r\n $points \r\n $addedwinchance \r\n $addedwinpoints \r\n $joincommand",
   	"group": "Boss1"
   },
   "B1WinText": {
     "type": "textbox",
-    "value": "{0} und seine {1} Crewmitglieder haben insgesamt {2} {3} gewonnen! Somit hat jeder {4} {3} bekommen.",
+    "value": "$username and his/her $attendees crewmates have won $points $currency! So everybody won $attendeepoints $currency.",
   	"label": "Win Text",
-    "tooltip": "Text that will be posted after you win \r\n {0} = user \r\n {1} = amount attendees \r\n {2} = total win points \r\n {3} = currency \r\n {4} = win per attendee",
+    "tooltip": "Text that will be posted after you win \r\n $username \r\n $attendees \r\n $points \r\n $currency \r\n $attendeepoints",
   	"group": "Boss1"
   },
   "B1LoseText": {
     "type": "textbox",
-    "value": "{0} du hast {1} {2} verloren!",
+    "value": "$username and his/her crewmates lost $points $currency each",
   	"label": "Lose Text",
-    "tooltip": "Text that will be posted after you lose \r\n {0} = user \r\n {1} = amount of points \r\n {2} = currency name",
+    "tooltip": "Text that will be posted after you lose \r\n $username \r\n $points \r\n $currency",
   	"group": "Boss1"
   },
   "B2Name": {
     "type": "textbox",
-    "value": "Üblesstinktier",
+    "value": "Skunk",
   	"label": "Name",
-    "tooltip": "Name from the Boss",
+    "tooltip": "Name of the Boss",
   	"group": "Boss2"
   },
   "B2WinChance": {
@@ -277,30 +277,30 @@
   },
   "B2StartText": {
     "type": "textbox",
-    "value": "{0} du trittst gegen [Grün] Üblesstinktier an. Win Chance {1} - Total Win Points {2} - Added Win Chance per Attendee {3} - Added Win Points per Attendee {4}! Viel Glück!",
+    "value": "$username you started a hunt against a $targetname. Win Chance: $winchance% - Total Win Points: $points - Added Win Chance per Attendee: $addedwinchance - Added Win Points per Attendee: $addedwinpoints! Everybody can join the hunt with $joincommand. Good Luck!",
   	"label": "Start Text",
-    "tooltip": "Text that will be posted before the fight begins \r\n {0} = user \r\n {1} = win chance \r\n {2} = total win points \r\n {3} = added win chance per attendee \r\n {4} = added win points per attendee",
-  	"group": "Boss2"
+    "tooltip": "Text that will be posted before the fight begins \r\n $username \r\n $targetname \r\n $winchance \r\n $points \r\n $addedwinchance \r\n $addedwinpoints \r\n $joincommand",
+  	"group": "Boss1"
   },
   "B2WinText": {
     "type": "textbox",
-    "value": "{0} und seine {1} Crewmitglieder haben insgesamt {2} {3} gewonnen! Somit hat jeder {4} {3} bekommen.",
+    "value": "$username and his/her $attendees crewmates have won $points $currency! So everybody won $attendeepoints $currency.",
   	"label": "Win Text",
-    "tooltip": "Text that will be posted after you win \r\n {0} = user \r\n {1} = amount attendees \r\n {2} = total win points \r\n {3} = currency \r\n {4} = win per attendee",
-  	"group": "Boss2"
+    "tooltip": "Text that will be posted after you win \r\n $username \r\n $attendees \r\n $points \r\n $currency \r\n $attendeepoints",
+  	"group": "Boss1"
   },
   "B2LoseText": {
     "type": "textbox",
-    "value": "{0} du hast {1} {2} verloren!",
+    "value": "$username and his/her crewmates lost $points $currency each",
   	"label": "Lose Text",
-    "tooltip": "Text that will be posted after you lose \r\n {0} = user \r\n {1} = amount of points \r\n {2} = currency name",
-  	"group": "Boss2"
+    "tooltip": "Text that will be posted after you lose \r\n $username \r\n $points \r\n $currency",
+  	"group": "Boss1"
   },
   "B3Name": {
     "type": "textbox",
-    "value": "Geilesau",
+    "value": "Boar",
   	"label": "Name",
-    "tooltip": "Name from the Boss",
+    "tooltip": "Name of the Boss",
   	"group": "Boss3"
   },
   "B3WinChance": {
@@ -340,30 +340,30 @@
   },
   "B3StartText": {
     "type": "textbox",
-    "value": "{0} du trittst gegen [Blau] Geilesau an. Win Chance {1} - Total Win Points {2} - Added Win Chance per Attendee {3} - Added Win Points per Attendee {4}! Viel Glück!",
+    "value": "$username you started a hunt against a $targetname. Win Chance: $winchance% - Total Win Points: $points - Added Win Chance per Attendee: $addedwinchance - Added Win Points per Attendee: $addedwinpoints! Everybody can join the hunt with $joincommand. Good Luck!",
   	"label": "Start Text",
-    "tooltip": "Text that will be posted before the fight begins \r\n {0} = user \r\n {1} = win chance \r\n {2} = total win points \r\n {3} = added win chance per attendee \r\n {4} = added win points per attendee",
-  	"group": "Boss3"
+    "tooltip": "Text that will be posted before the fight begins \r\n $username \r\n $targetname \r\n $winchance \r\n $points \r\n $addedwinchance \r\n $addedwinpoints \r\n $joincommand",
+  	"group": "Boss1"
   },
   "B3WinText": {
     "type": "textbox",
-    "value": "{0} und seine {1} Crewmitglieder haben insgesamt {2} {3} gewonnen! Somit hat jeder {4} {3} bekommen.",
+    "value": "$username and his/her $attendees crewmates have won $points $currency! So everybody won $attendeepoints $currency.",
   	"label": "Win Text",
-    "tooltip": "Text that will be posted after you win \r\n {0} = user \r\n {1} = amount attendees \r\n {2} = total win points \r\n {3} = currency \r\n {4} = win per attendee",
-  	"group": "Boss3"
+    "tooltip": "Text that will be posted after you win \r\n $username \r\n $attendees \r\n $points \r\n $currency \r\n $attendeepoints",
+  	"group": "Boss1"
   },
   "B3LoseText": {
     "type": "textbox",
-    "value": "{0} du hast {1} {2} verloren!",
+    "value": "$username and his/her crewmates lost $points $currency each",
   	"label": "Lose Text",
-    "tooltip": "Text that will be posted after you lose \r\n {0} = user \r\n {1} = amount of points \r\n {2} = currency name",
-  	"group": "Boss3"
+    "tooltip": "Text that will be posted after you lose \r\n $username \r\n $points \r\n $currency",
+  	"group": "Boss1"
   },
     "B4Name": {
     "type": "textbox",
-    "value": "Jauerbär",
+    "value": "Bear",
   	"label": "Name",
-    "tooltip": "Name from the Boss",
+    "tooltip": "Name of the Boss",
   	"group": "Boss4"
   },
   "B4WinChance": {
@@ -403,30 +403,30 @@
   },
   "B4StartText": {
     "type": "textbox",
-    "value": "{0} du trittst gegen [Lila] Jauerbär an. Win Chance {1} - Total Win Points {2} - Added Win Chance per Attendee {3} - Added Win Points per Attendee {4}! Viel Glück!",
+    "value": "$username you started a hunt against a $targetname. Win Chance: $winchance% - Total Win Points: $points - Added Win Chance per Attendee: $addedwinchance - Added Win Points per Attendee: $addedwinpoints! Everybody can join the hunt with $joincommand. Good Luck!",
   	"label": "Start Text",
-    "tooltip": "Text that will be posted before the fight begins \r\n {0} = user \r\n {1} = win chance \r\n {2} = total win points \r\n {3} = added win chance per attendee \r\n {4} = added win points per attendee",
-  	"group": "Boss4"
+    "tooltip": "Text that will be posted before the fight begins \r\n $username \r\n $targetname \r\n $winchance \r\n $points \r\n $addedwinchance \r\n $addedwinpoints \r\n $joincommand",
+  	"group": "Boss1"
   },
   "B4WinText": {
     "type": "textbox",
-    "value": "{0} und seine {1} Crewmitglieder haben insgesamt {2} {3} gewonnen! Somit hat jeder {4} {3} bekommen.",
+    "value": "$username and his/her $attendees crewmates have won $points $currency! So everybody won $attendeepoints $currency.",
   	"label": "Win Text",
-    "tooltip": "Text that will be posted after you win \r\n {0} = user \r\n {1} = amount attendees \r\n {2} = total win points \r\n {3} = currency \r\n {4} = win per attendee",
-  	"group": "Boss4"
+    "tooltip": "Text that will be posted after you win \r\n $username \r\n $attendees \r\n $points \r\n $currency \r\n $attendeepoints",
+  	"group": "Boss1"
   },
   "B4LoseText": {
     "type": "textbox",
-    "value": "{0} du hast {1} {2} verloren!",
+    "value": "$username and his/her crewmates lost $points $currency each",
   	"label": "Lose Text",
-    "tooltip": "Text that will be posted after you lose \r\n {0} = user \r\n {1} = amount of points \r\n {2} = currency name",
-  	"group": "Boss4"
+    "tooltip": "Text that will be posted after you lose \r\n $username \r\n $points \r\n $currency",
+  	"group": "Boss1"
   },
   "B5Name": {
     "type": "textbox",
-    "value": "Maroxotant",
+    "value": "Lion",
   	"label": "Name",
-    "tooltip": "Name from the Boss",
+    "tooltip": "Name of the Boss",
   	"group": "Boss5"
   },
   "B5WinChance": {
@@ -466,24 +466,24 @@
   },
   "B5StartText": {
     "type": "textbox",
-    "value": "{0} du trittst gegen [Gold] Maroxotant an. Win Chance {1} - Total Win Points {2} - Added Win Chance per Attendee {3} - Added Win Points per Attendee {4}! Viel Glück!",
+    "value": "$username you started a hunt against a $targetname. Win Chance: $winchance% - Total Win Points: $points - Added Win Chance per Attendee: $addedwinchance - Added Win Points per Attendee: $addedwinpoints! Everybody can join the hunt with $joincommand. Good Luck!",
   	"label": "Start Text",
-    "tooltip": "Text that will be posted before the fight begins \r\n {0} = user \r\n {1} = win chance \r\n {2} = total win points \r\n {3} = added win chance per attendee \r\n {4} = added win points per attendee",
-  	"group": "Boss5"
+    "tooltip": "Text that will be posted before the fight begins \r\n $username \r\n $targetname \r\n $winchance \r\n $points \r\n $addedwinchance \r\n $addedwinpoints \r\n $joincommand",
+  	"group": "Boss1"
   },
   "B5WinText": {
     "type": "textbox",
-    "value": "{0} und seine {1} Crewmitglieder haben insgesamt {2} {3} gewonnen! Somit hat jeder {4} {3} bekommen.",
+    "value": "$username and his/her $attendees crewmates have won $points $currency! So everybody won $attendeepoints $currency.",
   	"label": "Win Text",
-    "tooltip": "Text that will be posted after you win \r\n {0} = user \r\n {1} = amount attendees \r\n {2} = total win points \r\n {3} = currency \r\n {4} = win per attendee",
-  	"group": "Boss5"
+    "tooltip": "Text that will be posted after you win \r\n $username \r\n $attendees \r\n $points \r\n $currency \r\n $attendeepoints",
+  	"group": "Boss1"
   },
   "B5LoseText": {
     "type": "textbox",
-    "value": "{0} du hast {1} {2} verloren!",
+    "value": "$username and his/her crewmates lost $points $currency each",
   	"label": "Lose Text",
-    "tooltip": "Text that will be posted after you lose \r\n {0} = user \r\n {1} = amount of points \r\n {2} = currency name",
-  	"group": "Boss5"
+    "tooltip": "Text that will be posted after you lose \r\n $username \r\n $points \r\n $currency",
+  	"group": "Boss1"
   },
     "BtnDefaults": {
     "type": "button",
