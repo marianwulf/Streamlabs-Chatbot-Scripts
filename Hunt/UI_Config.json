@@ -221,16 +221,16 @@
   },
   "B1WinText": {
     "type": "textbox",
-    "value": "$username and his/her $attendees crewmates have won $points $currency! So everybody won $attendeepoints $currency.",
+    "value": "$username and his/her $attendees crewmates have won $points $currency at the hunt against $targetname! So everybody won $attendeepoints $currency.",
   	"label": "Win Text",
-    "tooltip": "Text that will be posted after you win \r\n $username \r\n $attendees \r\n $points \r\n $currency \r\n $attendeepoints",
+    "tooltip": "Text that will be posted after you win \r\n $username \r\n $targetname \r\n $attendees \r\n $points \r\n $currency \r\n $attendeepoints",
   	"group": "Boss1"
   },
   "B1LoseText": {
     "type": "textbox",
     "value": "$username and his/her crewmates lost $points $currency each",
   	"label": "Lose Text",
-    "tooltip": "Text that will be posted after you lose \r\n $username \r\n $points \r\n $currency",
+    "tooltip": "Text that will be posted after you lose \r\n $username \r\n $targetname \r\n $points \r\n $currency",
   	"group": "Boss1"
   },
   "B2Name": {
@@ -284,16 +284,16 @@
   },
   "B2WinText": {
     "type": "textbox",
-    "value": "$username and his/her $attendees crewmates have won $points $currency! So everybody won $attendeepoints $currency.",
+    "value": "$username and his/her $attendees crewmates have won $points $currency at the hunt against $targetname! So everybody won $attendeepoints $currency.",
   	"label": "Win Text",
-    "tooltip": "Text that will be posted after you win \r\n $username \r\n $attendees \r\n $points \r\n $currency \r\n $attendeepoints",
+    "tooltip": "Text that will be posted after you win \r\n $username \r\n $targetname \r\n $attendees \r\n $points \r\n $currency \r\n $attendeepoints",
   	"group": "Boss2"
   },
   "B2LoseText": {
     "type": "textbox",
     "value": "$username and his/her crewmates lost $points $currency each",
   	"label": "Lose Text",
-    "tooltip": "Text that will be posted after you lose \r\n $username \r\n $points \r\n $currency",
+    "tooltip": "Text that will be posted after you lose \r\n $username \r\n $targetname \r\n $points \r\n $currency",
   	"group": "Boss2"
   },
   "B3Name": {
@@ -347,16 +347,16 @@
   },
   "B3WinText": {
     "type": "textbox",
-    "value": "$username and his/her $attendees crewmates have won $points $currency! So everybody won $attendeepoints $currency.",
+    "value": "$username and his/her $attendees crewmates have won $points $currency at the hunt against $targetname! So everybody won $attendeepoints $currency.",
   	"label": "Win Text",
-    "tooltip": "Text that will be posted after you win \r\n $username \r\n $attendees \r\n $points \r\n $currency \r\n $attendeepoints",
+    "tooltip": "Text that will be posted after you win \r\n $username \r\n $targetname \r\n $attendees \r\n $points \r\n $currency \r\n $attendeepoints",
   	"group": "Boss3"
   },
   "B3LoseText": {
     "type": "textbox",
     "value": "$username and his/her crewmates lost $points $currency each",
   	"label": "Lose Text",
-    "tooltip": "Text that will be posted after you lose \r\n $username \r\n $points \r\n $currency",
+    "tooltip": "Text that will be posted after you lose \r\n $username \r\n $targetname \r\n $points \r\n $currency",
   	"group": "Boss3"
   },
     "B4Name": {
@@ -410,16 +410,16 @@
   },
   "B4WinText": {
     "type": "textbox",
-    "value": "$username and his/her $attendees crewmates have won $points $currency! So everybody won $attendeepoints $currency.",
+    "value": "$username and his/her $attendees crewmates have won $points $currency at the hunt against $targetname! So everybody won $attendeepoints $currency.",
   	"label": "Win Text",
-    "tooltip": "Text that will be posted after you win \r\n $username \r\n $attendees \r\n $points \r\n $currency \r\n $attendeepoints",
+    "tooltip": "Text that will be posted after you win \r\n $username \r\n $targetname \r\n $attendees \r\n $points \r\n $currency \r\n $attendeepoints",
   	"group": "Boss4"
   },
   "B4LoseText": {
     "type": "textbox",
     "value": "$username and his/her crewmates lost $points $currency each",
   	"label": "Lose Text",
-    "tooltip": "Text that will be posted after you lose \r\n $username \r\n $points \r\n $currency",
+    "tooltip": "Text that will be posted after you lose \r\n $username \r\n $targetname \r\n $points \r\n $currency",
   	"group": "Boss4"
   },
   "B5Name": {
@@ -473,16 +473,16 @@
   },
   "B5WinText": {
     "type": "textbox",
-    "value": "$username and his/her $attendees crewmates have won $points $currency! So everybody won $attendeepoints $currency.",
+    "value": "$username and his/her $attendees crewmates have won $points $currency at the hunt against $targetname! So everybody won $attendeepoints $currency.",
   	"label": "Win Text",
-    "tooltip": "Text that will be posted after you win \r\n $username \r\n $attendees \r\n $points \r\n $currency \r\n $attendeepoints",
+    "tooltip": "Text that will be posted after you win \r\n $username \r\n $targetname \r\n $attendees \r\n $points \r\n $currency \r\n $attendeepoints",
   	"group": "Boss5"
   },
   "B5LoseText": {
     "type": "textbox",
     "value": "$username and his/her crewmates lost $points $currency each",
   	"label": "Lose Text",
-    "tooltip": "Text that will be posted after you lose \r\n $username \r\n $points \r\n $currency",
+    "tooltip": "Text that will be posted after you lose \r\n $username \r\n $targetname \r\n $points \r\n $currency",
   	"group": "Boss5"
   },
     "BtnDefaults": {
