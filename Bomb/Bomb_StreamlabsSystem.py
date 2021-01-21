@@ -232,6 +232,12 @@ def Tick():
     """Required tick function"""
     
 
+    # check if game time if over
+    if MySet.ActiveGame and time.time() >= MySet.ActiveGameEnd:
+
+        #reset game times
+        MySet.ActiveGame = False
+        MySet.ActiveGameEnd = None
 
 #---------------------------------------
 # [Optional] Functions for usage handling
