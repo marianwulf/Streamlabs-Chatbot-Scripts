@@ -137,37 +137,37 @@
   },
     "ActiveGameResponse": {
     "type": "textbox",
-    "value": "{0} the hunt against {1} is currently active. Type {2} in the next {3} seconds to join the fight.",
+    "value": "$username the hunt against $targetname is currently active. Type $joincommand in the next $remainingtime seconds to join the fight.",
   	"label": "Active Game Response",
-    "tooltip": "The message that the bot will display when a game is active. \r\n {0} = user \r\n {1} = target \r\n {2} = join command \r\n {3} = time left",
+    "tooltip": "The message that the bot will display when a game is active. \r\n $username \r\n $targetname \r\n $joincommand \r\n $remainingtime",
   	"group": "Responses"
   },
   "NoActiveGameResponse": {
     "type": "textbox",
-    "value": "{0} there is no hunt currently active. Type {1} to begin hunting.",
+    "value": "$username there is no hunt currently active. Type $command to begin hunting.",
   	"label": "No Active Game Response",
-    "tooltip": "The message that the bot will display when no game is active. \r\n {0} = user \r\n {1} = join command",
+    "tooltip": "The message that the bot will display when no game is active. \r\n $username \r\n $command",
   	"group": "Responses"
   },
   "MinAttendeesResponse": {
     "type": "textbox",
-    "value": "{0} not enough people joined the hunt, so it was aborted.",
+    "value": "$username not enough people joined the hunt, so it was aborted.",
   	"label": "Min Attendees Response",
-    "tooltip": "The message that the bot will display when there are not enough attendees \r\n {0} = user",
+    "tooltip": "The message that the bot will display when there are not enough attendees \r\n $username",
   	"group": "Responses"
   },
   "JoinedFightResponse": {
     "type": "textbox",
-    "value": "{0} you joined the hunt against {1}! Attendees: {2} - Win Chance {3} - Total Win Points {4} - Win Points per User {5}",
+    "value": "$username you joined the hunt against $targetname! Attendees: $attendees - Win Chance: $winchance% - Total Win Points: $points - Win Points per User: $attendeepoints",
     "label": "Join Fight response",
-    "tooltip": "Message sent when user joins the fight \r\n {0} = user \r\n {1} = target \r\n {2} = attendees \r\n {3} = win chance \r\n {4} = total win points \r\n {5} = win points per attendee",
+    "tooltip": "Message sent when user joins the fight \r\n $username \r\n $targetname \r\n $attendees \r\n $winchance \r\n $points \r\n $attendeepoints",
     "group": "Responses"
   },
   "AlreadyJoinedFight": {
     "type": "textbox",
-    "value": "{0} you already joined the hunt!",
+    "value": "$username you already joined the hunt!",
     "label": "Already Joined Fight response",
-    "tooltip": "Message sent when user already joined the fight \r\n {0} = user",
+    "tooltip": "Message sent when user already joined the fight \r\n $username",
     "group": "Responses"
   },
   "B1Name": {
