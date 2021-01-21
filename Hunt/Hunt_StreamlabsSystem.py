@@ -18,17 +18,18 @@ from array import *
 ScriptName = "Hunt"
 Website = "https://github.com/marianwulf"
 Creator = "Marox"
-Version = "1.2.2"
+Version = "1.3.0"
 Description = "Hunt command"
 #---------------------------------------
 # Versions
 #---------------------------------------
-""" Releases (open README.txt for full release notes)
+""" Releases (open README.md for full release notes)
 1.0.0 - Initial Release
 1.1.0 - other users can join the hunt
 1.2.0 - add winchance & winpoints per attendee
 1.2.1 - minimum attendees to succeed
 1.2.2 - visual bugfix - max 100% win chance
+1.3.0 - changed code for better usability in ui
 """
 #---------------------------------------
 # Variables
