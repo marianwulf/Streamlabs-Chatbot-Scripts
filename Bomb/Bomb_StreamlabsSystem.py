@@ -40,6 +40,8 @@ class Settings:
     # The 'default' variable names need to match UI_Config
     def __init__(self, settingsFile=None):
 
+        self.ActiveGame = False
+        self.ActiveGameEnd = None
         if settingsFile and os.path.isfile(settingsFile):
             with codecs.open(settingsFile, encoding='utf-8-sig', mode='r') as f:
                 self.__dict__ = json.load(f, encoding='utf-8-sig')
@@ -134,7 +136,16 @@ def Execute(data):
                 return
 
             userblacklist = MySet.Blacklist.lower().replace(" ","").split(',')
+                    
+            # check if a game is active
+            if MySet.ActiveGame:
+                
+            else:
             
+                # enable bomb
+                MySet.ActiveGame = True
+                MySet.ActiveGameEnd = time.time() + Parent.GetRandom((MySet.ActiveGameTime*0.8), (MySet.ActiveGameTime*1.2))
+                MySet.LastBombHolder = data.UserName
 
 
 def Tick():
