@@ -119,7 +119,7 @@ class Settings:
             self.B5LoseText = "$username and his/her crewmates lost $points $currency each"
             self.B5AddWinChancePerAttendee = 0
             self.B5AddWinPointsPerAttendee = 0
-            self.highestlose = 0
+            self.HighestLose = 0
 
         # load variables that do not need to be customisable from the ui
         self.ActiveGame = False
@@ -217,18 +217,18 @@ def Execute(data):
                             [MySet.B4Name, MySet.B4WinChance, MySet.B4Win, MySet.B4Lose, MySet.B4StartText.replace("$username", data.UserName).replace("$targetname", MySet.B4Name).replace("$winchance", str(MySet.B4WinChance)).replace("$points", str(MySet.B4Win)).replace("$addedwinchance", str(MySet.B4AddWinChancePerAttendee)).replace("$addedwinpoints", str(MySet.B4AddWinPointsPerAttendee)).replace("$joincommand", MySet.JoinCommand), MySet.B4WinText.replace("$username", data.UserName).replace("$attendees", str(0)).replace("$points", str(MySet.B4Win)).replace("$currency", Parent.GetCurrencyName()).replace("$attendeepoints", str(MySet.B4Win)), MySet.B4LoseText.replace("$username", data.UserName).replace("$points", str(MySet.B4Lose)).replace("$currency", Parent.GetCurrencyName()), MySet.B4AddWinChancePerAttendee, MySet.B4AddWinPointsPerAttendee], \
                             [MySet.B5Name, MySet.B5WinChance, MySet.B5Win, MySet.B5Lose, MySet.B5StartText.replace("$username", data.UserName).replace("$targetname", MySet.B5Name).replace("$winchance", str(MySet.B5WinChance)).replace("$points", str(MySet.B5Win)).replace("$addedwinchance", str(MySet.B5AddWinChancePerAttendee)).replace("$addedwinpoints", str(MySet.B5AddWinPointsPerAttendee)).replace("$joincommand", MySet.JoinCommand), MySet.B5WinText.replace("$username", data.UserName).replace("$attendees", str(0)).replace("$points", str(MySet.B5Win)).replace("$currency", Parent.GetCurrencyName()).replace("$attendeepoints", str(MySet.B5Win)), MySet.B5LoseText.replace("$username", data.UserName).replace("$points", str(MySet.B5Lose)).replace("$currency", Parent.GetCurrencyName()), MySet.B5AddWinChancePerAttendee, MySet.B5AddWinPointsPerAttendee]]            
             
-                MySet.highestlose = MySet.B1Lose
+                MySet.HighestLose = MySet.B1Lose
             
                 for BossIT in MySet.Boss:
-                    if BossIT[3] > MySet.highestlose:
-                        MySet.highestlose = BossIT[3]
+                    if BossIT[3] > MySet.HighestLose:
+                        MySet.HighestLose = BossIT[3]
             
                 # check if user has more points than highest possible lost
-                if not Parent.RemovePoints(data.User, data.UserName, MySet.highestlose + MySet.Cost):
-                    message = MySet.NotEnoughResponse.format(data.UserName, Parent.GetCurrencyName(), MySet.highestlose + MySet.Cost)
+                if not Parent.RemovePoints(data.User, data.UserName, MySet.HighestLose + MySet.Cost):
+                    message = MySet.NotEnoughResponse.replace("$username", data.UserName).replace("$currency", Parent.GetCurrencyName()).replace("$points", str(MySet.HighestLose + MySet.Cost))
                     SendResp(data, message)
                     return
-                Parent.AddPoints(data.User, data.UserName, MySet.highestlose + MySet.Cost)
+                Parent.AddPoints(data.User, data.UserName, MySet.HighestLose + MySet.Cost)
             
                 Parent.RemovePoints(data.User, data.UserName, MySet.Cost)
             
@@ -272,11 +272,11 @@ def Execute(data):
             if MySet.ActiveGame:
             
                 # check if user has more points than highest possible lost
-                if not Parent.RemovePoints(data.User, data.UserName, MySet.highestlose + MySet.Cost):
-                    message = MySet.NotEnoughResponse.format(data.UserName, Parent.GetCurrencyName(), MySet.highestlose + MySet.Cost)
+                if not Parent.RemovePoints(data.User, data.UserName, MySet.HighestLose + MySet.Cost):
+                    message = MySet.NotEnoughResponse.replace("$username", data.UserName).replace("$currency", Parent.GetCurrencyName()).replace("$points", str(MySet.HighestLose + MySet.Cost))
                     SendResp(data, message)
                     return
-                Parent.AddPoints(data.User, data.UserName, MySet.highestlose + MySet.Cost)
+                Parent.AddPoints(data.User, data.UserName, MySet.HighestLose + MySet.Cost)
                 
                 # check if user already joined and send message if
                 if data.User in MySet.ActiveGameAttendees:
