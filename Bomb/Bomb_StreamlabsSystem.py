@@ -155,6 +155,14 @@ def Execute(data):
                 # get viewerlist
                 MySet.Viewerlist = Parent.GetActiveUsers()
 
+                # if there are less than 2 viewers reset game, add cooldown and send message
+                if len(MySet.Viewerlist) < 2:
+                    message = MySet.NoTargetFoundResponse.replace("$username", data.UserName)
+                    SendResp(data, message)
+                    MySet.ActiveGame = False
+                    MySet.ActiveGameEnd = None
+                    Parent.AddCooldown(ScriptName, MySet.Command, MySet.Cooldown)
+                    return
 
 
 def Tick():
