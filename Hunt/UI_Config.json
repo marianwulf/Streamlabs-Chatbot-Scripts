@@ -280,21 +280,21 @@
     "value": "$username you started a hunt against a $targetname. Win Chance: $winchance% - Total Win Points: $points - Added Win Chance per Attendee: $addedwinchance - Added Win Points per Attendee: $addedwinpoints! Everybody can join the hunt with $joincommand. Good Luck!",
   	"label": "Start Text",
     "tooltip": "Text that will be posted before the fight begins \r\n $username \r\n $targetname \r\n $winchance \r\n $points \r\n $addedwinchance \r\n $addedwinpoints \r\n $joincommand",
-  	"group": "Boss1"
+  	"group": "Boss2"
   },
   "B2WinText": {
     "type": "textbox",
     "value": "$username and his/her $attendees crewmates have won $points $currency! So everybody won $attendeepoints $currency.",
   	"label": "Win Text",
     "tooltip": "Text that will be posted after you win \r\n $username \r\n $attendees \r\n $points \r\n $currency \r\n $attendeepoints",
-  	"group": "Boss1"
+  	"group": "Boss2"
   },
   "B2LoseText": {
     "type": "textbox",
     "value": "$username and his/her crewmates lost $points $currency each",
   	"label": "Lose Text",
     "tooltip": "Text that will be posted after you lose \r\n $username \r\n $points \r\n $currency",
-  	"group": "Boss1"
+  	"group": "Boss2"
   },
   "B3Name": {
     "type": "textbox",
@@ -343,21 +343,21 @@
     "value": "$username you started a hunt against a $targetname. Win Chance: $winchance% - Total Win Points: $points - Added Win Chance per Attendee: $addedwinchance - Added Win Points per Attendee: $addedwinpoints! Everybody can join the hunt with $joincommand. Good Luck!",
   	"label": "Start Text",
     "tooltip": "Text that will be posted before the fight begins \r\n $username \r\n $targetname \r\n $winchance \r\n $points \r\n $addedwinchance \r\n $addedwinpoints \r\n $joincommand",
-  	"group": "Boss1"
+  	"group": "Boss3"
   },
   "B3WinText": {
     "type": "textbox",
     "value": "$username and his/her $attendees crewmates have won $points $currency! So everybody won $attendeepoints $currency.",
   	"label": "Win Text",
     "tooltip": "Text that will be posted after you win \r\n $username \r\n $attendees \r\n $points \r\n $currency \r\n $attendeepoints",
-  	"group": "Boss1"
+  	"group": "Boss3"
   },
   "B3LoseText": {
     "type": "textbox",
     "value": "$username and his/her crewmates lost $points $currency each",
   	"label": "Lose Text",
     "tooltip": "Text that will be posted after you lose \r\n $username \r\n $points \r\n $currency",
-  	"group": "Boss1"
+  	"group": "Boss3"
   },
     "B4Name": {
     "type": "textbox",
@@ -406,21 +406,21 @@
     "value": "$username you started a hunt against a $targetname. Win Chance: $winchance% - Total Win Points: $points - Added Win Chance per Attendee: $addedwinchance - Added Win Points per Attendee: $addedwinpoints! Everybody can join the hunt with $joincommand. Good Luck!",
   	"label": "Start Text",
     "tooltip": "Text that will be posted before the fight begins \r\n $username \r\n $targetname \r\n $winchance \r\n $points \r\n $addedwinchance \r\n $addedwinpoints \r\n $joincommand",
-  	"group": "Boss1"
+  	"group": "Boss4"
   },
   "B4WinText": {
     "type": "textbox",
     "value": "$username and his/her $attendees crewmates have won $points $currency! So everybody won $attendeepoints $currency.",
   	"label": "Win Text",
     "tooltip": "Text that will be posted after you win \r\n $username \r\n $attendees \r\n $points \r\n $currency \r\n $attendeepoints",
-  	"group": "Boss1"
+  	"group": "Boss4"
   },
   "B4LoseText": {
     "type": "textbox",
     "value": "$username and his/her crewmates lost $points $currency each",
   	"label": "Lose Text",
     "tooltip": "Text that will be posted after you lose \r\n $username \r\n $points \r\n $currency",
-  	"group": "Boss1"
+  	"group": "Boss4"
   },
   "B5Name": {
     "type": "textbox",
@@ -469,21 +469,21 @@
     "value": "$username you started a hunt against a $targetname. Win Chance: $winchance% - Total Win Points: $points - Added Win Chance per Attendee: $addedwinchance - Added Win Points per Attendee: $addedwinpoints! Everybody can join the hunt with $joincommand. Good Luck!",
   	"label": "Start Text",
     "tooltip": "Text that will be posted before the fight begins \r\n $username \r\n $targetname \r\n $winchance \r\n $points \r\n $addedwinchance \r\n $addedwinpoints \r\n $joincommand",
-  	"group": "Boss1"
+  	"group": "Boss5"
   },
   "B5WinText": {
     "type": "textbox",
     "value": "$username and his/her $attendees crewmates have won $points $currency! So everybody won $attendeepoints $currency.",
   	"label": "Win Text",
     "tooltip": "Text that will be posted after you win \r\n $username \r\n $attendees \r\n $points \r\n $currency \r\n $attendeepoints",
-  	"group": "Boss1"
+  	"group": "Boss5"
   },
   "B5LoseText": {
     "type": "textbox",
     "value": "$username and his/her crewmates lost $points $currency each",
   	"label": "Lose Text",
     "tooltip": "Text that will be posted after you lose \r\n $username \r\n $points \r\n $currency",
-  	"group": "Boss1"
+  	"group": "Boss5"
   },
     "BtnDefaults": {
     "type": "button",
