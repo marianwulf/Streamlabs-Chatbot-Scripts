@@ -100,13 +100,6 @@
     "tooltip": "Max rob value",
   	"group": "Outcomes"
   },
-  "Protected": {
-    "type": "checkbox",
-    "value": false,
-  	"label": "Caster cannot lose",
-    "tooltip": "If enabled viewers can't rob from the broadcaster",
-  	"group": "Outcomes"
-  },
   "Blacklist": {
     "type": "textbox",
     "value": "Streamlabs,Saltyrohrtopus,Nightbot,Anotherttvviewer,Soundalerts,Bebiyoda",
