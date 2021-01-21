@@ -11,3 +11,6 @@ Multiplayer PVE - use customisable command to fight against 1 of 5 defined bosse
 
 ## [Rob Minigame](https://github.com/marianwulf/Streamlabs-Chatbot-Scripts/tree/main/Rob)
 Singleplayer PVP - use customisable command to rob another choosen target in the viewerlist. Classic 50 / 50 chance to gain or give some points. You can adjust all values and responses in the UI.
+
+---
+> GitHub [@marianwulf](https://github.com/marianwulf)
