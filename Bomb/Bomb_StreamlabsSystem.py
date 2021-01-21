@@ -23,7 +23,7 @@ Description = "Bomb command"
 #---------------------------------------
 # Versions
 #---------------------------------------
-""" Releases (open README.txt for full release notes)
+""" Releases (open README.md for full release notes)
 1.0.0 - Initial Release
 """
 #---------------------------------------
