@@ -187,11 +187,6 @@ def Execute(data):
         if not IsFromValidSource(data, MySet.Usage):
             return
 
-        # if client has no permission -> quit
-        if not Parent.HasPermission(data.User, MySet.Permission, MySet.PermissionInfo):
-            message = MySet.PermissionResponse.format(data.User, MySet.Permission, MySet.PermissionInfo)
-            SendResp(data, message)
-
         if not HasPermission(data):
             return
 
@@ -254,10 +249,6 @@ def Execute(data):
             return
 
         # if client has no permission -> quit
-        if not Parent.HasPermission(data.User, MySet.Permission, MySet.PermissionInfo):
-            message = MySet.PermissionResponse.format(data.User, MySet.Permission, MySet.PermissionInfo)
-            SendResp(data, message)
-
         if not HasPermission(data):
             return
 
@@ -367,9 +358,6 @@ def Tick():
             if MySet.Timeout:
                 Parent.SendStreamMessage("/timeout {0} {1}".format(MySet.BossStarterUserName.lower(), MySet.TL))
                 return
-        else:
-            message = "Hunt hat nen Bug :("
-            Parent.SendStreamMessage(message)
 
 #---------------------------------------
 # [Optional] Functions for usage handling
