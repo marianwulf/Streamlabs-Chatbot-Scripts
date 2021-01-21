@@ -68,6 +68,12 @@ class Settings:
             self.Timeout = False
             self.TL = 60
             self.Blacklist = "Streamlabs,Nightbot,Anotherttvviewer,Soundalerts,Bebiyoda,Commanderroot"
+            self.NoTargetFoundResponse = "$username unfortunately there is no valid target in the viewerlist :("
+            self.StartResponse = "$username you started the bomb game and gave it to $targetname. Use $command to pass it to the next person!"
+            self.PassResponse = "$username you gave the bomb to $targetname. Use $command to pass it to the next person!"
+            self.TargetLostNotEnough = "The bomb exploded and $loser had only $pointslost $currency, so he lost everything. $winner was the last person to pass the bomb and won $pointswon $currency"
+            self.TargetLost = "The bomb exploded and $loser lost $pointslost $currency. $winner was the last person to pass the bomb and won $pointswon $currency"
+            self.ActiveGameButNotBombHolderResponse = "$username the game is currently active but you are not the bomb owner"
             self.NotEnoughResponse = "$username you don´t have enough $currency to attempt this! You will need atleast $points $currency."
             self.PermissionResponse = "$username -> only $permission ($permissioninfo) and higher can use this command"
 
