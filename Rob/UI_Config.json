@@ -79,9 +79,9 @@
     "tooltip": "The message that the bot will display when the command is on user cooldown. \r\n {0} = user \r\n {1} = time remaining",
   	"group": "Cooldown"
   },
-  "CasterCD": {
+  "CasterIgnoreCD": {
     "type": "checkbox",
-    "value": true,
+    "value": false,
   	"label": "Caster ignores cooldown",
     "tooltip": "Enable/Disable cooldown for caster",
   	"group": "Cooldown"
