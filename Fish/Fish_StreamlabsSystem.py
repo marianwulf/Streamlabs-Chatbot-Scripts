@@ -147,25 +147,33 @@ def Init():
 
 def Execute(data):
     """Required Execute data function"""
+    
+    # check if command is command
     if data.IsChatMessage() and data.GetParam(0).lower() == MySet.Command.lower():
 
+        # if command is not from valid source -> quit
         if not IsFromValidSource(data, MySet.Usage):
             return
 
+        # if user has no permission -> quit
         if not HasPermission(data):
             return
 
+        # check on onlylive setting or if user is live
         if not MySet.OnlyLive or Parent.IsLive():
 
+            # if command is on cooldown -> quit
             if IsOnCooldown(data):
                 return
             
+            # define Boss Array
             Boss = [[MySet.B1Name, MySet.B1WinChance, MySet.B1Win, MySet.B1Lose, MySet.B1StartText.replace("$username", data.UserName).replace("$targetname", MySet.B1Name), MySet.B1WinText.replace("$username", data.UserName).replace("$points", str(MySet.B1Win)).replace("$currency", Parent.GetCurrencyName()), MySet.B1LoseText.replace("$username", data.UserName).replace("$points", str(MySet.B1Lose)).replace("$currency", Parent.GetCurrencyName())], \
                     [MySet.B2Name, MySet.B2WinChance, MySet.B2Win, MySet.B2Lose, MySet.B2StartText.replace("$username", data.UserName).replace("$targetname", MySet.B2Name), MySet.B2WinText.replace("$username", data.UserName).replace("$points", str(MySet.B2Win)).replace("$currency", Parent.GetCurrencyName()), MySet.B2LoseText.replace("$username", data.UserName).replace("$points", str(MySet.B2Lose)).replace("$currency", Parent.GetCurrencyName())], \
                     [MySet.B3Name, MySet.B3WinChance, MySet.B3Win, MySet.B3Lose, MySet.B3StartText.replace("$username", data.UserName).replace("$targetname", MySet.B3Name), MySet.B3WinText.replace("$username", data.UserName).replace("$points", str(MySet.B3Win)).replace("$currency", Parent.GetCurrencyName()), MySet.B3LoseText.replace("$username", data.UserName).replace("$points", str(MySet.B3Lose)).replace("$currency", Parent.GetCurrencyName())], \
                     [MySet.B4Name, MySet.B4WinChance, MySet.B4Win, MySet.B4Lose, MySet.B4StartText.replace("$username", data.UserName).replace("$targetname", MySet.B4Name), MySet.B4WinText.replace("$username", data.UserName).replace("$points", str(MySet.B4Win)).replace("$currency", Parent.GetCurrencyName()), MySet.B4LoseText.replace("$username", data.UserName).replace("$points", str(MySet.B4Lose)).replace("$currency", Parent.GetCurrencyName())], \
                     [MySet.B5Name, MySet.B5WinChance, MySet.B5Win, MySet.B5Lose, MySet.B5StartText.replace("$username", data.UserName).replace("$targetname", MySet.B5Name), MySet.B5WinText.replace("$username", data.UserName).replace("$points", str(MySet.B5Win)).replace("$currency", Parent.GetCurrencyName()), MySet.B5LoseText.replace("$username", data.UserName).replace("$points", str(MySet.B5Lose)).replace("$currency", Parent.GetCurrencyName())]]            
             
+            # set highest lose to the first boss and then check if the others are higher
             highestlose = MySet.B1Lose
             
             for BossIT in Boss:
@@ -176,16 +184,21 @@ def Execute(data):
             if not HasEnoughPoints(data, highestlose + MySet.Cost):
                 return
             
+            # subtract usage costs
             Parent.RemovePoints(data.User, data.UserName, MySet.Cost)
             
+            # select random boss and determine winchance
             selectedboss = Parent.GetRandom(0,len(Boss))
             selectedwin = Parent.GetRandom(1,101)
             
+            # switch into selected boss
             Boss = Boss[selectedboss]
             
+            # send start message
             message = Boss[4]
             SendResp(data, message)
             
+            # check if you won or lost, add/remove points and send response
             if selectedwin <= Boss[1]:
                 Parent.AddPoints(data.User, data.UserName, Boss[2])
                 message = Boss[5]

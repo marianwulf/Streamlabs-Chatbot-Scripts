@@ -121,48 +121,61 @@ def Init():
 
 def Execute(data):
     """Required Execute data function"""
+
+    # check if command is command
     if data.IsChatMessage() and data.GetParam(0).lower() == MySet.Command.lower():
 
+        # if command is not from valid source -> quit
         if not IsFromValidSource(data, MySet.Usage):
             return
 
+        # if user has no permission -> quit
         if not HasPermission(data):
             return
 
+        # check on onlylive setting or if user is live
         if not MySet.OnlyLive or Parent.IsLive():
 
+            # if command is on cooldown -> quit
             if IsOnCooldown(data):
                 return
                 
+            # replace spaces from blacklist and put it into a list
             userblacklist = MySet.Blacklist.lower().replace(" ","").split(',')
+            # replace @ when linking in twitch chat
             targetname = data.GetParam(1).lower().replace('@', '')
             
+            # if no username was set send info response
             if data.GetParamCount() < 2:
                 message = MySet.InfoResponse.replace("$username", data.UserName)
                 SendResp(data, message)
                 return
             
+            # if target is in blacklist send response
             if targetname in userblacklist:
                 message = MySet.BlacklistResponse.replace("$username", data.UserName).replace("$targetname", data.GetParam(1))
                 SendResp(data,message)
                 return
  
+            # if target is himself send response
             if targetname == data.User:
                 message = MySet.SelfRobResponse.replace("$username", data.UserName)
                 SendResp(data,message)
                 return
             
+            # get all viewers
             viewerlist = Parent.GetViewerList() 
             
             for viewerlistIT in viewerlist:
                 viewerlistIT = viewerlistIT.lower()
                     
-                    
+            # if target is not in the viewerlist send response        
             if targetname not in viewerlist:
                 message = MySet.NotHereResponse.replace("$username", data.UserName)
                 SendResp(data,message)
                 return
                 
+            # get random value between min and max
             value = Parent.GetRandom(MySet.Min,MySet.Max)
             
             
@@ -170,14 +183,17 @@ def Execute(data):
             if not HasEnoughPoints(data, MySet.Max + MySet.Cost):
                 return
             
+            # check if target has more points than highest possible lost
             if not Parent.RemovePoints(targetname, targetname, value):
                 message = MySet.TargetNotEnoughResponse.replace("$username", data.UserName).replace("$targetname", data.GetParam(1)).replace("$currency", Parent.GetCurrencyName())
                 SendResp(data, message)
                 return
             Parent.AddPoints(targetname, targetname, value)
             
+            # subtract usage costs
             Parent.RemovePoints(data.User, data.UserName, MySet.Cost)
             
+            # get random 50/50 and add/remove points and send message
             outcome = Parent.GetRandom(1, 3)
             if outcome == 1:
                 Parent.RemovePoints(data.User, data.UserName, value)
