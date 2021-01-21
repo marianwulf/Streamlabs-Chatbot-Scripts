@@ -53,8 +53,8 @@ class Settings:
             self.Cooldown = 5
             self.OnCooldown = "$username the command is still on cooldown for $cooldown seconds!"
             self.UserCooldown = 10
-            self.CasterCD = True
             self.OnUserCooldown = "$username the command is still on user cooldown for $cooldown seconds!"
+            self.CasterIgnoreCD = False
             self.NotEnoughResponse = "$username you don't have enough $currency to attempt this! You will need atleast $points $currency."
             self.TargetNotEnoughResponse = "$username the target $targetname has not enough $currency to attempt this!"
             self.WinResponse = "$username managed to rob $points $currency from $targetname"
@@ -264,7 +264,7 @@ def IsOnCooldown(data):
     """Return true if command is on cooldown and send cooldown message if enabled"""
     cooldown = Parent.IsOnCooldown(ScriptName, MySet.Command)
     userCooldown = Parent.IsOnUserCooldown(ScriptName, MySet.Command, data.User)
-    caster = (Parent.HasPermission(data.User, "Caster", "") and MySet.CasterCD)
+    caster = (Parent.HasPermission(data.User, "Caster", "") and MySet.CasterIgnoreCD)
 
     if (cooldown or userCooldown) and caster is False:
 
@@ -318,7 +318,7 @@ def IsFromValidSource(data, Usage):
 
 def AddCooldown(data):
     """add cooldowns"""
-    if Parent.HasPermission(data.User, "Caster", "") and MySet.CasterCD:
+    if Parent.HasPermission(data.User, "Caster", "") and MySet.CasterIgnoreCD:
         Parent.AddCooldown(ScriptName, MySet.Command, MySet.Cooldown)
         return
 
