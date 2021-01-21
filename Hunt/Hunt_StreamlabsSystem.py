@@ -43,16 +43,11 @@ class Settings:
 
     # The 'default' variable names need to match UI_Config
     def __init__(self, settingsFile=None):
+
         if settingsFile and os.path.isfile(settingsFile):
             with codecs.open(settingsFile, encoding='utf-8-sig', mode='r') as f:
                 self.__dict__ = json.load(f, encoding='utf-8-sig')
-                # load variables that do not need to be customisable from the ui
-                self.ActiveGame = False
-                self.ActiveGameAttendees = []
-                self.ActiveGameEnd = None
-                self.BossStarterUserName = ""
-                self.Boss = []
-                self.selectedboss = 0
+                
 
         else: #set variables if no custom settings file is found
             self.OnlyLive = False
@@ -68,12 +63,8 @@ class Settings:
             self.OnCooldown = "$username the command is still on cooldown for $cooldown seconds!"
             self.UserCooldown = 10
             self.CasterCD = True
-            self.ActiveGame = False
-            self.ActiveGameAttendees = []
-            self.ActiveGameEnd = None
             self.OnUserCooldown = "$username the command is still on user cooldown for $cooldown seconds!"
             self.ActiveGameTime = 60
-            self.BossStarterUserName = ""
             self.ActiveGameResponse = "$username the hunt against $targetname is currently active. Type $joincommand in the next $remainingtime seconds to join the fight."
             self.NoActiveGameResponse = "$username there is no hunt currently active. Type $command to begin hunting."
             self.MinAttendeesResponse = "$username not enough people joined the hunt, so it was aborted."
@@ -83,7 +74,6 @@ class Settings:
             self.PermissionResponse = "$username -> only $permission ($permissioninfo) and higher can use this command"
             self.Timeout = False
             self.TL = 60
-            self.Boss = []
             self.B1Name = "Rat"
             self.B1WinChance = 80
             self.B1Win = 7
@@ -130,6 +120,14 @@ class Settings:
             self.B5AddWinChancePerAttendee = 0
             self.B5AddWinPointsPerAttendee = 0
             self.highestlose = 0
+
+        # load variables that do not need to be customisable from the ui
+        self.ActiveGame = False
+        self.ActiveGameAttendees = []
+        self.ActiveGameEnd = None
+        self.BossStarterUserName = ""
+        self.Boss = []
+        self.selectedboss = 0
 
     # Reload settings on save through UI
     def ReloadSettings(self, data):
