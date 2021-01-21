@@ -171,6 +171,12 @@ def Execute(data):
                 # set new bomb holder
                 MySet.LastBombHolder = MySet.BombHolder
                 MySet.BombHolder = Parent.GetDisplayName(targetname)
+
+                # send pass response
+                message = MySet.PassResponse.replace("$username", data.UserName).replace("$targetname", MySet.BombHolder).replace("$command", MySet.Command)
+                SendResp(data, message)
+
+                
             else:
             
                 # enable bomb
