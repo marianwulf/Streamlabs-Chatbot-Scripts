@@ -40,13 +40,6 @@ class Settings:
     # The 'default' variable names need to match UI_Config
     def __init__(self, settingsFile=None):
 
-        # load variables that do not need to be customisable from the ui
-        self.ActiveGame = False
-        self.ActiveGameEnd = None
-        self.BombHolder = ""
-        self.LastBombHolder = ""
-        self.Viewerlist = []
-
         if settingsFile and os.path.isfile(settingsFile):
             with codecs.open(settingsFile, encoding='utf-8-sig', mode='r') as f:
                 self.__dict__ = json.load(f, encoding='utf-8-sig')
@@ -76,6 +69,13 @@ class Settings:
             self.ActiveGameButNotBombHolderResponse = "$username the game is currently active but you are not the bomb owner"
             self.NotEnoughResponse = "$username you don´t have enough $currency to attempt this! You will need atleast $points $currency."
             self.PermissionResponse = "$username -> only $permission ($permissioninfo) and higher can use this command"
+            
+        # load variables that do not need to be customisable from the ui
+        self.ActiveGame = False
+        self.ActiveGameEnd = None
+        self.BombHolder = ""
+        self.LastBombHolder = ""
+        self.Viewerlist = []
 
     # Reload settings on save through UI
     def ReloadSettings(self, data):
