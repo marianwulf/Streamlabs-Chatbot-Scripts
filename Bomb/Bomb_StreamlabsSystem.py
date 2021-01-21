@@ -180,6 +180,10 @@ def Execute(data):
                     tries += 1
 
                 MySet.BombHolder = Parent.GetDisplayName(targetname)
+            
+                # send start message
+                message = MySet.StartResponse.replace("$username", data.UserName).replace("$targetname", MySet.BombHolder).replace("$command", MySet.Command)
+                SendResp(data, message)
 
 
 def Tick():
