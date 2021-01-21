@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 # pylint: disable=invalid-name
-"""Rob command, replica of the textbased version."""
+"""Rob command"""
 #---------------------------------------
 # Libraries and references
 #---------------------------------------
@@ -14,16 +14,17 @@ import ctypes
 # [Required] Script information
 #---------------------------------------
 ScriptName = "Rob"
-Website = "https://www.twitch.tv/maroxtv"
+Website = "https://github.com/marianwulf"
 Creator = "Marox"
-Version = "1.0.1"
+Version = "1.1.0"
 Description = "Rob command"
 #---------------------------------------
 # Versions
 #---------------------------------------
-""" Releases (open README.txt for full release notes)
+""" Releases (open README.md for full release notes)
 1.0.0 - Initial Release
 1.0.1 - added User Blacklist, fixed cost
+1.1.0 - changed code for better usability in ui
 """
 #---------------------------------------
 # Variables
@@ -51,23 +52,22 @@ class Settings:
             self.Usage = "Stream Chat"
             self.UseCD = True
             self.Cooldown = 5
-            self.OnCooldown = "{0} the command is still on cooldown for {1} seconds!"
+            self.OnCooldown = "$username the command is still on cooldown for $cooldown seconds!"
             self.UserCooldown = 10
-            self.OnUserCooldown = "{0} the command is still on user cooldown for {1} seconds!"
-            self.CasterCD = True
-            self.NotEnoughResponse = "{0} you don't have enough {1} to attempt this! You will need atleast {2} {1}."
-            self.TargetNotEnoughResponse = "{0} the target {1} has not enough {2} to attempt this!"
-            self.WinResponse = "{0} managed to rob {1} {2} from {3}"
-            self.LoseResponse = "{0} tried to rob some {1} from {2} but {0} got rekt and {2} managed to rob {3} {1} from {0} instead!"
-            self.PermissionResponse = "{0} -> only {1} ({2}) and higher can use this command"
-            self.InfoResponse = "{0} you have to chose a target to try to rob from"
-            self.NotHereResponse = "{0} you can only rob from users who are currently in the viewerlist!"
-            self.SelfRobResponse = "{0} you can not rob yourself!"
+            self.OnUserCooldown = "$username the command is still on user cooldown for $cooldown seconds!"
+            self.CasterIgnoreCD = False
+            self.NotEnoughResponse = "$username you don't have enough $currency to attempt this! You will need atleast $points $currency."
+            self.TargetNotEnoughResponse = "$username the target $targetname has not enough $currency to attempt this!"
+            self.WinResponse = "$username managed to rob $points $currency from $targetname"
+            self.LoseResponse = "$username tried to rob some $currency from $targetname but $username got rekt and $targetname managed to rob $points $currency from $username instead!"
+            self.PermissionResponse = "$username -> only $permission ($permissioninfo) and higher can use this command"
+            self.InfoResponse = "$username you have to choose a target to try to rob from"
+            self.NotHereResponse = "$username you can only rob from users who are currently in the viewerlist!"
+            self.SelfRobResponse = "$username you can not rob yourself!"
             self.Max = 20
             self.Min = 10
-            self.Protected = False
             self.Blacklist = ""
-            self.BlacklistResponse = "{0} you can not rob {1}. User is blacklisted."
+            self.BlacklistResponse = "$username you can not rob $targetname. User is blacklisted."
             self.Timeout = False
             self.TL = 60
 
@@ -126,10 +126,6 @@ def Execute(data):
         if not IsFromValidSource(data, MySet.Usage):
             return
 
-        if not Parent.HasPermission(data.User, MySet.Permission, MySet.PermissionInfo):
-            message = MySet.PermissionResponse.format(data.User, MySet.Permission, MySet.PermissionInfo)
-            SendResp(data, message)
-
         if not HasPermission(data):
             return
 
@@ -141,27 +137,18 @@ def Execute(data):
             userblacklist = MySet.Blacklist.lower().replace(" ","").split(',')
             targetname = data.GetParam(1).lower().replace('@', '')
             
+            if data.GetParamCount() < 2:
+                message = MySet.InfoResponse.replace("$username", data.UserName)
+                SendResp(data, message)
+                return
+            
             if targetname in userblacklist:
-                message = MySet.BlacklistResponse.format(data.UserName, data.GetParam(1))
+                message = MySet.BlacklistResponse.replace("$username", data.UserName).replace("$targetname", data.GetParam(1))
                 SendResp(data,message)
                 return
-            
-            if targetname == Parent.GetChannelName().lower and MySet.Protected:
-                value = Parent.GetRandom(MySet.Min, MySet.Max)
-                Parent.RemovePoints(data.User, data.UserName, value)
-                message = MySet.LoseResponse.format(data.UserName, Parent.GetCurrencyName(), value, data.GetParam(1))
-                SendResp(data, message)
-                AddCooldown(data)
-                return
-
-            if data.GetParamCount() < 2:
-                message = MySet.InfoResponse.format(data.UserName)
-                SendResp(data, message)
-                return
-
-            
+ 
             if targetname == data.User:
-                message = MySet.SelfRobResponse.format(data.UserName)
+                message = MySet.SelfRobResponse.replace("$username", data.UserName)
                 SendResp(data,message)
                 return
             
@@ -172,7 +159,7 @@ def Execute(data):
                     
                     
             if targetname not in viewerlist:
-                message = MySet.NotHereResponse.format(data.UserName)
+                message = MySet.NotHereResponse.replace("$username", data.UserName)
                 SendResp(data,message)
                 return
                 
@@ -180,13 +167,13 @@ def Execute(data):
             
             
             if not Parent.RemovePoints(data.User, data.UserName, MySet.Max + MySet.Cost):
-                message = MySet.NotEnoughResponse.format(data.UserName, Parent.GetCurrencyName(), MySet.Max + MySet.Cost)
+                message = MySet.NotEnoughResponse.replace("$username", data.UserName).replace("$currency", Parent.GetCurrencyName()).replace("$points", str(MySet.Max + MySet.Cost))
                 SendResp(data, message)
                 return
             Parent.AddPoints(data.User, data.UserName, MySet.Max + MySet.Cost)
             
             if not Parent.RemovePoints(targetname, targetname, value):
-                message = MySet.TargetNotEnoughResponse.format(data.UserName, data.GetParam(1), Parent.GetCurrencyName())
+                message = MySet.TargetNotEnoughResponse.replace("$username", data.UserName).replace("$targetname", data.GetParam(1)).replace("$currency", Parent.GetCurrencyName())
                 SendResp(data, message)
                 return
             Parent.AddPoints(targetname, targetname, value)
@@ -197,7 +184,7 @@ def Execute(data):
             if outcome == 1:
                 Parent.RemovePoints(data.User, data.UserName, value)
                 Parent.AddPoints(targetname, targetname, value)
-                message = MySet.LoseResponse.format(data.UserName, Parent.GetCurrencyName(), data.GetParam(1), value)
+                message = MySet.LoseResponse.replace("$username", data.UserName).replace("$currency", Parent.GetCurrencyName()).replace("$points", str(value)).replace("$targetname", data.GetParam(1))
                 SendResp(data, message)
                 AddCooldown(data)
                 if MySet.Timeout:
@@ -207,14 +194,10 @@ def Execute(data):
             elif outcome == 2:
                 Parent.RemovePoints(targetname, targetname, value)
                 Parent.AddPoints(data.User, data.UserName, value)
-                message = MySet.WinResponse.format(data.UserName, value, Parent.GetCurrencyName(), data.GetParam(1))
+                message = MySet.WinResponse.replace("$username", data.UserName).replace("$currency", Parent.GetCurrencyName()).replace("$points", str(value)).replace("$targetname", data.GetParam(1))
                 SendResp(data, message)
                 AddCooldown(data)
                 return
-
-            else:
-                message = "Rob hat nen Bug :("
-                SendResp(data, message)
 
 def Tick():
     """Required tick function"""
@@ -265,7 +248,7 @@ def IsOnCooldown(data):
     """Return true if command is on cooldown and send cooldown message if enabled"""
     cooldown = Parent.IsOnCooldown(ScriptName, MySet.Command)
     userCooldown = Parent.IsOnUserCooldown(ScriptName, MySet.Command, data.User)
-    caster = (Parent.HasPermission(data.User, "Caster", "") and MySet.CasterCD)
+    caster = (Parent.HasPermission(data.User, "Caster", "") and MySet.CasterIgnoreCD)
 
     if (cooldown or userCooldown) and caster is False:
 
@@ -276,13 +259,13 @@ def IsOnCooldown(data):
             if cooldownDuration > userCDD:
                 m_CooldownRemaining = cooldownDuration
 
-                message = MySet.OnCooldown.format(data.UserName, m_CooldownRemaining)
+                message = MySet.OnCooldown.replace("$username", data.UserName).replace("$cooldown", str(m_CooldownRemaining))
                 SendResp(data, message)
 
             else:
                 m_CooldownRemaining = userCDD
 
-                message = MySet.OnUserCooldown.format(data.UserName, m_CooldownRemaining)
+                message = MySet.OnUserCooldown.replace("$username", data.UserName).replace("$cooldown", str(m_CooldownRemaining))
                 SendResp(data, message)
         return True
     return False
@@ -290,7 +273,7 @@ def IsOnCooldown(data):
 def HasPermission(data):
     """Returns true if user has permission and false if user doesn't"""
     if not Parent.HasPermission(data.User, MySet.Permission, MySet.PermissionInfo):
-        message = MySet.PermissionResponse.format(data.UserName, MySet.Permission, MySet.PermissionInfo)
+        message = MySet.PermissionResponse.replace("$username", data.UserName).replace("$permission", MySet.Permission).replace("$permissioninfo", MySet.PermissionInfo)
         SendResp(data, message)
         return False
     return True
@@ -319,7 +302,7 @@ def IsFromValidSource(data, Usage):
 
 def AddCooldown(data):
     """add cooldowns"""
-    if Parent.HasPermission(data.User, "Caster", "") and MySet.CasterCD:
+    if Parent.HasPermission(data.User, "Caster", "") and MySet.CasterIgnoreCD:
         Parent.AddCooldown(ScriptName, MySet.Command, MySet.Cooldown)
         return
 

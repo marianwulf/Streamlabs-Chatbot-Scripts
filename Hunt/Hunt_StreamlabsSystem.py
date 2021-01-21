@@ -18,17 +18,18 @@ from array import *
 ScriptName = "Hunt"
 Website = "https://github.com/marianwulf"
 Creator = "Marox"
-Version = "1.2.2"
+Version = "1.3.0"
 Description = "Hunt command"
 #---------------------------------------
 # Versions
 #---------------------------------------
-""" Releases (open README.txt for full release notes)
+""" Releases (open README.md for full release notes)
 1.0.0 - Initial Release
 1.1.0 - other users can join the hunt
 1.2.0 - add winchance & winpoints per attendee
 1.2.1 - minimum attendees to succeed
 1.2.2 - visual bugfix - max 100% win chance
+1.3.0 - changed code for better usability in ui
 """
 #---------------------------------------
 # Variables
@@ -43,16 +44,11 @@ class Settings:
 
     # The 'default' variable names need to match UI_Config
     def __init__(self, settingsFile=None):
+
         if settingsFile and os.path.isfile(settingsFile):
             with codecs.open(settingsFile, encoding='utf-8-sig', mode='r') as f:
                 self.__dict__ = json.load(f, encoding='utf-8-sig')
-                # load variables that do not need to be customisable from the ui
-                self.ActiveGame = False
-                self.ActiveGameAttendees = []
-                self.ActiveGameEnd = None
-                self.BossStarterUserName = ""
-                self.Boss = []
-                self.selectedboss = 0
+                
 
         else: #set variables if no custom settings file is found
             self.OnlyLive = False
@@ -65,71 +61,74 @@ class Settings:
             self.Usage = "Stream Chat"
             self.UseCD = True
             self.Cooldown = 5
-            self.OnCooldown = "{0} the command is still on cooldown for {1} seconds!"
+            self.OnCooldown = "$username the command is still on cooldown for $cooldown seconds!"
             self.UserCooldown = 10
-            self.OnUserCooldown = "{0} the command is still on user cooldown for {1} seconds!"
-            self.CasterCD = True
-            self.ActiveGame = False
-            self.ActiveGameAttendees = []
-            self.ActiveGameEnd = None
+            self.OnUserCooldown = "$username the command is still on user cooldown for $cooldown seconds!"
+            self.CasterIgnoreCD = True
             self.ActiveGameTime = 60
-            self.BossStarterUserName = ""
-            self.ActiveGameResponse = "{0} the hunt against {1} is currently active. Type {2} in the next {3} seconds to join the fight."
-            self.NoActiveGameResponse = "{0} there is no hunt currently active. Type {1} to begin hunting."
-            self.MinAttendeesResponse = "{0} not enough people joined the hunt, so it was aborted."
-            self.JoinedFightResponse = "{0} you joined the hunt against {1}! Attendees: {2} - Win Chance {3} - Total Win Points {4} - Win Points per User {5}"
-            self.AlreadyJoinedFight = "{0} you already joined the hunt!"
-            self.NotEnoughResponse = "{0} you don't have enough {1} to attempt this! You will need atleast {2} {1}."
-            self.PermissionResponse = "{0} -> only {1} ({2}) and higher can use this command"
+            self.ActiveGameResponse = "$username the hunt against $targetname is currently active. Type $joincommand in the next $remainingtime seconds to join the fight."
+            self.NoActiveGameResponse = "$username there is no hunt currently active. Type $command to begin hunting."
+            self.MinAttendeesResponse = "$username not enough people joined the hunt, so it was aborted."
+            self.JoinedFightResponse = "$username you joined the hunt against $targetname! Attendees: $attendees - Win Chance: $winchance% - Total Win Points: $points $currency - Win Points per User: $attendeepoints"
+            self.AlreadyJoinedFight = "$username you already joined the hunt!"
+            self.NotEnoughResponse = "$username you don't have enough $currency to attempt this! You will need atleast $points $currency."
+            self.PermissionResponse = "$username -> only $permission ($permissioninfo) and higher can use this command"
             self.Timeout = False
             self.TL = 60
-            self.Boss = []
-            self.B1Name = "Feigeratte"
+            self.B1Name = "Rat"
             self.B1WinChance = 80
             self.B1Win = 7
             self.B1Lose = 3
-            self.B1StartText = "{0} du trittst gegen [Weiß] Feigeratte an. Win Chance {1} - Total Win Points {2} - Added Win Chance per Attendee {3} - Added Win Points per Attendee {4}! Viel Glück!"
-            self.B1WinText = "{0} und seine {1} Crewmitglieder haben insgesamt {2} {3} gewonnen! Somit hat jeder {4} {3} bekommen."
-            self.B1LoseText = "{0} du hast {1} {2} verloren!"
+            self.B1StartText = "$username you started a hunt against a $targetname. Win Chance: $winchance% - Total Win Points: $points - Added Win Chance per Attendee: $addedwinchance - Added Win Points per Attendee: $addedwinpoints! Everybody can join the hunt with $joincommand. Good Luck!"
+            self.B1WinText = "$username and his/her $attendees crewmates have won $points $currency at the hunt against $targetname! So everybody won $attendeepoints $currency."
+            self.B1LoseText = "$username and his/her crewmates lost $points $currency each"
             self.B1AddWinChancePerAttendee = 0
             self.B1AddWinPointsPerAttendee = 0
-            self.B2Name = "Üblesstinktier"
+            self.B2Name = "Skunk"
             self.B2WinChance = 60
             self.B2Win = 15
             self.B2Lose = 15
-            self.B2StartText = "{0} du trittst gegen [Grün] Üblesstinktier an. Win Chance {1} - Total Win Points {2} - Added Win Chance per Attendee {3} - Added Win Points per Attendee {4}! Viel Glück!"
-            self.B2WinText = "{0} und seine {1} Crewmitglieder haben insgesamt {2} {3} gewonnen! Somit hat jeder {4} {3} bekommen."
-            self.B2LoseText = "{0} du hast {1} {2} verloren!"
+            self.B2StartText = "$username you started a hunt against a $targetname. Win Chance: $winchance% - Total Win Points: $points - Added Win Chance per Attendee: $addedwinchance - Added Win Points per Attendee: $addedwinpoints! Everybody can join the hunt with $joincommand. Good Luck!"
+            self.B2WinText = "$username and his/her $attendees crewmates have won $points $currency at the hunt against $targetname! So everybody won $attendeepoints $currency."
+            self.B2LoseText = "$username and his/her crewmates lost $points $currency each"
             self.B2AddWinChancePerAttendee = 0
             self.B2AddWinPointsPerAttendee = 0
-            self.B3Name = "Geilesau"
+            self.B3Name = "Boar"
             self.B3WinChance = 40
             self.B3Win = 30
             self.B3Lose = 18
-            self.B3StartText = "{0} du trittst gegen [Blau] Geilesau an. Win Chance {1} - Total Win Points {2} - Added Win Chance per Attendee {3} - Added Win Points per Attendee {4}! Viel Glück!"
-            self.B3WinText = "{0} und seine {1} Crewmitglieder haben insgesamt {2} {3} gewonnen! Somit hat jeder {4} {3} bekommen."
-            self.B3LoseText = "{0} du hast {1} {2} verloren!"
+            self.B3StartText = "$username you started a hunt against a $targetname. Win Chance: $winchance% - Total Win Points: $points - Added Win Chance per Attendee: $addedwinchance - Added Win Points per Attendee: $addedwinpoints! Everybody can join the hunt with $joincommand. Good Luck!"
+            self.B3WinText = "$username and his/her $attendees crewmates have won $points $currency at the hunt against $targetname! So everybody won $attendeepoints $currency."
+            self.B3LoseText = "$username and his/her crewmates lost $points $currency each"
             self.B3AddWinChancePerAttendee = 0
             self.B3AddWinPointsPerAttendee = 0
-            self.B4Name = "Jauerbär"
+            self.B4Name = "Bear"
             self.B4WinChance = 20
             self.B4Win = 40
             self.B4Lose = 13
-            self.B4StartText = "{0} du trittst gegen [Lila] Jauerbär an. Win Chance {1} - Total Win Points {2} - Added Win Chance per Attendee {3} - Added Win Points per Attendee {4}! Viel Glück!"
-            self.B4WinText = "{0} und seine {1} Crewmitglieder haben insgesamt {2} {3} gewonnen! Somit hat jeder {4} {3} bekommen."
-            self.B4LoseText = "{0} du hast {1} {2} verloren!"
+            self.B4StartText = "$username you started a hunt against a $targetname. Win Chance: $winchance% - Total Win Points: $points - Added Win Chance per Attendee: $addedwinchance - Added Win Points per Attendee: $addedwinpoints! Everybody can join the hunt with $joincommand. Good Luck!"
+            self.B4WinText = "$username and his/her $attendees crewmates have won $points $currency at the hunt against $targetname! So everybody won $attendeepoints $currency."
+            self.B4LoseText = "$username and his/her crewmates lost $points $currency each"
             self.B4AddWinChancePerAttendee = 0
             self.B4AddWinPointsPerAttendee = 0
-            self.B5Name = "Maroxotant"
+            self.B5Name = "Lion"
             self.B5WinChance = 10
             self.B5Win = 80
             self.B5Lose = 15
-            self.B5StartText = "{0} du trittst gegen [Gold] Maroxotant an. Win Chance {1} - Total Win Points {2} - Added Win Chance per Attendee {3} - Added Win Points per Attendee {4}! Viel Glück!"
-            self.B5WinText = "{0} und seine {1} Crewmitglieder haben insgesamt {2} {3} gewonnen! Somit hat jeder {4} {3} bekommen."
-            self.B5LoseText = "{0} du hast {1} {2} verloren!"
+            self.B5StartText = "$username you started a hunt against a $targetname. Win Chance: $winchance% - Total Win Points: $points - Added Win Chance per Attendee: $addedwinchance - Added Win Points per Attendee: $addedwinpoints! Everybody can join the hunt with $joincommand. Good Luck!"
+            self.B5WinText = "$username and his/her $attendees crewmates have won $points $currency at the hunt against $targetname! So everybody won $attendeepoints $currency."
+            self.B5LoseText = "$username and his/her crewmates lost $points $currency each"
             self.B5AddWinChancePerAttendee = 0
             self.B5AddWinPointsPerAttendee = 0
-            self.highestlose = 0
+            self.HighestLose = 0
+
+        # load variables that do not need to be customisable from the ui
+        self.ActiveGame = False
+        self.ActiveGameAttendees = []
+        self.ActiveGameEnd = None
+        self.BossStarterUserName = ""
+        self.Boss = []
+        self.selectedboss = 0
 
     # Reload settings on save through UI
     def ReloadSettings(self, data):
@@ -189,11 +188,6 @@ def Execute(data):
         if not IsFromValidSource(data, MySet.Usage):
             return
 
-        # if client has no permission -> quit
-        if not Parent.HasPermission(data.User, MySet.Permission, MySet.PermissionInfo):
-            message = MySet.PermissionResponse.format(data.User, MySet.Permission, MySet.PermissionInfo)
-            SendResp(data, message)
-
         if not HasPermission(data):
             return
 
@@ -206,31 +200,31 @@ def Execute(data):
                     
             # send message about active hunt if one is active
             if MySet.ActiveGame:
-                message = MySet.ActiveGameResponse.format(data.UserName, MySet.Boss[0], MySet.JoinCommand, str(round(MySet.ActiveGameEnd - time.time())))
+                message = MySet.ActiveGameResponse.replace("$username", data.UserName).replace("$targetname", MySet.Boss[0]).replace("$joincommand", MySet.JoinCommand).replace("$remainingtime", str(round(MySet.ActiveGameEnd - time.time())))
                 SendResp(data, message)
                 return
                 
             else:
                 
                 # define bosses
-                MySet.Boss = [[MySet.B1Name, MySet.B1WinChance, MySet.B1Win, MySet.B1Lose, MySet.B1StartText.format(data.UserName, MySet.B1WinChance, MySet.B1Win, MySet.B1AddWinChancePerAttendee, MySet.B1AddWinPointsPerAttendee), MySet.B1WinText.format(data.UserName, 0, MySet.B1Win, Parent.GetCurrencyName(), 0), MySet.B1LoseText.format(data.UserName, MySet.B1Lose, Parent.GetCurrencyName()), MySet.B1AddWinChancePerAttendee, MySet.B1AddWinPointsPerAttendee], \
-                            [MySet.B2Name, MySet.B2WinChance, MySet.B2Win, MySet.B2Lose, MySet.B2StartText.format(data.UserName, MySet.B2WinChance, MySet.B2Win, MySet.B2AddWinChancePerAttendee, MySet.B2AddWinPointsPerAttendee), MySet.B2WinText.format(data.UserName, 0, MySet.B2Win, Parent.GetCurrencyName(), 0), MySet.B2LoseText.format(data.UserName, MySet.B2Lose, Parent.GetCurrencyName()), MySet.B2AddWinChancePerAttendee, MySet.B2AddWinPointsPerAttendee], \
-                            [MySet.B3Name, MySet.B3WinChance, MySet.B3Win, MySet.B3Lose, MySet.B3StartText.format(data.UserName, MySet.B3WinChance, MySet.B3Win, MySet.B3AddWinChancePerAttendee, MySet.B3AddWinPointsPerAttendee), MySet.B3WinText.format(data.UserName, 0, MySet.B3Win, Parent.GetCurrencyName(), 0), MySet.B3LoseText.format(data.UserName, MySet.B3Lose, Parent.GetCurrencyName()), MySet.B3AddWinChancePerAttendee, MySet.B3AddWinPointsPerAttendee], \
-                            [MySet.B4Name, MySet.B4WinChance, MySet.B4Win, MySet.B4Lose, MySet.B4StartText.format(data.UserName, MySet.B4WinChance, MySet.B4Win, MySet.B4AddWinChancePerAttendee, MySet.B4AddWinPointsPerAttendee), MySet.B4WinText.format(data.UserName, 0, MySet.B4Win, Parent.GetCurrencyName(), 0), MySet.B4LoseText.format(data.UserName, MySet.B4Lose, Parent.GetCurrencyName()), MySet.B4AddWinChancePerAttendee, MySet.B4AddWinPointsPerAttendee], \
-                            [MySet.B5Name, MySet.B5WinChance, MySet.B5Win, MySet.B5Lose, MySet.B5StartText.format(data.UserName, MySet.B5WinChance, MySet.B5Win, MySet.B5AddWinChancePerAttendee, MySet.B5AddWinPointsPerAttendee), MySet.B5WinText.format(data.UserName, 0, MySet.B5Win, Parent.GetCurrencyName(), 0), MySet.B5LoseText.format(data.UserName, MySet.B5Lose, Parent.GetCurrencyName()), MySet.B5AddWinChancePerAttendee, MySet.B5AddWinPointsPerAttendee]]            
+                MySet.Boss = [[MySet.B1Name, MySet.B1WinChance, MySet.B1Win, MySet.B1Lose, MySet.B1StartText.replace("$username", data.UserName).replace("$targetname", MySet.B1Name).replace("$winchance", str(MySet.B1WinChance)).replace("$points", str(MySet.B1Win)).replace("$addedwinchance", str(MySet.B1AddWinChancePerAttendee)).replace("$addedwinpoints", str(MySet.B1AddWinPointsPerAttendee)).replace("$joincommand", MySet.JoinCommand), MySet.B1WinText.replace("$username", data.UserName).replace("$targetname", MySet.B1Name).replace("$attendees", str(0)).replace("$points", str(MySet.B1Win)).replace("$currency", Parent.GetCurrencyName()).replace("$attendeepoints", str(MySet.B1Win)), MySet.B1LoseText.replace("$username", data.UserName).replace("$targetname", MySet.B1Name).replace("$points", str(MySet.B1Lose)).replace("$currency", Parent.GetCurrencyName()), MySet.B1AddWinChancePerAttendee, MySet.B1AddWinPointsPerAttendee], \
+                            [MySet.B2Name, MySet.B2WinChance, MySet.B2Win, MySet.B2Lose, MySet.B2StartText.replace("$username", data.UserName).replace("$targetname", MySet.B2Name).replace("$winchance", str(MySet.B2WinChance)).replace("$points", str(MySet.B2Win)).replace("$addedwinchance", str(MySet.B2AddWinChancePerAttendee)).replace("$addedwinpoints", str(MySet.B2AddWinPointsPerAttendee)).replace("$joincommand", MySet.JoinCommand), MySet.B2WinText.replace("$username", data.UserName).replace("$targetname", MySet.B2Name).replace("$attendees", str(0)).replace("$points", str(MySet.B2Win)).replace("$currency", Parent.GetCurrencyName()).replace("$attendeepoints", str(MySet.B2Win)), MySet.B2LoseText.replace("$username", data.UserName).replace("$targetname", MySet.B2Name).replace("$points", str(MySet.B2Lose)).replace("$currency", Parent.GetCurrencyName()), MySet.B2AddWinChancePerAttendee, MySet.B2AddWinPointsPerAttendee], \
+                            [MySet.B3Name, MySet.B3WinChance, MySet.B3Win, MySet.B3Lose, MySet.B3StartText.replace("$username", data.UserName).replace("$targetname", MySet.B3Name).replace("$winchance", str(MySet.B3WinChance)).replace("$points", str(MySet.B3Win)).replace("$addedwinchance", str(MySet.B3AddWinChancePerAttendee)).replace("$addedwinpoints", str(MySet.B3AddWinPointsPerAttendee)).replace("$joincommand", MySet.JoinCommand), MySet.B3WinText.replace("$username", data.UserName).replace("$targetname", MySet.B3Name).replace("$attendees", str(0)).replace("$points", str(MySet.B3Win)).replace("$currency", Parent.GetCurrencyName()).replace("$attendeepoints", str(MySet.B3Win)), MySet.B3LoseText.replace("$username", data.UserName).replace("$targetname", MySet.B3Name).replace("$points", str(MySet.B3Lose)).replace("$currency", Parent.GetCurrencyName()), MySet.B3AddWinChancePerAttendee, MySet.B3AddWinPointsPerAttendee], \
+                            [MySet.B4Name, MySet.B4WinChance, MySet.B4Win, MySet.B4Lose, MySet.B4StartText.replace("$username", data.UserName).replace("$targetname", MySet.B4Name).replace("$winchance", str(MySet.B4WinChance)).replace("$points", str(MySet.B4Win)).replace("$addedwinchance", str(MySet.B4AddWinChancePerAttendee)).replace("$addedwinpoints", str(MySet.B4AddWinPointsPerAttendee)).replace("$joincommand", MySet.JoinCommand), MySet.B4WinText.replace("$username", data.UserName).replace("$targetname", MySet.B4Name).replace("$attendees", str(0)).replace("$points", str(MySet.B4Win)).replace("$currency", Parent.GetCurrencyName()).replace("$attendeepoints", str(MySet.B4Win)), MySet.B4LoseText.replace("$username", data.UserName).replace("$targetname", MySet.B4Name).replace("$points", str(MySet.B4Lose)).replace("$currency", Parent.GetCurrencyName()), MySet.B4AddWinChancePerAttendee, MySet.B4AddWinPointsPerAttendee], \
+                            [MySet.B5Name, MySet.B5WinChance, MySet.B5Win, MySet.B5Lose, MySet.B5StartText.replace("$username", data.UserName).replace("$targetname", MySet.B5Name).replace("$winchance", str(MySet.B5WinChance)).replace("$points", str(MySet.B5Win)).replace("$addedwinchance", str(MySet.B5AddWinChancePerAttendee)).replace("$addedwinpoints", str(MySet.B5AddWinPointsPerAttendee)).replace("$joincommand", MySet.JoinCommand), MySet.B5WinText.replace("$username", data.UserName).replace("$targetname", MySet.B5Name).replace("$attendees", str(0)).replace("$points", str(MySet.B5Win)).replace("$currency", Parent.GetCurrencyName()).replace("$attendeepoints", str(MySet.B5Win)), MySet.B5LoseText.replace("$username", data.UserName).replace("$targetname", MySet.B5Name).replace("$points", str(MySet.B5Lose)).replace("$currency", Parent.GetCurrencyName()), MySet.B5AddWinChancePerAttendee, MySet.B5AddWinPointsPerAttendee]]            
             
-                MySet.highestlose = MySet.B1Lose
+                MySet.HighestLose = MySet.B1Lose
             
                 for BossIT in MySet.Boss:
-                    if BossIT[3] > MySet.highestlose:
-                        MySet.highestlose = BossIT[3]
+                    if BossIT[3] > MySet.HighestLose:
+                        MySet.HighestLose = BossIT[3]
             
                 # check if user has more points than highest possible lost
-                if not Parent.RemovePoints(data.User, data.UserName, MySet.highestlose + MySet.Cost):
-                    message = MySet.NotEnoughResponse.format(data.UserName, Parent.GetCurrencyName(), MySet.highestlose + MySet.Cost)
+                if not Parent.RemovePoints(data.User, data.UserName, MySet.HighestLose + MySet.Cost):
+                    message = MySet.NotEnoughResponse.replace("$username", data.UserName).replace("$currency", Parent.GetCurrencyName()).replace("$points", str(MySet.HighestLose + MySet.Cost))
                     SendResp(data, message)
                     return
-                Parent.AddPoints(data.User, data.UserName, MySet.highestlose + MySet.Cost)
+                Parent.AddPoints(data.User, data.UserName, MySet.HighestLose + MySet.Cost)
             
                 Parent.RemovePoints(data.User, data.UserName, MySet.Cost)
             
@@ -256,10 +250,6 @@ def Execute(data):
             return
 
         # if client has no permission -> quit
-        if not Parent.HasPermission(data.User, MySet.Permission, MySet.PermissionInfo):
-            message = MySet.PermissionResponse.format(data.User, MySet.Permission, MySet.PermissionInfo)
-            SendResp(data, message)
-
         if not HasPermission(data):
             return
 
@@ -274,15 +264,15 @@ def Execute(data):
             if MySet.ActiveGame:
             
                 # check if user has more points than highest possible lost
-                if not Parent.RemovePoints(data.User, data.UserName, MySet.highestlose + MySet.Cost):
-                    message = MySet.NotEnoughResponse.format(data.UserName, Parent.GetCurrencyName(), MySet.highestlose + MySet.Cost)
+                if not Parent.RemovePoints(data.User, data.UserName, MySet.HighestLose + MySet.Cost):
+                    message = MySet.NotEnoughResponse.replace("$username", data.UserName).replace("$currency", Parent.GetCurrencyName()).replace("$points", str(MySet.HighestLose + MySet.Cost))
                     SendResp(data, message)
                     return
-                Parent.AddPoints(data.User, data.UserName, MySet.highestlose + MySet.Cost)
+                Parent.AddPoints(data.User, data.UserName, MySet.HighestLose + MySet.Cost)
                 
                 # check if user already joined and send message if
                 if data.User in MySet.ActiveGameAttendees:
-                    message = MySet.AlreadyJoinedFight.format(data.UserName, MySet.Boss[0])
+                    message = MySet.AlreadyJoinedFight.replace("$username", data.UserName).replace("$targetname", MySet.Boss[0])
                     SendResp(data, message)
                     return
             
@@ -300,24 +290,24 @@ def Execute(data):
                        
                 # add user to game and notify
                 MySet.ActiveGameAttendees.append(data.User)
-                message = MySet.JoinedFightResponse.format(data.UserName, MySet.Boss[0], len(MySet.ActiveGameAttendees), MySet.Boss[1], MySet.Boss[2], MySet.Boss[2]/len(MySet.ActiveGameAttendees))
+                message = MySet.JoinedFightResponse.replace("$username", data.UserName).replace("$targetname", MySet.Boss[0]).replace("$attendees", str(len(MySet.ActiveGameAttendees))).replace("$winchance", str(MySet.Boss[1])).replace("$points", str(MySet.Boss[2])).replace("$currency", Parent.GetCurrencyName()).replace("$attendeepoints", str(MySet.Boss[2]/len(MySet.ActiveGameAttendees)))
                 SendResp(data, message)  
 
                 # update WinText message
                 if MySet.selectedboss == 0:
-                    MySet.Boss[5] = MySet.B1WinText.format(MySet.BossStarterUserName, len(MySet.ActiveGameAttendees)-1, MySet.Boss[2], Parent.GetCurrencyName(), MySet.Boss[2]/len(MySet.ActiveGameAttendees))
+                    MySet.Boss[5] = MySet.B1WinText.replace("$username", MySet.BossStarterUserName).replace("$targetname", MySet.B1Name).replace("$attendees", str(len(MySet.ActiveGameAttendees)-1)).replace("$points", str(MySet.Boss[2])).replace("$currency", Parent.GetCurrencyName()).replace("$attendeepoints", str(MySet.Boss[2]/len(MySet.ActiveGameAttendees)))
                 elif MySet.selectedboss == 1:
-                    MySet.Boss[5] = MySet.B2WinText.format(MySet.BossStarterUserName, len(MySet.ActiveGameAttendees)-1, MySet.Boss[2], Parent.GetCurrencyName(), MySet.Boss[2]/len(MySet.ActiveGameAttendees))
+                    MySet.Boss[5] = MySet.B2WinText.replace("$username", MySet.BossStarterUserName).replace("$targetname", MySet.B2Name).replace("$attendees", str(len(MySet.ActiveGameAttendees)-1)).replace("$points", str(MySet.Boss[2])).replace("$currency", Parent.GetCurrencyName()).replace("$attendeepoints", str(MySet.Boss[2]/len(MySet.ActiveGameAttendees)))
                 elif MySet.selectedboss == 2:
-                    MySet.Boss[5] = MySet.B3WinText.format(MySet.BossStarterUserName, len(MySet.ActiveGameAttendees)-1, MySet.Boss[2], Parent.GetCurrencyName(), MySet.Boss[2]/len(MySet.ActiveGameAttendees))
+                    MySet.Boss[5] = MySet.B3WinText.replace("$username", MySet.BossStarterUserName).replace("$targetname", MySet.B3Name).replace("$attendees", str(len(MySet.ActiveGameAttendees)-1)).replace("$points", str(MySet.Boss[2])).replace("$currency", Parent.GetCurrencyName()).replace("$attendeepoints", str(MySet.Boss[2]/len(MySet.ActiveGameAttendees)))
                 elif MySet.selectedboss == 3:
-                    MySet.Boss[5] = MySet.B4WinText.format(MySet.BossStarterUserName, len(MySet.ActiveGameAttendees)-1, MySet.Boss[2], Parent.GetCurrencyName(), MySet.Boss[2]/len(MySet.ActiveGameAttendees))
+                    MySet.Boss[5] = MySet.B4WinText.replace("$username", MySet.BossStarterUserName).replace("$targetname", MySet.B4Name).replace("$attendees", str(len(MySet.ActiveGameAttendees)-1)).replace("$points", str(MySet.Boss[2])).replace("$currency", Parent.GetCurrencyName()).replace("$attendeepoints", str(MySet.Boss[2]/len(MySet.ActiveGameAttendees)))
                 elif MySet.selectedboss == 4:
-                    MySet.Boss[5] = MySet.B5WinText.format(MySet.BossStarterUserName, len(MySet.ActiveGameAttendees)-1, MySet.Boss[2], Parent.GetCurrencyName(), MySet.Boss[2]/len(MySet.ActiveGameAttendees))     
+                    MySet.Boss[5] = MySet.B5WinText.replace("$username", MySet.BossStarterUserName).replace("$targetname", MySet.B5Name).replace("$attendees", str(len(MySet.ActiveGameAttendees)-1)).replace("$points", str(MySet.Boss[2])).replace("$currency", Parent.GetCurrencyName()).replace("$attendeepoints", str(MySet.Boss[2]/len(MySet.ActiveGameAttendees)))
             
             else:
                 # notify that no game is active 
-                message = MySet.NoActiveGameResponse.format(data.UserName, MySet.Command)
+                message = MySet.NoActiveGameResponse.replace("$username", data.UserName).replace("$command", MySet.Command)
                 SendResp(data, message)
                 return
 
@@ -338,7 +328,7 @@ def Tick():
         if len(MySet.ActiveGameAttendees) < MySet.MinAttendees:
             del MySet.ActiveGameAttendees[:]
             Parent.AddCooldown(ScriptName, MySet.Command, MySet.Cooldown)
-            message = MySet.MinAttendeesResponse.format(MySet.BossStarterUserName)
+            message = MySet.MinAttendeesResponse.replace("$username", MySet.BossStarterUserName)
             Parent.SendStreamMessage(message)
             return
 
@@ -367,11 +357,8 @@ def Tick():
             del MySet.ActiveGameAttendees[:]
             Parent.AddCooldown(ScriptName, MySet.Command, MySet.Cooldown)
             if MySet.Timeout:
-                Parent.SendStreamMessage("/timeout {0} {1}".format(data.User, MySet.TL))
+                Parent.SendStreamMessage("/timeout {0} {1}".format(MySet.BossStarterUserName.lower(), MySet.TL))
                 return
-        else:
-            message = "Hunt hat nen Bug :("
-            Parent.SendStreamMessage(message)
 
 #---------------------------------------
 # [Optional] Functions for usage handling
@@ -419,7 +406,7 @@ def IsOnCooldown(data):
     """Return true if command is on cooldown and send cooldown message if enabled"""
     cooldown = Parent.IsOnCooldown(ScriptName, MySet.Command)
     userCooldown = Parent.IsOnUserCooldown(ScriptName, MySet.Command, data.User)
-    caster = (Parent.HasPermission(data.User, "Caster", "") and MySet.CasterCD)
+    caster = (Parent.HasPermission(data.User, "Caster", "") and MySet.CasterIgnoreCD)
 
     if (cooldown or userCooldown) and caster is False:
 
@@ -430,13 +417,13 @@ def IsOnCooldown(data):
             if cooldownDuration > userCDD:
                 m_CooldownRemaining = cooldownDuration
 
-                message = MySet.OnCooldown.format(data.UserName, m_CooldownRemaining)
+                message = MySet.OnCooldown.replace("$username", data.UserName).replace("$cooldown", str(m_CooldownRemaining))
                 SendResp(data, message)
 
             else:
                 m_CooldownRemaining = userCDD
 
-                message = MySet.OnUserCooldown.format(data.UserName, m_CooldownRemaining)
+                message = MySet.OnUserCooldown.replace("$username", data.UserName).replace("$cooldown", str(m_CooldownRemaining))
                 SendResp(data, message)
         return True
     return False
@@ -444,7 +431,7 @@ def IsOnCooldown(data):
 def HasPermission(data):
     """Returns true if user has permission and false if user doesn't"""
     if not Parent.HasPermission(data.User, MySet.Permission, MySet.PermissionInfo):
-        message = MySet.PermissionResponse.format(data.UserName, MySet.Permission, MySet.PermissionInfo)
+        message = MySet.PermissionResponse.replace("$username", data.UserName).replace("$permission", MySet.Permission).replace("$permissioninfo", MySet.PermissionInfo)
         SendResp(data, message)
         return False
     return True
@@ -473,7 +460,7 @@ def IsFromValidSource(data, Usage):
 
 def AddCooldown(data):
     """add cooldowns"""
-    if Parent.HasPermission(data.User, "Caster", "") and MySet.CasterCD:
+    if Parent.HasPermission(data.User, "Caster", "") and MySet.CasterIgnoreCD:
         Parent.AddCooldown(ScriptName, MySet.Command, MySet.Cooldown)
         return
 

@@ -15,16 +15,17 @@ from array import *
 # [Required] Script information
 #---------------------------------------
 ScriptName = "Fish"
-Website = "https://www.twitch.tv/maroxtv"
+Website = "https://github.com/marianwulf"
 Creator = "Marox"
-Version = "1.0.1"
+Version = "1.1.0"
 Description = "Fish command"
 #---------------------------------------
 # Versions
 #---------------------------------------
-""" Releases (open README.txt for full release notes)
+""" Releases (open README.md for full release notes)
 1.0.0 - Initial Release
 1.0.1 - fixed cost
+1.1.0 - changed code for better usability in ui
 """
 #---------------------------------------
 # Variables
@@ -52,49 +53,49 @@ class Settings:
             self.Usage = "Stream Chat"
             self.UseCD = True
             self.Cooldown = 5
-            self.OnCooldown = "{0} the command is still on cooldown for {1} seconds!"
+            self.OnCooldown = "$username the command is still on cooldown for $cooldown seconds!"
             self.UserCooldown = 10
-            self.OnUserCooldown = "{0} the command is still on user cooldown for {1} seconds!"
-            self.CasterCD = True
-            self.NotEnoughResponse = "{0} you don't have enough {1} to attempt this! You will need atleast {2} {1}."
-            self.PermissionResponse = "{0} -> only {1} ({2}) and higher can use this command"
+            self.OnUserCooldown = "$username the command is still on user cooldown for $cooldown seconds!"
+            self.CasterIgnoreCD = False
+            self.NotEnoughResponse = "$username you don't have enough $currency to attempt this! You will need atleast $points $currency."
+            self.PermissionResponse = "$username -> only $permission ($permissioninfo) and higher can use this command"
             self.Timeout = False
             self.TL = 60
-            self.B1Name = "Loserforelle"
+            self.B1Name = "Carp"
             self.B1WinChance = 80
             self.B1Win = 7
             self.B1Lose = 3
-            self.B1StartText = "{0} du trittst gegen [Weiß] Loserforelle an. Viel Glück!"
-            self.B1WinText = "{0} du hast {1} {2} gewonnen! .... und stinkst LuL."
-            self.B1LoseText = "{0} du hast {1} {2} verloren! Loserforelle macht ihrem Namen alle Ehre. (Noobfilter)"
-            self.B2Name = "Öderkarpfen"
+            self.B1StartText = "$username you try to fish $targetname. Good luck!"
+            self.B1WinText = "$username you won $points $currency!"
+            self.B1LoseText = "$username you failed and lost $points $currency!"
+            self.B2Name = "Herring"
             self.B2WinChance = 60
             self.B2Win = 15
             self.B2Lose = 15
-            self.B2StartText = "{0} du trittst gegen [Grün] Öderkarpfen an. Viel Glück!"
-            self.B2WinText = "{0} du hast {1} {2} gewonnen!"
-            self.B2LoseText = "{0} du hast {1} {2} verloren!"
-            self.B3Name = "Parketthering"
+            self.B2StartText = "$username you try to fish $targetname. Good luck!"
+            self.B2WinText = "$username you won $points $currency!"
+            self.B2LoseText = "$username you failed and lost $points $currency!"
+            self.B3Name = "Sardine"
             self.B3WinChance = 40
             self.B3Win = 30
             self.B3Lose = 18
-            self.B3StartText = "{0} du trittst gegen [Blau] Parketthering an. Viel Glück!"
-            self.B3WinText = "{0} du hast {1} {2} gewonnen!"
-            self.B3LoseText = "{0} du hast {1} {2} verloren!"
-            self.B4Name = "Geilerhecht"
+            self.B3StartText = "$username you try to fish $targetname. Good luck!"
+            self.B3WinText = "$username you won $points $currency!"
+            self.B3LoseText = "$username you failed and lost $points $currency!"
+            self.B4Name = "Tuna"
             self.B4WinChance = 20
             self.B4Win = 40
             self.B4Lose = 13
-            self.B4StartText = "{0} du trittst gegen [Lila] Geilerhecht an. Viel Glück!"
-            self.B4WinText = "{0} du hast {1} {2} gewonnen!"
-            self.B4LoseText = "{0} du hast {1} {2} verloren!"
-            self.B5Name = "Saltyrohrtopus"
+            self.B4StartText = "$username you try to fish $targetname. Good luck!"
+            self.B4WinText = "$username you won $points $currency!"
+            self.B4LoseText = "$username you failed and lost $points $currency!"
+            self.B5Name = "Pufferfish"
             self.B5WinChance = 10
             self.B5Win = 80
             self.B5Lose = 15
-            self.B5StartText = "{0} du trittst gegen [Gold] Saltyrohrtopus an. Viel Glück!"
-            self.B5WinText = "{0} du hast {1} {2} gewonnen!"
-            self.B5LoseText = "{0} du hast {1} {2} verloren!"
+            self.B5StartText = "$username you try to fish $targetname. Good luck!"
+            self.B5WinText = "$username you won $points $currency!"
+            self.B5LoseText = "$username you failed and lost $points $currency!"
 
     # Reload settings on save through UI
     def ReloadSettings(self, data):
@@ -151,10 +152,6 @@ def Execute(data):
         if not IsFromValidSource(data, MySet.Usage):
             return
 
-        if not Parent.HasPermission(data.User, MySet.Permission, MySet.PermissionInfo):
-            message = MySet.PermissionResponse.format(data.User, MySet.Permission, MySet.PermissionInfo)
-            SendResp(data, message)
-
         if not HasPermission(data):
             return
 
@@ -162,14 +159,12 @@ def Execute(data):
 
             if IsOnCooldown(data):
                 return
-
             
-            
-            Boss = [[MySet.B1Name, MySet.B1WinChance, MySet.B1Win, MySet.B1Lose, MySet.B1StartText.format(data.UserName), MySet.B1WinText.format(data.UserName, MySet.B1Win, Parent.GetCurrencyName()), MySet.B1LoseText.format(data.UserName, MySet.B1Lose, Parent.GetCurrencyName())], \
-                    [MySet.B2Name, MySet.B2WinChance, MySet.B2Win, MySet.B2Lose, MySet.B2StartText.format(data.UserName), MySet.B2WinText.format(data.UserName, MySet.B2Win, Parent.GetCurrencyName()), MySet.B2LoseText.format(data.UserName, MySet.B2Lose, Parent.GetCurrencyName())], \
-                    [MySet.B3Name, MySet.B3WinChance, MySet.B3Win, MySet.B3Lose, MySet.B3StartText.format(data.UserName), MySet.B3WinText.format(data.UserName, MySet.B3Win, Parent.GetCurrencyName()), MySet.B3LoseText.format(data.UserName, MySet.B3Lose, Parent.GetCurrencyName())], \
-                    [MySet.B4Name, MySet.B4WinChance, MySet.B4Win, MySet.B4Lose, MySet.B4StartText.format(data.UserName), MySet.B4WinText.format(data.UserName, MySet.B4Win, Parent.GetCurrencyName()), MySet.B4LoseText.format(data.UserName, MySet.B4Lose, Parent.GetCurrencyName())], \
-                    [MySet.B5Name, MySet.B5WinChance, MySet.B5Win, MySet.B5Lose, MySet.B5StartText.format(data.UserName), MySet.B5WinText.format(data.UserName, MySet.B5Win, Parent.GetCurrencyName()), MySet.B5LoseText.format(data.UserName, MySet.B5Lose, Parent.GetCurrencyName())]]            
+            Boss = [[MySet.B1Name, MySet.B1WinChance, MySet.B1Win, MySet.B1Lose, MySet.B1StartText.replace("$username", data.UserName).replace("$targetname", MySet.B1Name), MySet.B1WinText.replace("$username", data.UserName).replace("$points", str(MySet.B1Win)).replace("$currency", Parent.GetCurrencyName()), MySet.B1LoseText.replace("$username", data.UserName).replace("$points", str(MySet.B1Lose)).replace("$currency", Parent.GetCurrencyName())], \
+                    [MySet.B2Name, MySet.B2WinChance, MySet.B2Win, MySet.B2Lose, MySet.B2StartText.replace("$username", data.UserName).replace("$targetname", MySet.B2Name), MySet.B2WinText.replace("$username", data.UserName).replace("$points", str(MySet.B2Win)).replace("$currency", Parent.GetCurrencyName()), MySet.B2LoseText.replace("$username", data.UserName).replace("$points", str(MySet.B2Lose)).replace("$currency", Parent.GetCurrencyName())], \
+                    [MySet.B3Name, MySet.B3WinChance, MySet.B3Win, MySet.B3Lose, MySet.B3StartText.replace("$username", data.UserName).replace("$targetname", MySet.B3Name), MySet.B3WinText.replace("$username", data.UserName).replace("$points", str(MySet.B3Win)).replace("$currency", Parent.GetCurrencyName()), MySet.B3LoseText.replace("$username", data.UserName).replace("$points", str(MySet.B3Lose)).replace("$currency", Parent.GetCurrencyName())], \
+                    [MySet.B4Name, MySet.B4WinChance, MySet.B4Win, MySet.B4Lose, MySet.B4StartText.replace("$username", data.UserName).replace("$targetname", MySet.B4Name), MySet.B4WinText.replace("$username", data.UserName).replace("$points", str(MySet.B4Win)).replace("$currency", Parent.GetCurrencyName()), MySet.B4LoseText.replace("$username", data.UserName).replace("$points", str(MySet.B4Lose)).replace("$currency", Parent.GetCurrencyName())], \
+                    [MySet.B5Name, MySet.B5WinChance, MySet.B5Win, MySet.B5Lose, MySet.B5StartText.replace("$username", data.UserName).replace("$targetname", MySet.B5Name), MySet.B5WinText.replace("$username", data.UserName).replace("$points", str(MySet.B5Win)).replace("$currency", Parent.GetCurrencyName()), MySet.B5LoseText.replace("$username", data.UserName).replace("$points", str(MySet.B5Lose)).replace("$currency", Parent.GetCurrencyName())]]            
             
             highestlose = MySet.B1Lose
             
@@ -178,7 +173,7 @@ def Execute(data):
                     highestlose = BossIT[3]
             
             if not Parent.RemovePoints(data.User, data.UserName, highestlose + MySet.Cost):
-                message = MySet.NotEnoughResponse.format(data.UserName, Parent.GetCurrencyName(), highestlose + MySet.Cost)
+                message = MySet.NotEnoughResponse.replace("$username", data.UserName).replace("$currency", Parent.GetCurrencyName()).replace("$points", str(highestlose + MySet.Cost))
                 SendResp(data, message)
                 return
             Parent.AddPoints(data.User, data.UserName, highestlose + MySet.Cost)
@@ -207,9 +202,6 @@ def Execute(data):
                 if MySet.Timeout:
                     Parent.SendStreamMessage("/timeout {0} {1}".format(data.User, MySet.TL))
                 return
-            else:
-                message = "Fish hat nen Bug :("
-                SendResp(data, message)
 
 def Tick():
     """Required tick function"""
@@ -260,7 +252,7 @@ def IsOnCooldown(data):
     """Return true if command is on cooldown and send cooldown message if enabled"""
     cooldown = Parent.IsOnCooldown(ScriptName, MySet.Command)
     userCooldown = Parent.IsOnUserCooldown(ScriptName, MySet.Command, data.User)
-    caster = (Parent.HasPermission(data.User, "Caster", "") and MySet.CasterCD)
+    caster = (Parent.HasPermission(data.User, "Caster", "") and MySet.CasterIgnoreCD)
 
     if (cooldown or userCooldown) and caster is False:
 
@@ -271,13 +263,13 @@ def IsOnCooldown(data):
             if cooldownDuration > userCDD:
                 m_CooldownRemaining = cooldownDuration
 
-                message = MySet.OnCooldown.format(data.UserName, m_CooldownRemaining)
+                message = MySet.OnCooldown.replace("$username", data.UserName).replace("$cooldown", str(m_CooldownRemaining))
                 SendResp(data, message)
 
             else:
                 m_CooldownRemaining = userCDD
 
-                message = MySet.OnUserCooldown.format(data.UserName, m_CooldownRemaining)
+                message = MySet.OnUserCooldown.replace("$username", data.UserName).replace("$cooldown", str(m_CooldownRemaining))
                 SendResp(data, message)
         return True
     return False
@@ -285,7 +277,7 @@ def IsOnCooldown(data):
 def HasPermission(data):
     """Returns true if user has permission and false if user doesn't"""
     if not Parent.HasPermission(data.User, MySet.Permission, MySet.PermissionInfo):
-        message = MySet.PermissionResponse.format(data.UserName, MySet.Permission, MySet.PermissionInfo)
+        message = MySet.PermissionResponse.replace("$username", data.UserName).replace("$permission", MySet.Permission).replace("$permissioninfo", MySet.PermissionInfo)
         SendResp(data, message)
         return False
     return True
@@ -314,7 +306,7 @@ def IsFromValidSource(data, Usage):
 
 def AddCooldown(data):
     """add cooldowns"""
-    if Parent.HasPermission(data.User, "Caster", "") and MySet.CasterCD:
+    if Parent.HasPermission(data.User, "Caster", "") and MySet.CasterIgnoreCD:
         Parent.AddCooldown(ScriptName, MySet.Command, MySet.Cooldown)
         return
 

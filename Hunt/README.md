@@ -1,7 +1,7 @@
 # Hunt Minigame
 
 Name: Hunt Streamlabs Bot  
-Version: 1.2.2  
+Version: 1.3.0  
 Creator: [marianwulf](https://github.com/marianwulf)  
 Description: Multiplayer PVE - use customisable command to fight against 1 of 5 defined bosses. Other players can join the hunt to increase customisable win chances and amounts. You can adjust all values and responses in the UI.
 
@@ -25,9 +25,14 @@ To trigger the bot use !hunt in the chat. Other users can join with !joinhunt
 
 ## Changelog
 
+### V1.3.0
+ - Modified code for better usability in the UI (if you are updating from V1.1.X or V1.2.X you need to review your variables in the responses)
+ - Added targetname variable to win & lose responses
+ - Added currency variable to join fight response
+
 ### V1.2.X
  - Customisable minimum attendees to succeed
- - visual bugfix - max 100% win chance
+ - Visual bugfix - max 100% win chance
  - Customisable response messages
 
 ### V1.2.0

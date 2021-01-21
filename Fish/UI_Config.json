@@ -58,11 +58,11 @@
     "tooltip": "Cooldown in seconds.",
   	"group": "Cooldown"
   },
-    "OnCooldown": {
+  "OnCooldown": {
     "type": "textbox",
-    "value": "{0} the command is still on cooldown for {1} seconds!",
+    "value": "$username the command is still on cooldown for $cooldown seconds!",
   	"label": "Cooldown Response",
-    "tooltip": "The message that the bot will display when the command is on cooldown. \r\n {0} = user \r\n {1} = time remaining",
+    "tooltip": "The message that the bot will display when the command is on cooldown. \r\n $username \r\n $cooldown",
   	"group": "Cooldown"
   },
     "UserCooldown": {
@@ -72,16 +72,16 @@
     "tooltip": "User cooldown in seconds.",
   	"group": "Cooldown"
   },
-    "OnUserCooldown": {
+  "OnUserCooldown": {
     "type": "textbox",
-    "value": "{0} the command is still on user cooldown for {1} seconds!",
+    "value": "$username the command is still on user cooldown for $cooldown seconds!",
   	"label": "User Cooldown Response",
-    "tooltip": "The message that the bot will display when the command is on user cooldown. \r\n {0} = user \r\n {1} = time remaining",
+    "tooltip": "The message that the bot will display when the command is on user cooldown. \r\n $username \r\n $cooldown",
   	"group": "Cooldown"
   },
-  "CasterCD": {
+  "CasterIgnoreCD": {
     "type": "checkbox",
-    "value": true,
+    "value": false,
   	"label": "Caster ignores cooldown",
     "tooltip": "Enable/Disable cooldown for caster",
   	"group": "Cooldown"
@@ -100,264 +100,264 @@
     "tooltip": "Length for the timeout if users fail to fish",
   	"group": "Outcomes"
   },
-    "NotEnoughResponse": {
+  "NotEnoughResponse": {
     "type": "textbox",
-    "value": "{0} you don't have enough {1} to attempt this! You will need atleast {2} {1}.",
+    "value": "$username you don't have enough $currency to attempt this! You will need atleast $points $currency.",
     "label": "Not enough currency response",
-    "tooltip": "Message sent when user doesn't have enough points \r\n {0} = user \r\n {1} = Currencyname \r\n {1} = amount of points",
+    "tooltip": "Message sent when user doesn't have enough points \r\n $username \r\n $currency \r\n $points",
     "group": "Responses"
   },
   "PermissionResponse": {
     "type": "textbox",
-    "value": "{0} -> only {1} ({2}) and higher can use this command",
+    "value": "$username -> only $permission ($permissioninfo) and higher can use this command",
     "label": "Permission denied response",
-    "tooltip": "Message sent when user doesn't select any valid wire. \r\n{0} = user \r\n{1} = permission\r\n{2} = permission info",
+    "tooltip": "Message sent when user doesn't select any valid wire. \r\n $username \r\n $permission \r\n $permissioninfo",
     "group": "Responses"
   },
   "B1Name": {
     "type": "textbox",
-    "value": "Loserforelle",
+    "value": "Carp",
   	"label": "Name",
-    "tooltip": "Name from the Boss",
-  	"group": "Boss1"
+    "tooltip": "Name of the Fish",
+  	"group": "Fish1"
   },
   "B1WinChance": {
     "type": "numberbox",
     "value": 80,
   	"label": "Win Chance",
     "tooltip": "Chance to Win in %",
-  	"group": "Boss1"
+  	"group": "Fish1"
   },
   "B1Win": {
     "type": "numberbox",
     "value": 7,
   	"label": "Win Points",
     "tooltip": "Points that you gain for winning",
-  	"group": "Boss1"
+  	"group": "Fish1"
   },
   "B1Lose": {
     "type": "numberbox",
     "value": 3,
   	"label": "Lose Points",
     "tooltip": "Points that you lose for losing",
-  	"group": "Boss1"
+  	"group": "Fish1"
   },
   "B1StartText": {
     "type": "textbox",
-    "value": "{0} du trittst gegen [Weiß] Loserforelle an. Viel Glück!",
+    "value": "$username you try to fish $targetname. Good luck!",
   	"label": "Start Text",
-    "tooltip": "Text that will be posted before the fight begins",
-  	"group": "Boss1"
+    "tooltip": "Text that will be posted before the fight begins \r\n $username \r\n $targetname",
+  	"group": "Fish1"
   },
   "B1WinText": {
     "type": "textbox",
-    "value": "{0} du hast {1} {2} gewonnen! .... und stinkst LUL.",
+    "value": "$username you won $points $currency!",
   	"label": "Win Text",
-    "tooltip": "Text that will be posted after you win",
-  	"group": "Boss1"
+    "tooltip": "Text that will be posted after you win \r\n $username \r\n $points \r\n $currency",
+  	"group": "Fish1"
   },
   "B1LoseText": {
     "type": "textbox",
-    "value": "{0} du hast {1} {2} verloren! Loserforelle macht ihrem Namen alle Ehre. (Noobfilter)",
+    "value": "$username you failed and lost $points $currency!",
   	"label": "Lose Text",
-    "tooltip": "Text that will be posted after you lose",
-  	"group": "Boss1"
+    "tooltip": "Text that will be posted after you lose \r\n $username \r\n $points \r\n $currency",
+  	"group": "Fish1"
   },
   "B2Name": {
     "type": "textbox",
-    "value": "Öderkarpfen",
+    "value": "Herring",
   	"label": "Name",
-    "tooltip": "Name from the Boss",
-  	"group": "Boss2"
+    "tooltip": "Name of the Fish",
+  	"group": "Fish2"
   },
   "B2WinChance": {
     "type": "numberbox",
     "value": 60,
   	"label": "Win Chance",
     "tooltip": "Chance to Win in %",
-  	"group": "Boss2"
+  	"group": "Fish2"
   },
   "B2Win": {
     "type": "numberbox",
     "value": 15,
   	"label": "Win Points",
     "tooltip": "Points that you gain for winning",
-  	"group": "Boss2"
+  	"group": "Fish2"
   },
   "B2Lose": {
     "type": "numberbox",
     "value": 15,
   	"label": "Lose Points",
     "tooltip": "Points that you lose for losing",
-  	"group": "Boss2"
+  	"group": "Fish2"
   },
   "B2StartText": {
     "type": "textbox",
-    "value": "{0} du trittst gegen [Grün] Öderkarpfen an. Viel Glück!",
+    "value": "$username you try to fish $targetname. Good luck!",
   	"label": "Start Text",
-    "tooltip": "Text that will be posted before the fight begins",
-  	"group": "Boss2"
+    "tooltip": "Text that will be posted before the fight begins \r\n $username \r\n $targetname",
+  	"group": "Fish2"
   },
   "B2WinText": {
     "type": "textbox",
-    "value": "{0} du hast {1} {2} gewonnen!",
+    "value": "$username you won $points $currency!",
   	"label": "Win Text",
-    "tooltip": "Text that will be posted after you win",
-  	"group": "Boss2"
+    "tooltip": "Text that will be posted after you win \r\n $username \r\n $points \r\n $currency",
+  	"group": "Fish2"
   },
   "B2LoseText": {
     "type": "textbox",
-    "value": "{0} du hast {1} {2} verloren!",
+    "value": "$username you failed and lost $points $currency!",
   	"label": "Lose Text",
-    "tooltip": "Text that will be posted after you lose",
-  	"group": "Boss2"
+    "tooltip": "Text that will be posted after you lose \r\n $username \r\n $points \r\n $currency",
+  	"group": "Fish2"
   },
   "B3Name": {
     "type": "textbox",
-    "value": "Parketthering",
+    "value": "Sardine",
   	"label": "Name",
-    "tooltip": "Name from the Boss",
-  	"group": "Boss3"
+    "tooltip": "Name of the Fish",
+  	"group": "Fish3"
   },
   "B3WinChance": {
     "type": "numberbox",
     "value": 40,
   	"label": "Win Chance",
     "tooltip": "Chance to Win in %",
-  	"group": "Boss3"
+  	"group": "Fish3"
   },
   "B3Win": {
     "type": "numberbox",
     "value": 30,
   	"label": "Win Points",
     "tooltip": "Points that you gain for winning",
-  	"group": "Boss3"
+  	"group": "Fish3"
   },
   "B3Lose": {
     "type": "numberbox",
     "value": 18,
   	"label": "Lose Points",
     "tooltip": "Points that you lose for losing",
-  	"group": "Boss3"
+  	"group": "Fish3"
   },
   "B3StartText": {
     "type": "textbox",
-    "value": "{0} du trittst gegen [Blau] Parketthering an. Viel Glück!",
+    "value": "$username you try to fish $targetname. Good luck!",
   	"label": "Start Text",
-    "tooltip": "Text that will be posted before the fight begins",
-  	"group": "Boss3"
+    "tooltip": "Text that will be posted before the fight begins \r\n $username \r\n $targetname",
+  	"group": "Fish3"
   },
   "B3WinText": {
     "type": "textbox",
-    "value": "{0} du hast {1} {2} gewonnen!",
+    "value": "$username you won $points $currency!",
   	"label": "Win Text",
-    "tooltip": "Text that will be posted after you win",
-  	"group": "Boss3"
+    "tooltip": "Text that will be posted after you win \r\n $username \r\n $points \r\n $currency",
+  	"group": "Fish3"
   },
   "B3LoseText": {
     "type": "textbox",
-    "value": "{0} du hast {1} {2} verloren!",
+    "value": "$username you failed and lost $points $currency!",
   	"label": "Lose Text",
-    "tooltip": "Text that will be posted after you lose",
-  	"group": "Boss3"
+    "tooltip": "Text that will be posted after you lose \r\n $username \r\n $points \r\n $currency",
+  	"group": "Fish3"
   },
     "B4Name": {
     "type": "textbox",
-    "value": "Geilerhecht",
+    "value": "Tuna",
   	"label": "Name",
-    "tooltip": "Name from the Boss",
-  	"group": "Boss4"
+    "tooltip": "Name of the Fish",
+  	"group": "Fish4"
   },
   "B4WinChance": {
     "type": "numberbox",
     "value": 20,
   	"label": "Win Chance",
     "tooltip": "Chance to Win in %",
-  	"group": "Boss4"
+  	"group": "Fish4"
   },
   "B4Win": {
     "type": "numberbox",
     "value": 40,
   	"label": "Win Points",
     "tooltip": "Points that you gain for winning",
-  	"group": "Boss4"
+  	"group": "Fish4"
   },
   "B4Lose": {
     "type": "numberbox",
     "value": 13,
   	"label": "Lose Points",
     "tooltip": "Points that you lose for losing",
-  	"group": "Boss4"
+  	"group": "Fish4"
   },
   "B4StartText": {
     "type": "textbox",
-    "value": "{0} du trittst gegen [Lila] Geilerhecht an. Viel Glück!",
+    "value": "$username you try to fish $targetname. Good luck!",
   	"label": "Start Text",
-    "tooltip": "Text that will be posted before the fight begins",
-  	"group": "Boss4"
+    "tooltip": "Text that will be posted before the fight begins \r\n $username \r\n $targetname",
+  	"group": "Fish4"
   },
   "B4WinText": {
     "type": "textbox",
-    "value": "{0} du hast {1} {2} gewonnen!",
+    "value": "$username you won $points $currency!",
   	"label": "Win Text",
-    "tooltip": "Text that will be posted after you win",
-  	"group": "Boss4"
+    "tooltip": "Text that will be posted after you win \r\n $username \r\n $points \r\n $currency",
+  	"group": "Fish4"
   },
   "B4LoseText": {
     "type": "textbox",
-    "value": "{0} du hast {1} {2} verloren!",
+    "value": "$username you failed and lost $points $currency!",
   	"label": "Lose Text",
-    "tooltip": "Text that will be posted after you lose",
-  	"group": "Boss4"
+    "tooltip": "Text that will be posted after you lose \r\n $username \r\n $points \r\n $currency",
+  	"group": "Fish4"
   },
   "B5Name": {
     "type": "textbox",
-    "value": "Saltyrohrtopus",
+    "value": "Pufferfish",
   	"label": "Name",
-    "tooltip": "Name from the Boss",
-  	"group": "Boss5"
+    "tooltip": "Name of the Fish",
+  	"group": "Fish5"
   },
   "B5WinChance": {
     "type": "numberbox",
     "value": 10,
   	"label": "Win Chance",
     "tooltip": "Chance to Win in %",
-  	"group": "Boss5"
+  	"group": "Fish5"
   },
   "B5Win": {
     "type": "numberbox",
     "value": 80,
   	"label": "Win Points",
     "tooltip": "Points that you gain for winning",
-  	"group": "Boss5"
+  	"group": "Fish5"
   },
   "B5Lose": {
     "type": "numberbox",
     "value": 15,
   	"label": "Lose Points",
     "tooltip": "Points that you lose for losing",
-  	"group": "Boss5"
+  	"group": "Fish5"
   },
   "B5StartText": {
     "type": "textbox",
-    "value": "{0} du trittst gegen [Gold] Saltyrohrtopus an. Viel Glück!",
+    "value": "$username you try to fish $targetname. Good luck!",
   	"label": "Start Text",
-    "tooltip": "Text that will be posted before the fight begins",
-  	"group": "Boss5"
+    "tooltip": "Text that will be posted before the fight begins \r\n $username \r\n $targetname",
+  	"group": "Fish5"
   },
   "B5WinText": {
     "type": "textbox",
-    "value": "{0} du hast {1} {2} gewonnen!",
+    "value": "$username you won $points $currency!",
   	"label": "Win Text",
-    "tooltip": "Text that will be posted after you win",
-  	"group": "Boss5"
+    "tooltip": "Text that will be posted after you win \r\n $username \r\n $points \r\n $currency",
+  	"group": "Fish5"
   },
   "B5LoseText": {
     "type": "textbox",
-    "value": "{0} du hast {1} {2} verloren!",
+    "value": "$username you failed and lost $points $currency!",
   	"label": "Lose Text",
-    "tooltip": "Text that will be posted after you lose",
-  	"group": "Boss5"
+    "tooltip": "Text that will be posted after you lose \r\n $username \r\n $points \r\n $currency",
+  	"group": "Fish5"
   },
     "BtnDefaults": {
     "type": "button",

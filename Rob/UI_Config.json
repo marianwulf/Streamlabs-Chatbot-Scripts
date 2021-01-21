@@ -60,9 +60,9 @@
   },
     "OnCooldown": {
     "type": "textbox",
-    "value": "{0} the command is still on cooldown for {1} seconds!",
+    "value": "$username the command is still on cooldown for $cooldown seconds!",
   	"label": "Cooldown Response",
-    "tooltip": "The message that the bot will display when the command is on cooldown. \r\n {0} = user \r\n {1} = time remaining",
+    "tooltip": "The message that the bot will display when the command is on cooldown. \r\n $username \r\n $cooldown",
   	"group": "Cooldown"
   },
     "UserCooldown": {
@@ -74,14 +74,14 @@
   },
     "OnUserCooldown": {
     "type": "textbox",
-    "value": "{0} the command is still on user cooldown for {1} seconds!",
+    "value": "$username the command is still on user cooldown for $cooldown seconds!",
   	"label": "User Cooldown Response",
-    "tooltip": "The message that the bot will display when the command is on user cooldown. \r\n {0} = user \r\n {1} = time remaining",
+    "tooltip": "The message that the bot will display when the command is on user cooldown. \r\n $username \r\n $cooldown",
   	"group": "Cooldown"
   },
-  "CasterCD": {
+  "CasterIgnoreCD": {
     "type": "checkbox",
-    "value": true,
+    "value": false,
   	"label": "Caster ignores cooldown",
     "tooltip": "Enable/Disable cooldown for caster",
   	"group": "Cooldown"
@@ -100,13 +100,6 @@
     "tooltip": "Max rob value",
   	"group": "Outcomes"
   },
-  "Protected": {
-    "type": "checkbox",
-    "value": false,
-  	"label": "Caster cannot lose",
-    "tooltip": "If enabled viewers can't rob from the broadcaster",
-  	"group": "Outcomes"
-  },
   "Blacklist": {
     "type": "textbox",
     "value": "Streamlabs,Saltyrohrtopus,Nightbot,Anotherttvviewer,Soundalerts,Bebiyoda",
@@ -116,9 +109,9 @@
   },
   "BlacklistResponse": {
     "type": "textbox",
-    "value": "{0} you can not rob {1}. User is blacklisted.",
+    "value": "$username you can not rob $targetname. User is blacklisted.",
   	"label": "Blacklist response",
-    "tooltip": "Message sent when the target is on blacklist \r\n {0} = user \r\n {1} = target",
+    "tooltip": "Message sent when the target is on blacklist \r\n $username \r\n $targetname",
   	"group": "Outcomes"
   },
   "Timeout": {
@@ -137,58 +130,58 @@
   },
     "WinResponse": {
     "type": "textbox",
-    "value": "{0} managed to rob {1} {2} from {3}",
+    "value": "$username managed to rob $points $currency from $targetname",
     "label": "Win response",
-    "tooltip": "Message sent when user wins \r\n {0} = user \r\n {1} = value won \r\n {2} = Currency name \r\n {3} = target",
+    "tooltip": "Message sent when user wins \r\n $username \r\n $points \r\n $currency \r\n $targetname",
     "group": "Responses"
   },
     "LoseResponse": {
     "type": "textbox",
-    "value": "{0} tried to rob some {1} from {2} but {0} got rekt and {2} managed to rob {3} {1} from {0} instead!",
+    "value": "$username tried to rob some $currency from $targetname but $username got rekt and $targetname managed to rob $points $currency from $username instead!",
     "label": "Lose response",
-    "tooltip": "Message sent when user fails to defuse the bomb \r\n {0} = user \r\n {1} = currencyname \r\n {2} = target \r\n {3} = amount of currency stolen",
+    "tooltip": "Message sent when user fails to defuse the bomb \r\n $username \r\n $currency \r\n $targetname \r\n $points",
     "group": "Responses"
   },
     "InfoResponse": {
     "type": "textbox",
-    "value": "{0} you have to chose a target to try to rob from",
+    "value": "$username you have to choose a target to try to rob from",
     "label": "Info response",
-    "tooltip": "Message sent when user doesn't choose a target. \r\n{0} = user",
+    "tooltip": "Message sent when user doesn't choose a target. \r\n $username",
     "group": "Responses"
   },
     "NotEnoughResponse": {
     "type": "textbox",
-    "value": "{0} you don't have enough {1} to attempt this! You will need atleast {2} {1}.",
+    "value": "$username you don't have enough $currency to attempt this! You will need atleast $points $currency.",
     "label": "Not enough currency response",
-    "tooltip": "Message sent when user doesn't have enough points \r\n {0} = user \r\n {1} = Currencyname \r\n {2} = min Amount",
+    "tooltip": "Message sent when user doesn't have enough points \r\n $username \r\n $currency \r\n $points",
     "group": "Responses"
   },
     "TargetNotEnoughResponse": {
     "type": "textbox",
-    "value": "{0} the target {1} has not enough {2} to attempt this!",
+    "value": "$username the target $targetname has not enough $currency to attempt this!",
     "label": "Target not enough currency response",
-    "tooltip": "Message sent when target doesn't have enough points \r\n {0} = user \r\n {1} = target \r\n {2} = Currencyname",
+    "tooltip": "Message sent when target doesn't have enough points \r\n $username \r\n $targetname \r\n $currency",
     "group": "Responses"
   },
   "PermissionResponse": {
     "type": "textbox",
-    "value": "{0} -> only {1} ({2}) and higher can use this command",
+    "value": "$username -> only $permission ($permissioninfo) and higher can use this command",
     "label": "Permission denied response",
-    "tooltip": "Message sent when user doesn't select any valid wire. \r\n{0} = user \r\n{1} = permission\r\n{2} = permission info",
+    "tooltip": "Message sent when user doesn't select any valid wire. \r\n $username \r\n $permission \r\n $permissioninfo",
     "group": "Responses"
   },
   "NotHereResponse": {
     "type": "textbox",
-    "value": "{0} you can only rob from users who are currently in the viewerlist!",
+    "value": "$username you can only rob from users who are currently in the viewerlist!",
     "label": "Bad target",
-    "tooltip": "Message sent when user doesn't select a user that's currently in the viewerlist. \r\n {0} = user",
+    "tooltip": "Message sent when user doesn't select a user that's currently in the viewerlist. \r\n $username",
     "group": "Responses"
   },
     "SelfRobResponse": {
     "type": "textbox",
-    "value": "{0} you can not rob yourself!",
+    "value": "$username you can not rob yourself!",
     "label": "Self target",
-    "tooltip": "Message sent when user wants to rob himself #facepalm. \r\n {0} = user",
+    "tooltip": "Message sent when user wants to rob himself #facepalm. \r\n $username",
     "group": "Responses"
   },
     "BtnDefaults": {

@@ -1,7 +1,7 @@
 # Fish Minigame
 
 Name: Fish Streamlabs Bot  
-Version: 1.0.1  
+Version: 1.1.0  
 Creator: [marianwulf](https://github.com/marianwulf)  
 Description: Singleplayer PVE - use customisable command to fish 1 of 5 defined fishes. If the random value is inside the defined win chance you can win points, otherwise you lose them. You can adjust all values and responses in the UI.
 
@@ -24,6 +24,10 @@ To trigger the bot use !fish in the chat.
 3. Disable and enable the script to reinitialise the modified values
 
 ## Changelog
+
+### V.1.1.0
+
+  - Modified code for better usability in the UI (if you are updating from V1.0.X you need to review your variables in the responses)
 
 ### V1.0.1
 
