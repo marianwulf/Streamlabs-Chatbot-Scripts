@@ -131,21 +131,22 @@ def Execute(data):
     # check if command is command
     if data.IsChatMessage() and data.GetParam(0).lower() == MySet.Command.lower():
 
-        # If command is not from valid source -> quit
+        # if command is not from valid source -> quit
         if not IsFromValidSource(data, MySet.Usage):
             return
 
-        # if client has no permission -> quit
+        # if user has no permission -> quit
         if not HasPermission(data):
             return
 
         # check on onlylive setting or if user is live
         if not MySet.OnlyLive or Parent.IsLive():
 
-            # quit on cooldown
+            # if command is on cooldown -> quit
             if IsOnCooldown(data):
                 return
 
+            # replace spaces from blacklist and put it into a list
             userblacklist = MySet.Blacklist.lower().replace(" ","").split(',')
                     
             # check if a game is active
