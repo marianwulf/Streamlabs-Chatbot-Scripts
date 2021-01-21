@@ -3,6 +3,7 @@
 Name: Hunt Streamlabs Bot  
 Version: 1.2.2  
 Creator: [marianwulf](https://github.com/marianwulf)  
+Description: Multiplayer PVE - use customisable command to fight against 1 of 5 defined bosses. Other players can join the hunt to increase customisable win chances and amounts. You can adjust all values and responses in the UI.
 
 
 ## Usage
