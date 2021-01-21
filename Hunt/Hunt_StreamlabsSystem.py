@@ -62,8 +62,8 @@ class Settings:
             self.Cooldown = 5
             self.OnCooldown = "$username the command is still on cooldown for $cooldown seconds!"
             self.UserCooldown = 10
-            self.CasterCD = True
             self.OnUserCooldown = "$username the command is still on user cooldown for $cooldown seconds!"
+            self.CasterIgnoreCD = True
             self.ActiveGameTime = 60
             self.ActiveGameResponse = "$username the hunt against $targetname is currently active. Type $joincommand in the next $remainingtime seconds to join the fight."
             self.NoActiveGameResponse = "$username there is no hunt currently active. Type $command to begin hunting."
@@ -417,7 +417,7 @@ def IsOnCooldown(data):
     """Return true if command is on cooldown and send cooldown message if enabled"""
     cooldown = Parent.IsOnCooldown(ScriptName, MySet.Command)
     userCooldown = Parent.IsOnUserCooldown(ScriptName, MySet.Command, data.User)
-    caster = (Parent.HasPermission(data.User, "Caster", "") and MySet.CasterCD)
+    caster = (Parent.HasPermission(data.User, "Caster", "") and MySet.CasterIgnoreCD)
 
     if (cooldown or userCooldown) and caster is False:
 
@@ -471,7 +471,7 @@ def IsFromValidSource(data, Usage):
 
 def AddCooldown(data):
     """add cooldowns"""
-    if Parent.HasPermission(data.User, "Caster", "") and MySet.CasterCD:
+    if Parent.HasPermission(data.User, "Caster", "") and MySet.CasterIgnoreCD:
         Parent.AddCooldown(ScriptName, MySet.Command, MySet.Cooldown)
         return
 
