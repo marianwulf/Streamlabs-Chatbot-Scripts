@@ -178,6 +178,10 @@ def Execute(data):
 
                 
             else:
+                
+                # check if user has more points than highest possible lost
+                if not HasEnoughPoints(data, MySet.Max):
+                    return
             
                 # enable bomb
                 MySet.ActiveGame = True
