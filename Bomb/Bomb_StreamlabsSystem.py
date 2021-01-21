@@ -239,6 +239,10 @@ def Tick():
         MySet.ActiveGame = False
         MySet.ActiveGameEnd = None
 
+        # get current points from the bomb holder and set the amount that will be lost
+        targetcurrentpoints = int(Parent.GetPoints(MySet.BombHolder.lower()))
+        randompoints = Parent.GetRandom(MySet.Min, MySet.Max + 1)
+
 #---------------------------------------
 # [Optional] Functions for usage handling
 #---------------------------------------
