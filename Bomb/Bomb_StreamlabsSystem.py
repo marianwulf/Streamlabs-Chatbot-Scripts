@@ -43,6 +43,8 @@ class Settings:
         # load variables that do not need to be customisable from the ui
         self.ActiveGame = False
         self.ActiveGameEnd = None
+        self.BombHolder = ""
+        self.LastBombHolder = ""
         self.Viewerlist = []
 
         if settingsFile and os.path.isfile(settingsFile):
