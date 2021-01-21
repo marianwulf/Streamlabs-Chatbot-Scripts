@@ -158,9 +158,9 @@
   },
   "JoinedFightResponse": {
     "type": "textbox",
-    "value": "$username you joined the hunt against $targetname! Attendees: $attendees - Win Chance: $winchance% - Total Win Points: $points - Win Points per User: $attendeepoints",
+    "value": "$username you joined the hunt against $targetname! Attendees: $attendees - Win Chance: $winchance% - Total Win Points: $points $currency - Win Points per User: $attendeepoints",
     "label": "Join Fight response",
-    "tooltip": "Message sent when user joins the fight \r\n $username \r\n $targetname \r\n $attendees \r\n $winchance \r\n $points \r\n $attendeepoints",
+    "tooltip": "Message sent when user joins the fight \r\n $username \r\n $targetname \r\n $attendees \r\n $winchance \r\n $points \r\n $currency \r\n $attendeepoints",
     "group": "Responses"
   },
   "AlreadyJoinedFight": {

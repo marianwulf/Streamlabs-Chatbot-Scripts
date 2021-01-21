@@ -68,7 +68,7 @@ class Settings:
             self.ActiveGameResponse = "$username the hunt against $targetname is currently active. Type $joincommand in the next $remainingtime seconds to join the fight."
             self.NoActiveGameResponse = "$username there is no hunt currently active. Type $command to begin hunting."
             self.MinAttendeesResponse = "$username not enough people joined the hunt, so it was aborted."
-            self.JoinedFightResponse = "$username you joined the hunt against $targetname! Attendees: $attendees - Win Chance: $winchance% - Total Win Points: $points - Win Points per User: $attendeepoints"
+            self.JoinedFightResponse = "$username you joined the hunt against $targetname! Attendees: $attendees - Win Chance: $winchance% - Total Win Points: $points $currency - Win Points per User: $attendeepoints"
             self.AlreadyJoinedFight = "$username you already joined the hunt!"
             self.NotEnoughResponse = "$username you don't have enough $currency to attempt this! You will need atleast $points $currency."
             self.PermissionResponse = "$username -> only $permission ($permissioninfo) and higher can use this command"
@@ -289,7 +289,7 @@ def Execute(data):
                        
                 # add user to game and notify
                 MySet.ActiveGameAttendees.append(data.User)
-                message = MySet.JoinedFightResponse.replace("$username", data.UserName).replace("$targetname", MySet.Boss[0]).replace("$attendees", str(len(MySet.ActiveGameAttendees))).replace("$winchance", str(MySet.Boss[1])).replace("$points", str(MySet.Boss[2])).replace("$attendeepoints", str(MySet.Boss[2]/len(MySet.ActiveGameAttendees)))
+                message = MySet.JoinedFightResponse.replace("$username", data.UserName).replace("$targetname", MySet.Boss[0]).replace("$attendees", str(len(MySet.ActiveGameAttendees))).replace("$winchance", str(MySet.Boss[1])).replace("$points", str(MySet.Boss[2])).replace("$currency", Parent.GetCurrencyName()).replace("$attendeepoints", str(MySet.Boss[2]/len(MySet.ActiveGameAttendees)))
                 SendResp(data, message)  
 
                 # update WinText message
