@@ -15,16 +15,17 @@ from array import *
 # [Required] Script information
 #---------------------------------------
 ScriptName = "Fish"
-Website = "https://www.twitch.tv/maroxtv"
+Website = "https://github.com/marianwulf"
 Creator = "Marox"
-Version = "1.0.1"
+Version = "1.1.0"
 Description = "Fish command"
 #---------------------------------------
 # Versions
 #---------------------------------------
-""" Releases (open README.txt for full release notes)
+""" Releases (open README.md for full release notes)
 1.0.0 - Initial Release
 1.0.1 - fixed cost
+1.1.0 - changed code for better usability in ui
 """
 #---------------------------------------
 # Variables
