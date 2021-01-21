@@ -40,8 +40,11 @@ class Settings:
     # The 'default' variable names need to match UI_Config
     def __init__(self, settingsFile=None):
 
+        # load variables that do not need to be customisable from the ui
         self.ActiveGame = False
         self.ActiveGameEnd = None
+        self.Viewerlist = []
+
         if settingsFile and os.path.isfile(settingsFile):
             with codecs.open(settingsFile, encoding='utf-8-sig', mode='r') as f:
                 self.__dict__ = json.load(f, encoding='utf-8-sig')
@@ -146,6 +149,10 @@ def Execute(data):
                 MySet.ActiveGame = True
                 MySet.ActiveGameEnd = time.time() + Parent.GetRandom((MySet.ActiveGameTime*0.8), (MySet.ActiveGameTime*1.2))
                 MySet.LastBombHolder = data.UserName
+                
+                # get viewerlist
+                MySet.Viewerlist = Parent.GetActiveUsers()
+
 
 
 def Tick():
