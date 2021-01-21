@@ -65,7 +65,6 @@ class Settings:
             self.SelfRobResponse = "$username you can not rob yourself!"
             self.Max = 20
             self.Min = 10
-            self.Protected = False
             self.Blacklist = ""
             self.BlacklistResponse = "$username you can not rob $targetname. User is blacklisted."
             self.Timeout = False
@@ -126,10 +125,6 @@ def Execute(data):
         if not IsFromValidSource(data, MySet.Usage):
             return
 
-        if not Parent.HasPermission(data.User, MySet.Permission, MySet.PermissionInfo):
-            message = MySet.PermissionResponse.format(data.User, MySet.Permission, MySet.PermissionInfo)
-            SendResp(data, message)
-
         if not HasPermission(data):
             return
 
@@ -146,14 +141,6 @@ def Execute(data):
                 SendResp(data,message)
                 return
             
-            if targetname == Parent.GetChannelName().lower and MySet.Protected:
-                value = Parent.GetRandom(MySet.Min, MySet.Max)
-                Parent.RemovePoints(data.User, data.UserName, value)
-                message = MySet.LoseResponse.format(data.UserName, Parent.GetCurrencyName(), value, data.GetParam(1))
-                SendResp(data, message)
-                AddCooldown(data)
-                return
-
             if data.GetParamCount() < 2:
                 message = MySet.InfoResponse.replace("$username", data.UserName)
                 SendResp(data, message)
@@ -210,10 +197,6 @@ def Execute(data):
                 SendResp(data, message)
                 AddCooldown(data)
                 return
-
-            else:
-                message = "Rob hat nen Bug :("
-                SendResp(data, message)
 
 def Tick():
     """Required tick function"""
