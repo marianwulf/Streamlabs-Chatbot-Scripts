@@ -1,7 +1,7 @@
 # Rob Minigame
 
 Name: Rob Streamlabs Bot  
-Version: 1.0.1  
+Version: 1.1.0  
 Creator: [marianwulf](https://github.com/marianwulf)  
 Description: Singleplayer PVP - use customisable command to rob another choosen target in the viewerlist. Classic 50 / 50 chance to gain or give some points. You can adjust all values and responses in the UI.
 
@@ -25,10 +25,14 @@ To trigger the bot use !rob in the chat.
 
 ## Changelog
 
+### V1.1.0
+
+  - Modified code for better usability in the UI (if you are updating from V1.0.X you need to review your variables in the responses)
+
 ### V1.0.1
 
   - Customisable user blacklist
-  - subtract costs after all checks
+  - Subtract costs after all checks
   - Customisable response messages
 
 ### V1.0.0

@@ -14,16 +14,17 @@ import ctypes
 # [Required] Script information
 #---------------------------------------
 ScriptName = "Rob"
-Website = "https://www.twitch.tv/maroxtv"
+Website = "https://github.com/marianwulf"
 Creator = "Marox"
-Version = "1.0.1"
+Version = "1.1.0"
 Description = "Rob command"
 #---------------------------------------
 # Versions
 #---------------------------------------
-""" Releases (open README.txt for full release notes)
+""" Releases (open README.md for full release notes)
 1.0.0 - Initial Release
 1.0.1 - added User Blacklist, fixed cost
+1.1.0 - changed code for better usability in ui
 """
 #---------------------------------------
 # Variables
