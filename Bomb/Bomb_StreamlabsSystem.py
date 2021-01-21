@@ -145,6 +145,11 @@ def Execute(data):
             # check if a game is active
             if MySet.ActiveGame:
                 
+                # if user is not the bomb holder send message
+                if data.UserName != MySet.BombHolder:
+                    message = MySet.ActiveGameButNotBombHolderResponse.replace("$username", data.UserName)
+                    SendResp(data, message)
+                    return
             else:
             
                 # enable bomb
