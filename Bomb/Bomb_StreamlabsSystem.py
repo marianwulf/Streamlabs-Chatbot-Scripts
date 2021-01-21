@@ -319,13 +319,13 @@ def IsOnCooldown(data):
             if cooldownDuration > userCDD:
                 m_CooldownRemaining = cooldownDuration
 
-                message = MySet.OnCooldown.replace("$username", data.UserName).replace("$cooldown", str(cooldownDuration))
+                message = MySet.OnCooldown.replace("$username", data.UserName).replace("$cooldown", str(m_CooldownRemaining))
                 SendResp(data, message)
 
             else:
                 m_CooldownRemaining = userCDD
 
-                message = MySet.OnUserCooldown.replace("$username", data.UserName).replace("$cooldown", str(cooldownDuration))
+                message = MySet.OnUserCooldown.replace("$username", data.UserName).replace("$cooldown", str(m_CooldownRemaining))
                 SendResp(data, message)
         return True
     return False
