@@ -1,0 +1,184 @@
+﻿{
+  "output_file": "settings.json",
+    "OnlyLive": {
+    "type": "checkbox",
+    "value": false,
+  	"label": "Only when live",
+    "tooltip": "Command is only active when stream is live",
+  	"group": "General"
+  },
+    "Command": {
+    "type": "textbox",
+    "value": "!bomb",
+  	"label": "Command Name",
+    "tooltip": "The command the bot will respond to",
+  	"group": "General"
+  },
+    "Permission": {
+    "type": "dropdown",
+    "value": "Everyone",
+    "items": ["Everyone","Regular","Subscriber","GameWisp Subscriber","User_Specific","Min_Rank","Min_Points","Min_Hours","Moderator","Editor","Caster"],
+    "label": "Permission level",
+    "tooltip": "Set the permission level for the command",
+    "group": "General"
+  },
+    "PermissionInfo": {
+    "type": "textbox",
+    "value": "",
+    "label": "Permission level info",
+    "tooltip": "Set the user, rank or tier for permission",
+    "group": "General"
+  },
+  "Usage": {
+    "type": "dropdown",
+    "value": "Stream Chat",
+    "items": ["Stream Chat","Stream Whisper","Stream Both","Discord Chat","Discord Whisper","Discord Both","Chat Both","Whisper Both","All"],
+    "label": "Usage",
+    "tooltip": "Usage for where the script can be used!",
+    "group": "General"
+  },
+  "Blacklist": {
+    "type": "textbox",
+    "value": "Streamlabs,Nightbot,Anotherttvviewer,Soundalerts,Bebiyoda,Commanderroot",
+  	"label": "Blacklisted User",
+    "tooltip": "List Users that can not take the bomb. Seperated with comma.",
+  	"group": "General"
+  },
+  "Min": {
+    "type": "numberbox",
+  	"label": "Min value",
+    "value": 10,
+    "tooltip": "Min value - a value in between will be taken",
+  	"group": "Outcomes"
+  },
+  "Max": {
+    "type": "numberbox",
+  	"label": "Max value",
+    "value": 20,
+    "tooltip": "Max value - a value in between will be taken",
+  	"group": "Outcomes"
+  },
+  "WinPointsPercentage": {
+    "type": "slider",
+    "label": "Win Points (in percent)",
+    "value": 100,
+    "min": 0,
+    "max": 100,
+    "ticks": 1,
+    "tooltip": "Determines the win points",
+    "group": "Outcomes"
+  },
+  "Timeout": {
+    "type": "checkbox",
+    "value": false,
+  	"label": "Timeout users who fail",
+    "tooltip": "If enabled viewers that are holding the bomb when it explodes will get timed out. Only available for Twitch ",
+  	"group": "Outcomes"
+  },
+  "TL": {
+    "type": "numberbox",
+  	"label": "Timeout length",
+    "value": 60,
+    "tooltip": "Length for the timeout",
+  	"group": "Outcomes"
+  },
+    "UseCD": {
+    "type": "checkbox",
+    "value": false,
+  	"label": "Use Cooldown Messages",
+    "tooltip": "Enable/Disable cooldown messages",
+  	"group": "Cooldown"
+  },
+  "ActiveGameTime": {
+    "type": "numberbox",
+  	"label": "Game time (seconds)",
+    "value": 120,
+    "tooltip": "Game time till the bomb explodes (in seconds). Will be randomed from 80% to 120%",
+  	"group": "Cooldown"
+  },
+    "Cooldown": {
+    "type": "numberbox",
+  	"label": "Cooldown (seconds)",
+    "value": 30,
+    "tooltip": "Cooldown in seconds.",
+  	"group": "Cooldown"
+  },
+    "OnCooldown": {
+    "type": "textbox",
+    "value": "$username the command is still on cooldown for $cooldown seconds!",
+  	"label": "Cooldown Response",
+    "tooltip": "The message that the bot will display when the command is on cooldown. \r\n $username \r\n $cooldown",
+  	"group": "Cooldown"
+  },
+  "CasterIgnoreCD": {
+    "type": "checkbox",
+    "value": false,
+  	"label": "Caster ignores cooldown",
+    "tooltip": "Enable/Disable cooldown for caster",
+  	"group": "Cooldown"
+  },
+    "NotEnoughResponse": {
+    "type": "textbox",
+    "value": "$username you don´t have enough $currency to attempt this! You will need atleast $points $currency.",
+    "label": "Not enough currency response",
+    "tooltip": "Message sent when user doesn't have enough points \r\n $username \r\n $currency \r\n $points",
+    "group": "Responses"
+  },
+  "PermissionResponse": {
+    "type": "textbox",
+    "value": "$username -> only $permission ($permissioninfo) and higher can use this command",
+    "label": "Permission denied response",
+    "tooltip": "Message sent when user doesn't select any valid wire. \r\n $username \r\n $permission \r\n $permissioninfo",
+    "group": "Responses"
+  },
+    "ActiveGameButNotBombHolderResponse": {
+    "type": "textbox",
+    "value": "$username the game is currently active but you are not the bomb owner",
+  	"label": "Active Game Response",
+    "tooltip": "The message that the bot will display when a game is active. \r\n $username",
+  	"group": "Responses"
+  },
+  "NoTargetFoundResponse": {
+    "type": "textbox",
+    "value": "$username unfortunately there is no valid target in the viewerlist :(",
+  	"label": "No Target Found Response",
+    "tooltip": "The message that the bot will display when no target is found. \r\n $username",
+  	"group": "Responses"
+  },
+  "StartResponse": {
+    "type": "textbox",
+    "value": "$username you started the bomb game and gave it to $targetname. Use $command to pass it to the next person!",
+  	"label": "Game Starting Response",
+    "tooltip": "The message that the bot will display when the game is starting. \r\n $username \r\n $targetname \r\n $command",
+  	"group": "Responses"
+  },
+  "PassResponse": {
+    "type": "textbox",
+    "value": "$username you gave the bomb to $targetname. Use $command to pass it to the next person!",
+  	"label": "Pass Bomb to another player Response",
+    "tooltip": "The message that the bot will display when a game is active. \r\n $username \r\n $targetname \r\n $command",
+  	"group": "Responses"
+  },
+  "TargetLostNotEnough": {
+    "type": "textbox",
+    "value": "The bomb exploded and $loser had only $pointslost $currency, so he lost everything. $winner was the last person to pass the bomb and won $pointswon $currency",
+  	"label": "Target Lost and had not enough points",
+    "tooltip": "The message that the bot will display when the loser had not enough points. \r\n $winner \r\n $loser \r\n $pointswon \r\n $pointslost \r\n $currency",
+  	"group": "Responses"
+  },
+  "TargetLost": {
+    "type": "textbox",
+    "value": "The bomb exploded and $loser had only $pointslost $currency, so he lost everything. $winner was the last person to pass the bomb and won $pointswon $currency",
+  	"label": "Target Lost",
+    "tooltip": "The message that the bot will display when the loser had not enough points. \r\n $winner \r\n $loser \r\n $pointswon \r\n $pointslost \r\n $currency",
+  	"group": "Responses"
+  },
+    "BtnDefaults": {
+    "type": "button",
+    "label": "Restore Default Settings",
+    "tooltip": "Reset settings back to defaults.\r\nReload Scripts afterwards to see the changes in the user interface!",
+    "function": "SetDefaults",
+    "wsevent": "",
+    "group": ""
+  }
+}
