@@ -365,7 +365,7 @@ def Tick():
             del MySet.ActiveGameAttendees[:]
             Parent.AddCooldown(ScriptName, MySet.Command, MySet.Cooldown)
             if MySet.Timeout:
-                Parent.SendStreamMessage("/timeout {0} {1}".format(data.User, MySet.TL))
+                Parent.SendStreamMessage("/timeout {0} {1}".format(MySet.BossStarterUserName.lower(), MySet.TL))
                 return
         else:
             message = "Hunt hat nen Bug :("
