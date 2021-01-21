@@ -151,10 +151,6 @@ def Execute(data):
         if not IsFromValidSource(data, MySet.Usage):
             return
 
-        if not Parent.HasPermission(data.User, MySet.Permission, MySet.PermissionInfo):
-            message = MySet.PermissionResponse.format(data.User, MySet.Permission, MySet.PermissionInfo)
-            SendResp(data, message)
-
         if not HasPermission(data):
             return
 
@@ -205,9 +201,6 @@ def Execute(data):
                 if MySet.Timeout:
                     Parent.SendStreamMessage("/timeout {0} {1}".format(data.User, MySet.TL))
                 return
-            else:
-                message = "Fish hat nen Bug :("
-                SendResp(data, message)
 
 def Tick():
     """Required tick function"""
