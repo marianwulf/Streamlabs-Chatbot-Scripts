@@ -136,16 +136,16 @@ def Execute(data):
             userblacklist = MySet.Blacklist.lower().replace(" ","").split(',')
             targetname = data.GetParam(1).lower().replace('@', '')
             
-            if targetname in userblacklist:
-                message = MySet.BlacklistResponse.format(data.UserName, data.GetParam(1))
-                SendResp(data,message)
-                return
-            
             if data.GetParamCount() < 2:
                 message = MySet.InfoResponse.replace("$username", data.UserName)
                 SendResp(data, message)
                 return
             
+            if targetname in userblacklist:
+                message = MySet.BlacklistResponse.replace("$username", data.UserName).replace("$targetname", data.GetParam(1))
+                SendResp(data,message)
+                return
+ 
             if targetname == data.User:
                 message = MySet.SelfRobResponse.replace("$username", data.UserName)
                 SendResp(data,message)
