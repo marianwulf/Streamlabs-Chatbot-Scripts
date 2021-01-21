@@ -60,6 +60,7 @@ class Settings:
             self.WinPointsPercentage = 100
             self.Timeout = False
             self.TL = 60
+            self.Blacklist = "Streamlabs,Nightbot,Anotherttvviewer,Soundalerts,Bebiyoda,Commanderroot"
             self.NotEnoughResponse = "$username you don´t have enough $currency to attempt this! You will need atleast $points $currency."
             self.PermissionResponse = "$username -> only $permission ($permissioninfo) and higher can use this command"
 
@@ -132,6 +133,7 @@ def Execute(data):
             if IsOnCooldown(data):
                 return
 
+            userblacklist = MySet.Blacklist.lower().replace(" ","").split(',')
             
 
 
