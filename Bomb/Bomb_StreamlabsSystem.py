@@ -165,6 +165,21 @@ def Execute(data):
                     return
                 # get random viewer from viewerlist
                 targetname = MySet.Viewerlist[Parent.GetRandom(0,len(MySet.Viewerlist))]
+                
+                # if target is the same person as the starting user or blacklisted try again. if no other target is found send message
+                tries = 0
+                while targetname.lower() == data.User or targetname.lower() in userblacklist:
+                    if tries >= 25:
+                        message = MySet.NoTargetFoundResponse.replace("$username", data.UserName)
+                        SendResp(data, message)
+                        MySet.ActiveGame = False
+                        MySet.ActiveGameEnd = None
+                        Parent.AddCooldown(ScriptName, MySet.Command, MySet.Cooldown)
+                        return
+                    targetname = MySet.Viewerlist[Parent.GetRandom(0,len(MySet.Viewerlist))]
+                    tries += 1
+
+                MySet.BombHolder = Parent.GetDisplayName(targetname)
 
 
 def Tick():
