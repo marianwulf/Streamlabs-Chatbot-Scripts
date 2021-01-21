@@ -163,6 +163,8 @@ def Execute(data):
                     MySet.ActiveGameEnd = None
                     Parent.AddCooldown(ScriptName, MySet.Command, MySet.Cooldown)
                     return
+                # get random viewer from viewerlist
+                targetname = MySet.Viewerlist[Parent.GetRandom(0,len(MySet.Viewerlist))]
 
 
 def Tick():
