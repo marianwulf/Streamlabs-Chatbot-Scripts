@@ -150,6 +150,9 @@ def Execute(data):
                 SendResp(data, message)
                 return
 
+            # check if user has more points than highest possible lost
+            if not HasEnoughPoints(data, MySet.Max):
+                return
 def Tick():
     """Required tick function"""
 
