@@ -59,9 +59,18 @@ class Settings:
             self.TL = 60
             self.Min = 10
             self.Max = 100
+            self.MultiplierTwoApart = 2
+            self.MultiplierTwoSidebySide = 4
+            self.MultiplierJackpot = 20
+            self.MultiplierEpicWin = 100
             self.Emotes = "Kappa,LUL,SeemsGood,DansGame,SeriousSloth,SMOrc"
             self.PremiumEmote = "GlitchLit"
             self.InfoResponse = "$username you have to set a value between $min and $max $currency that you want to bet."
+            self.LoseResponse = "$username you pulled the lever [ $slots ] and got nothing. You lost $points $currency!"
+            self.TwoApartResponse = "$username you pulled the lever [ $slots ] and got 2 same emotes! You won $points $currency!"
+            self.TwoSidebySideResponse = "$username you pulled the lever [ $slots ] and got 2 same emotes next to each other! You won $points $currency!"
+            self.JackpotResponse = "$username you pulled the lever [ $slots ] and got the Jackpot! You won $points $currency!"
+            self.EpicWinResponse = "$username you pulled the lever [ $slots ] and got the Epic Win! You won $points $currency!"
 
     # Reload settings on save through UI
     def ReloadSettings(self, data):
