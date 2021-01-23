@@ -12,5 +12,8 @@ Multiplayer PVE - use customisable command to fight against 1 of 5 defined bosse
 ## [Rob Minigame](https://github.com/marianwulf/Streamlabs-Chatbot-Scripts/tree/main/Rob)
 Singleplayer PVP - use customisable command to rob another choosen target in the viewerlist. Classic 50 / 50 chance to gain or give some points. You can adjust all values and responses in the UI.
 
+## [Slots Minigame](https://github.com/marianwulf/Streamlabs-Chatbot-Scripts/tree/main/Slots)
+Singleplayer PVE - use customisable command and bet amount to pull the lever. If you got the same 2 (side by side or apart), 3 or 3 premium emotes you win a multiplier of your bet. You can adjust all emotes, values and responses in the UI.
+
 ---
 > GitHub [@marianwulf](https://github.com/marianwulf)
