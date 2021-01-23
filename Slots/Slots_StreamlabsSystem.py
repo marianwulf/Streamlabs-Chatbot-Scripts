@@ -59,6 +59,8 @@ class Settings:
             self.TL = 60
             self.Min = 10
             self.Max = 100
+            self.Emotes = "Kappa,LUL,SeemsGood,DansGame,SeriousSloth,SMOrc"
+            self.PremiumEmote = "GlitchLit"
             self.InfoResponse = "$username you have to set a value between $min and $max $currency that you want to bet."
 
     # Reload settings on save through UI
@@ -153,6 +155,11 @@ def Execute(data):
             # check if user has more points than highest possible lost
             if not HasEnoughPoints(data, MySet.Max):
                 return
+
+            # replace spaces from emotes and put it into a list, afterwards add the premium emote to it
+            emotelist = MySet.Emotes.replace(" ","").split(",")
+            emotelist.append(MySet.PremiumEmote.replace(" ",""))
+
 def Tick():
     """Required tick function"""
 
