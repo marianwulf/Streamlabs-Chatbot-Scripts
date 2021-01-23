@@ -1,4 +1,4 @@
-# Fish Minigame
+# Slots Minigame
 
 Name: Slots Streamlabs Bot  
 Version: 1.0.0  
