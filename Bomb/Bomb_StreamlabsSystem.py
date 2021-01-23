@@ -195,8 +195,9 @@ def Execute(data):
                 MySet.ActiveGameEnd = time.time() + Parent.GetRandom((MySet.ActiveGameTime*0.8), (MySet.ActiveGameTime*1.2))
                 MySet.LastBombHolder = data.UserName
                 
-                # get viewerlist
+                # get active users from viewerlist and delete empty strings returned from chatbot
                 MySet.Viewerlist = Parent.GetActiveUsers()
+                MySet.Viewerlist = filter(None, MySet.Viewerlist)
 
                 # if there are less than 2 viewers reset game, add cooldown and send message
                 if len(MySet.Viewerlist) < 2:
