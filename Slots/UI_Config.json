@@ -1,0 +1,216 @@
+﻿{
+  "output_file": "settings.json",
+    "OnlyLive": {
+    "type": "checkbox",
+    "value": false,
+  	"label": "Only when live",
+    "tooltip": "Command is only active when stream is live",
+  	"group": "General"
+  },
+    "Command": {
+    "type": "textbox",
+    "value": "!slots",
+  	"label": "Command Name",
+    "tooltip": "The command the bot will respond to",
+  	"group": "General"
+  },
+  "Emotes": {
+    "type": "textbox",
+    "value": "Kappa,LUL,SeemsGood,DansGame,SeriousSloth,SMOrc",
+  	"label": "Emotes",
+    "tooltip": "The emotes that are used",
+  	"group": "General"
+  },
+  "PremiumEmote": {
+    "type": "textbox",
+    "value": "GlitchLit",
+  	"label": "Premium Emote",
+    "tooltip": "The premium emote for the Epic Win",
+  	"group": "General"
+  },
+    "Permission": {
+    "type": "dropdown",
+    "value": "Everyone",
+    "items": ["Everyone","Regular","Subscriber","GameWisp Subscriber","User_Specific","Min_Rank","Min_Points","Min_Hours","Moderator","Editor","Caster"],
+    "label": "Permission level",
+    "tooltip": "Set the permission level for the command",
+    "group": "General"
+  },
+    "PermissionInfo": {
+    "type": "textbox",
+    "value": "",
+    "label": "Permission level info",
+    "tooltip": "Set the user, rank or tier for permission",
+    "group": "General"
+  },
+  "Usage": {
+    "type": "dropdown",
+    "value": "Stream Chat",
+    "items": ["Stream Chat","Stream Whisper","Stream Both","Discord Chat","Discord Whisper","Discord Both","Chat Both","Whisper Both","All"],
+    "label": "Usage",
+    "tooltip": "Usage for where the script can be used!",
+    "group": "General"
+  },
+    "UseCD": {
+    "type": "checkbox",
+    "value": false,
+  	"label": "Use Cooldown Messages",
+    "tooltip": "Enable/Disable cooldown messages",
+  	"group": "Cooldown"
+  },
+    "Cooldown": {
+    "type": "numberbox",
+  	"label": "Cooldown (seconds)",
+    "value": 0,
+    "tooltip": "Cooldown in seconds.",
+  	"group": "Cooldown"
+  },
+    "OnCooldown": {
+    "type": "textbox",
+    "value": "$username the command is still on cooldown for $cooldown seconds!",
+  	"label": "Cooldown Response",
+    "tooltip": "The message that the bot will display when the command is on cooldown. \r\n $username \r\n $cooldown",
+  	"group": "Cooldown"
+  },
+    "UserCooldown": {
+    "type": "numberbox",
+  	"label": "User Cooldown (seconds)",
+    "value": 10,
+    "tooltip": "User cooldown in seconds.",
+  	"group": "Cooldown"
+  },
+    "OnUserCooldown": {
+    "type": "textbox",
+    "value": "$username the command is still on user cooldown for $cooldown seconds!",
+  	"label": "User Cooldown Response",
+    "tooltip": "The message that the bot will display when the command is on user cooldown. \r\n $username \r\n $cooldown",
+  	"group": "Cooldown"
+  },
+  "CasterIgnoreCD": {
+    "type": "checkbox",
+    "value": false,
+  	"label": "Caster ignores cooldown",
+    "tooltip": "Enable/Disable cooldown for caster",
+  	"group": "Cooldown"
+  },
+  "Min": {
+    "type": "numberbox",
+  	"label": "Min bet value",
+    "value": 10,
+    "tooltip": "Min bet value",
+  	"group": "Outcomes"
+  },
+  "Max": {
+    "type": "numberbox",
+  	"label": "Max bet value",
+    "value": 100,
+    "tooltip": "Max bet value",
+  	"group": "Outcomes"
+  },
+  "MultiplierTwoApart": {
+    "type": "numberbox",
+  	"label": "Multiplier 2 emotes apart",
+    "value": 2,
+    "tooltip": "Multiplier when 2 emotes are hit but are apart",
+  	"group": "Outcomes"
+  },
+  "MultiplierTwoSidebySide": {
+    "type": "numberbox",
+  	"label": "Multiplier 2 emotes side by side",
+    "value": 4,
+    "tooltip": "Multiplier when 2 emotes are hit and side by side",
+  	"group": "Outcomes"
+  },
+  "MultiplierJackpot": {
+    "type": "numberbox",
+  	"label": "Multiplier 3 emotes",
+    "value": 20,
+    "tooltip": "Multiplier when 3 emotes are hit",
+  	"group": "Outcomes"
+  },
+  "MultiplierEpicWin": {
+    "type": "numberbox",
+  	"label": "Multiplier 3 premium emotes",
+    "value": 100,
+    "tooltip": "Multiplier when 3 premium emotes are hit",
+  	"group": "Outcomes"
+  },
+  "Timeout": {
+    "type": "checkbox",
+    "value": false,
+  	"label": "Timeout users who fail",
+    "tooltip": "If enabled viewers that fail will get timed out. Only available for Twitch ",
+  	"group": "Outcomes"
+  },
+  "TL": {
+    "type": "numberbox",
+  	"label": "Timeout length",
+    "value": 60,
+    "tooltip": "Length for the timeout if users fail",
+  	"group": "Outcomes"
+  },
+  "InfoResponse": {
+    "type": "textbox",
+    "value": "$username you have to set a value between $min and $max $currency that you want to bet.",
+    "label": "Info response",
+    "tooltip": "Message sent when user doesn't choose a target. \r\n $username \r\n $min \r\n $max \r\n $currency",
+    "group": "Responses"
+  },  
+  "TwoApartResponse": {
+    "type": "textbox",
+    "value": "$username you pulled the lever [ $slots ] and got 2 same emotes! You won $points $currency!",
+    "label": "Two Apart Response",
+    "tooltip": "Message sent when user hits 2 same emotes that are apart \r\n $username \r\n $slots \r\n $points \r\n $currency",
+    "group": "Responses"
+  },
+  "TwoSidebySideResponse": {
+    "type": "textbox",
+    "value": "$username you pulled the lever [ $slots ] and got 2 same emotes next to each other! You won $points $currency!",
+    "label": "Two Side by Side response",
+    "tooltip": "Message sent when user hits 2 same emotes that are next to each other \r\n $username \r\n $slots \r\n $points \r\n $currency",
+    "group": "Responses"
+  },
+  "JackpotResponse": {
+    "type": "textbox",
+    "value": "$username you pulled the lever [ $slots ] and got the Jackpot! You won $points $currency!",
+    "label": "Jackpot response",
+    "tooltip": "Message sent when user hits 3 same emotes \r\n $username \r\n $slots \r\n $points \r\n $currency",
+    "group": "Responses"
+  },
+  "EpicWinResponse": {
+    "type": "textbox",
+    "value": "$username you pulled the lever [ $slots ] and got the Epic Win! You won $points $currency!",
+    "label": "Epic Win response",
+    "tooltip": "Message sent when user hits 3 same premium emotes \r\n $username \r\n $slots \r\n $points \r\n $currency",
+    "group": "Responses"
+  },
+    "LoseResponse": {
+    "type": "textbox",
+    "value": "$username you pulled the lever [ $slots ] and got nothing. You lost $points $currency!",
+    "label": "Lose response",
+    "tooltip": "Message sent when user doesn't hit min. 2 same emotes \r\n $username \r\n $slots \r\n $points \r\n $currency",
+    "group": "Responses"
+  },
+    "NotEnoughResponse": {
+    "type": "textbox",
+    "value": "$username you don't have enough $currency to attempt this! You will need atleast $points $currency.",
+    "label": "Not enough currency response",
+    "tooltip": "Message sent when user doesn't have enough points \r\n $username \r\n $currency \r\n $points",
+    "group": "Responses"
+  },
+  "PermissionResponse": {
+    "type": "textbox",
+    "value": "$username -> only $permission ($permissioninfo) and higher can use this command",
+    "label": "Permission denied response",
+    "tooltip": "Message sent when user doesn't select any valid wire. \r\n $username \r\n $permission \r\n $permissioninfo",
+    "group": "Responses"
+  },
+    "BtnDefaults": {
+    "type": "button",
+    "label": "Restore Default Settings",
+    "tooltip": "Reset settings back to defaults.\r\nReload Scripts afterwards to see the changes in the user interface!",
+    "function": "SetDefaults",
+    "wsevent": "",
+    "group": ""
+  }
+}
