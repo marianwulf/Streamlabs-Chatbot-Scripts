@@ -181,6 +181,40 @@ def Execute(data):
             # define output string for response message
             slotsString = slot1 + " " + slot2 + " " + slot3
 
+            # count the slots, send win or lose responses and add points to player
+            if slots.count(slot1) == 3:
+                if slot1 == MySet.PremiumEmote:
+                    message = MySet.EpicWinResponse.replace("$username", data.UserName).replace("$slots", slotsString).replace("$points", str(bet*MySet.MultiplierEpicWin)).replace("$currency", Parent.GetCurrencyName())
+                    SendResp(data, message)
+                    Parent.AddPoints(data.User, data.User, bet*MySet.MultiplierEpicWin)
+                    AddCooldown(data)
+                    return
+                else:
+                    message = MySet.JackpotResponse.replace("$username", data.UserName).replace("$slots", slotsString).replace("$points", str(bet*MySet.MultiplierJackpot)).replace("$currency", Parent.GetCurrencyName())
+                    SendResp(data, message)
+                    Parent.AddPoints(data.User, data.User, bet*MySet.MultiplierJackpot)
+                    AddCooldown(data)
+                    return
+            elif (slot1 == slot2 or slot2 == slot3):
+                message = MySet.TwoSidebySideResponse.replace("$username", data.UserName).replace("$slots", slotsString).replace("$points", str(bet*MySet.MultiplierTwoSidebySide)).replace("$currency", Parent.GetCurrencyName())
+                SendResp(data, message)
+                Parent.AddPoints(data.User, data.User, bet*MySet.MultiplierTwoSidebySide)
+                AddCooldown(data)
+                return
+            elif (slot1 == slot3):
+                message = MySet.TwoApartResponse.replace("$username", data.UserName).replace("$slots", slotsString).replace("$points", str(bet*MySet.MultiplierTwoApart)).replace("$currency", Parent.GetCurrencyName())
+                SendResp(data, message)
+                Parent.AddPoints(data.User, data.User, bet*MySet.MultiplierTwoApart)
+                AddCooldown(data)
+                return
+            else:
+                message = MySet.LoseResponse.replace("$username", data.UserName).replace("$slots", slotsString).replace("$points", str(bet)).replace("$currency", Parent.GetCurrencyName())
+                SendResp(data, message)
+                AddCooldown(data)
+                if MySet.Timeout:
+                    Parent.SendStreamMessage("/timeout {0} {1}".format(data.User, MySet.TL))
+                return        
+
 def Tick():
     """Required tick function"""
 
