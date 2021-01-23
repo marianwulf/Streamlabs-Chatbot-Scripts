@@ -60,13 +60,15 @@ class Settings:
             self.TL = 60
             self.Min = 10
             self.Max = 100
+            self.AcceptAllin = True
             self.MultiplierTwoApart = 2
             self.MultiplierTwoSidebySide = 4
             self.MultiplierJackpot = 20
             self.MultiplierEpicWin = 100
             self.Emotes = "Kappa,LUL,SeemsGood,DansGame,SeriousSloth,SMOrc"
             self.PremiumEmote = "GlitchLit"
-            self.InfoResponse = "$username you have to set a value between $min and $max $currency that you want to bet."
+            self.InfoResponse = "$username you have to set a value between $min and $max $currency that you want to bet. Or you dare to just go all in ;)"
+            self.AllinResponse = "$username you went all in with a value of $points $currency. Good Luck!"
             self.LoseResponse = "$username you pulled the lever [ $slots ] and got nothing. You lost $points $currency!"
             self.TwoApartResponse = "$username you pulled the lever [ $slots ] and got 2 same emotes! You won $points $currency!"
             self.TwoSidebySideResponse = "$username you pulled the lever [ $slots ] and got 2 same emotes next to each other! You won $points $currency!"
@@ -148,23 +150,38 @@ def Execute(data):
                 SendResp(data, message)
                 return
             
-            # if bet is not int send info response
-            try:
-                bet = int(data.GetParam(1))
-            except:
-                message = MySet.InfoResponse.replace("$username", data.UserName).replace("$min", str(MySet.Min)).replace("$max", str(MySet.Max)).replace("$currency", Parent.GetCurrencyName())
-                SendResp(data, message)
-                return
             
-            # if bet is not between min and max send info response
-            if not MySet.Min <= bet <= MySet.Max:
-                message = MySet.InfoResponse.replace("$username", data.UserName).replace("$min", str(MySet.Min)).replace("$max", str(MySet.Max)).replace("$currency", Parent.GetCurrencyName())
-                SendResp(data, message)
-                return
+            # if parameter is 'allin' bet all the points otherwise bet the value
+            if data.GetParam(1).lower() == "allin" and MySet.AcceptAllin:
+               
+                bet = Parent.GetPoints(data.User)
+                if bet < 1:
+                    message = MySet.NotEnoughResponse.replace("$username", data.UserName).replace("$currency", Parent.GetCurrencyName()).replace("$points", str(1))
+                    SendResp(data, message)
+                    return
+                else:
+                    message = MySet.AllinResponse.replace("$username", data.UserName).replace("$points", str(bet)).replace("$currency", Parent.GetCurrencyName())
+                    SendResp(data, message)
+           
+            else:            
+                
+                # if bet is not int send info response
+                try:
+                    bet = int(data.GetParam(1))
+                except:
+                    message = MySet.InfoResponse.replace("$username", data.UserName).replace("$min", str(MySet.Min)).replace("$max", str(MySet.Max)).replace("$currency", Parent.GetCurrencyName())
+                    SendResp(data, message)
+                    return
+            
+                # if bet is not between min and max send info response
+                if not MySet.Min <= bet <= MySet.Max:
+                    message = MySet.InfoResponse.replace("$username", data.UserName).replace("$min", str(MySet.Min)).replace("$max", str(MySet.Max)).replace("$currency", Parent.GetCurrencyName())
+                    SendResp(data, message)
+                    return
 
-            # check if user has more points than highest possible lost
-            if not HasEnoughPoints(data, MySet.Max):
-                return
+                # check if user has more points than his bet
+                if not HasEnoughPoints(data, bet):
+                    return
 
             # replace spaces from emotes and put it into a list, afterwards add the premium emote to it
             emotelist = MySet.Emotes.replace(" ","").split(",")

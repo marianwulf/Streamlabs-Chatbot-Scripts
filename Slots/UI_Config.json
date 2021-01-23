@@ -107,6 +107,13 @@
     "tooltip": "Max bet value",
   	"group": "Outcomes"
   },
+  "AcceptAllin": {
+    "type": "checkbox",
+    "value": true,
+  	"label": "Accept all in",
+    "tooltip": "Enable/Disable that the user can bet all points",
+  	"group": "Outcomes"
+  },
   "MultiplierTwoApart": {
     "type": "numberbox",
   	"label": "Multiplier 2 emotes apart",
@@ -151,9 +158,16 @@
   },
   "InfoResponse": {
     "type": "textbox",
-    "value": "$username you have to set a value between $min and $max $currency that you want to bet.",
+    "value": "$username you have to set a value between $min and $max $currency that you want to bet. Or you dare to just go all in ;)",
     "label": "Info response",
     "tooltip": "Message sent when the user doesn't set an amount to bet. \r\n $username \r\n $min \r\n $max \r\n $currency",
+    "group": "Responses"
+  },
+  "AllinResponse": {
+    "type": "textbox",
+    "value": "$username you went all in with a value of $points $currency. Good Luck!",
+    "label": "All in response",
+    "tooltip": "Message sent when the user goes all in. \r\n $username \r\n $points \r\n $currency",
     "group": "Responses"
   },  
   "TwoApartResponse": {
