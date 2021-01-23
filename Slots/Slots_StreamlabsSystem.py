@@ -163,6 +163,15 @@ def Execute(data):
             # subtract usage costs
             Parent.RemovePoints(data.User, data.User, bet)
 
+            # pull the lever
+            slot1 = emotelist[Parent.GetRandom(0, len(emotelist))]
+            slot2 = emotelist[Parent.GetRandom(0, len(emotelist))]
+            slot3 = emotelist[Parent.GetRandom(0, len(emotelist))]
+            slots = [slot1, slot2, slot3]
+
+            # define output string for response message
+            slotsString = slot1 + " " + slot2 + " " + slot3
+
 def Tick():
     """Required tick function"""
 
