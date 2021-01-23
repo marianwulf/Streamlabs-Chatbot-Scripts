@@ -59,6 +59,7 @@ class Settings:
             self.TL = 60
             self.Min = 10
             self.Max = 100
+            self.InfoResponse = "$username you have to set a value between $min and $max $currency that you want to bet."
 
     # Reload settings on save through UI
     def ReloadSettings(self, data):
@@ -129,6 +130,12 @@ def Execute(data):
             if IsOnCooldown(data):
                 return
 
+            # if no value was set send info response
+            if data.GetParamCount() < 2:
+                message = MySet.InfoResponse.replace("$username", data.UserName).replace("$min", str(MySet.Min)).replace("$max", str(MySet.Max)).replace("$currency", Parent.GetCurrencyName())
+                SendResp(data, message)
+                return
+            
 def Tick():
     """Required tick function"""
 
