@@ -136,6 +136,20 @@ def Execute(data):
                 SendResp(data, message)
                 return
             
+            # if bet is not int send info response
+            try:
+                bet = int(data.GetParam(1))
+            except:
+                message = MySet.InfoResponse.replace("$username", data.UserName).replace("$min", str(MySet.Min)).replace("$max", str(MySet.Max)).replace("$currency", Parent.GetCurrencyName())
+                SendResp(data, message)
+                return
+            
+            # if bet is not between min and max send info response
+            if not MySet.Min <= bet <= MySet.Max:
+                message = MySet.InfoResponse.replace("$username", data.UserName).replace("$min", str(MySet.Min)).replace("$max", str(MySet.Max)).replace("$currency", Parent.GetCurrencyName())
+                SendResp(data, message)
+                return
+
 def Tick():
     """Required tick function"""
 
