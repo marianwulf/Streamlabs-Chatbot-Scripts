@@ -18,13 +18,14 @@ from array import *
 ScriptName = "Bomb"
 Website = "https://github.com/marianwulf"
 Creator = "Marox"
-Version = "1.0.0"
+Version = "1.0.1"
 Description = "Bomb command"
 #---------------------------------------
 # Versions
 #---------------------------------------
 """ Releases (open README.md for full release notes)
 1.0.0 - Initial Release
+1.0.1 - fixed empty targetnames in active users viewerlist
 """
 #---------------------------------------
 # Variables
