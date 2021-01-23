@@ -160,6 +160,9 @@ def Execute(data):
             emotelist = MySet.Emotes.replace(" ","").split(",")
             emotelist.append(MySet.PremiumEmote.replace(" ",""))
 
+            # subtract usage costs
+            Parent.RemovePoints(data.User, data.User, bet)
+
 def Tick():
     """Required tick function"""
 
