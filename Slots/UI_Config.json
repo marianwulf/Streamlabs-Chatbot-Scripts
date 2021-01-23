@@ -153,56 +153,56 @@
     "type": "textbox",
     "value": "$username you have to set a value between $min and $max $currency that you want to bet.",
     "label": "Info response",
-    "tooltip": "Message sent when user doesn't choose a target. \r\n $username \r\n $min \r\n $max \r\n $currency",
+    "tooltip": "Message sent when the user doesn't set an amount to bet. \r\n $username \r\n $min \r\n $max \r\n $currency",
     "group": "Responses"
   },  
   "TwoApartResponse": {
     "type": "textbox",
     "value": "$username you pulled the lever [ $slots ] and got 2 same emotes! You won $points $currency!",
     "label": "Two Apart Response",
-    "tooltip": "Message sent when user hits 2 same emotes that are apart \r\n $username \r\n $slots \r\n $points \r\n $currency",
+    "tooltip": "Message sent when the user hits 2 same emotes that are apart \r\n $username \r\n $slots \r\n $points \r\n $currency",
     "group": "Responses"
   },
   "TwoSidebySideResponse": {
     "type": "textbox",
     "value": "$username you pulled the lever [ $slots ] and got 2 same emotes next to each other! You won $points $currency!",
     "label": "Two Side by Side response",
-    "tooltip": "Message sent when user hits 2 same emotes that are next to each other \r\n $username \r\n $slots \r\n $points \r\n $currency",
+    "tooltip": "Message sent when the user hits 2 same emotes that are next to each other \r\n $username \r\n $slots \r\n $points \r\n $currency",
     "group": "Responses"
   },
   "JackpotResponse": {
     "type": "textbox",
     "value": "$username you pulled the lever [ $slots ] and got the Jackpot! You won $points $currency!",
     "label": "Jackpot response",
-    "tooltip": "Message sent when user hits 3 same emotes \r\n $username \r\n $slots \r\n $points \r\n $currency",
+    "tooltip": "Message sent when the user hits 3 same emotes \r\n $username \r\n $slots \r\n $points \r\n $currency",
     "group": "Responses"
   },
   "EpicWinResponse": {
     "type": "textbox",
     "value": "$username you pulled the lever [ $slots ] and got the Epic Win! You won $points $currency!",
     "label": "Epic Win response",
-    "tooltip": "Message sent when user hits 3 same premium emotes \r\n $username \r\n $slots \r\n $points \r\n $currency",
+    "tooltip": "Message sent when the user hits 3 same premium emotes \r\n $username \r\n $slots \r\n $points \r\n $currency",
     "group": "Responses"
   },
     "LoseResponse": {
     "type": "textbox",
     "value": "$username you pulled the lever [ $slots ] and got nothing. You lost $points $currency!",
     "label": "Lose response",
-    "tooltip": "Message sent when user doesn't hit min. 2 same emotes \r\n $username \r\n $slots \r\n $points \r\n $currency",
+    "tooltip": "Message sent when the user doesn't hit min. 2 same emotes \r\n $username \r\n $slots \r\n $points \r\n $currency",
     "group": "Responses"
   },
     "NotEnoughResponse": {
     "type": "textbox",
     "value": "$username you don't have enough $currency to attempt this! You will need atleast $points $currency.",
     "label": "Not enough currency response",
-    "tooltip": "Message sent when user doesn't have enough points \r\n $username \r\n $currency \r\n $points",
+    "tooltip": "Message sent when the user doesn't have enough points \r\n $username \r\n $currency \r\n $points",
     "group": "Responses"
   },
   "PermissionResponse": {
     "type": "textbox",
     "value": "$username -> only $permission ($permissioninfo) and higher can use this command",
     "label": "Permission denied response",
-    "tooltip": "Message sent when user doesn't select any valid wire. \r\n $username \r\n $permission \r\n $permissioninfo",
+    "tooltip": "Message sent when the user doesn't select any valid wire. \r\n $username \r\n $permission \r\n $permissioninfo",
     "group": "Responses"
   },
     "BtnDefaults": {
