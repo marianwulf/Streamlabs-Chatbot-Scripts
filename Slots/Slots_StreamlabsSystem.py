@@ -17,13 +17,14 @@ from array import *
 ScriptName = "Slots"
 Website = "https://github.com/marianwulf"
 Creator = "Marox"
-Version = "1.0.0"
+Version = "1.0.1"
 Description = "Slots command"
 #---------------------------------------
 # Versions
 #---------------------------------------
 """ Releases (open README.md for full release notes)
 1.0.0 - Initial Release
+1.0.1 - added allin
 """
 #---------------------------------------
 # Variables
