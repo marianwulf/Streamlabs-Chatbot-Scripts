@@ -8,7 +8,7 @@ Description: Singleplayer PVP - use customisable command to rob another choosen 
 
 ## Usage
 
-To trigger the bot use !rob in the chat.
+To trigger the bot use !rob targetname in the chat.
 
 ## Installation
 
