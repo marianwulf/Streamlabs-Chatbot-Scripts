@@ -78,7 +78,7 @@ class Settings:
         self.LastBombHolder = ""
         self.Viewerlist = []
         # replace spaces from blacklist and put it into a list
-        self.UserBlacklist = MySet.Blacklist.lower().replace(" ","").split(',')
+        self.UserBlacklist = self.Blacklist.lower().replace(" ","").split(',')
 
     # Reload settings on save through UI
     def ReloadSettings(self, data):
