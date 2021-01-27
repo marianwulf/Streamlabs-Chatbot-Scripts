@@ -77,6 +77,8 @@ class Settings:
         self.BombHolder = ""
         self.LastBombHolder = ""
         self.Viewerlist = []
+        # replace spaces from blacklist and put it into a list
+        self.UserBlacklist = MySet.Blacklist.lower().replace(" ","").split(',')
 
     # Reload settings on save through UI
     def ReloadSettings(self, data):
@@ -146,9 +148,6 @@ def Execute(data):
             # if command is on cooldown -> quit
             if IsOnCooldown(data):
                 return
-
-            # replace spaces from blacklist and put it into a list
-            userblacklist = MySet.Blacklist.lower().replace(" ","").split(',')
                     
             # check if a game is active
             if MySet.ActiveGame:
@@ -164,7 +163,7 @@ def Execute(data):
                 
                 # if target is the same person as the bomb holder or blacklisted try again. if no other target is found send message
                 tries = 0
-                while targetname.lower() == MySet.BombHolder.lower() or targetname.lower() in userblacklist:
+                while targetname.lower() == MySet.BombHolder.lower() or targetname.lower() in MySet.UserBlacklist:
                     if tries >= 25:
                         message = MySet.NoTargetFoundResponse.replace("$username", data.UserName)
                         SendResp(data, message)
@@ -213,7 +212,7 @@ def Execute(data):
                 
                 # if target is the same person as the starting user or blacklisted try again. if no other target is found send message
                 tries = 0
-                while targetname.lower() == data.User or targetname.lower() in userblacklist:
+                while targetname.lower() == data.User or targetname.lower() in MySet.UserBlacklist:
                     if tries >= 25:
                         message = MySet.NoTargetFoundResponse.replace("$username", data.UserName)
                         SendResp(data, message)
