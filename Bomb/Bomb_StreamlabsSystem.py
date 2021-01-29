@@ -145,10 +145,6 @@ def Execute(data):
         if not IsFromValidSource(data, MySet.Usage):
             return
 
-        # if user has no permission -> quit
-        if not HasPermission(data):
-            return
-
         # check on onlylive setting or if user is live
         if not MySet.OnlyLive or Parent.IsLive():
 
@@ -198,6 +194,10 @@ def Execute(data):
 
                 
             else:
+                
+                # if user has no permission -> quit
+                if not HasPermission(data):
+                    return
                 
                 # check if user has more points than highest possible lost
                 if not HasEnoughPoints(data, MySet.Max):
