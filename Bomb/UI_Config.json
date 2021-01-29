@@ -44,6 +44,34 @@
     "tooltip": "List Users that can not take the bomb. Seperated with comma.",
   	"group": "General"
   },
+  "RandomPassCommands": {
+    "type": "checkbox",
+    "value": false,
+  	"label": "Use randomized pass commands",
+    "tooltip": "Enable randomized pass commands from the given list to prevent copy paste of the players",
+  	"group": "Random Pass Commands"
+  },
+  "PassCommandsList": {
+    "type": "textbox",
+    "value": "!gift,!donotcopypasteme,!bomb123",
+  	"label": "Commands to pass the bomb",
+    "tooltip": "The commands to pass the bomb seperated by comma. Must be min. 2 commands and it will choose one of it random each time.",
+  	"group": "Random Pass Commands"
+  },
+  "EnableWrongCommandResponse": {
+    "type": "checkbox",
+    "value": false,
+  	"label": "Enable wrong command response",
+    "tooltip": "Enable the response if the player enter one of the given commands but not the right command",
+  	"group": "Random Pass Commands"
+  },
+  "ActiveGameButWrongCommand": {
+    "type": "textbox",
+    "value": "$username the game is currently active but you used the wrong random command ($command) to pass it!",
+  	"label": "Wrong command response",
+    "tooltip": "The message that the bot will display when the wrong command is entered while the game is active. \r\n $username \r\n $command",
+  	"group": "Random Pass Commands"
+  },
   "Min": {
     "type": "numberbox",
   	"label": "Min value",
