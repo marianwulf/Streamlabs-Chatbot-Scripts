@@ -1,7 +1,7 @@
 # Bomb Minigame
 
 Name: Bomb Streamlabs Bot  
-Version: 1.0.1 
+Version: 1.0.2 
 Creator: [marianwulf](https://github.com/marianwulf)  
 Description: Multiplayer PVP - use customisable command to pass the bomb to another random target in the viewerlist. If it explodes the bomb holder will lose the defined value and the last holder will get an customisable amount of it. You can adjust all values and responses in the UI.
 
@@ -25,9 +25,17 @@ To trigger the bot use !bomb in the chat.
 
 ## Changelog
 
+### V1.0.2
+
+  New Feature: added randomized pass commands
+  - Enable/Disable the randomized pass commands
+  - Enable/Disable the wrong command response
+  - Customisable pass commands
+  - Customisable response messages
+
 ### V1.0.1
 
-  - Bugfix: Chatbot sometimes returns empty targetnames as active users, now they will be purged from the viewerlist.
+  Bugfix: Chatbot sometimes returns empty targetnames as active users, now they will be purged from the viewerlist.
 
 ### V1.0.0
 
