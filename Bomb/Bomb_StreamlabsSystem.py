@@ -71,6 +71,7 @@ class Settings:
             self.TargetLostNotEnough = "The bomb exploded and $loser had only $pointslost $currency, so he lost everything. $winner was the last person to pass the bomb and won $pointswon $currency"
             self.TargetLost = "The bomb exploded and $loser lost $pointslost $currency. $winner was the last person to pass the bomb and won $pointswon $currency"
             self.ActiveGameButNotBombHolderResponse = "$username the game is currently active but you are not the bomb owner"
+            self.ActiveGameButWrongCommand = "$username the game is currently active but you used the wrong random command ($command) to pass it!"
             self.NotEnoughResponse = "$username you don´t have enough $currency to attempt this! You will need atleast $points $currency."
             self.PermissionResponse = "$username -> only $permission ($permissioninfo) and higher can use this command"
             
@@ -137,6 +138,19 @@ def Init():
 
 def Execute(data):
     """Required Execute data function"""
+
+    # if RandomPassCommands and EnableWrongCommandReponse is enabled check if a game is active and wrong command is entered
+    if MySet.RandomPassCommands and MySet.EnableWrongCommandResponse:
+        if (data.IsChatMessage() and MySet.ActiveGame) and (data.GetParam(0).lower() != MySet.ActiveCommand.lower() and (data.GetParam(0).lower() in MySet.ActiveCommandList or data.GetParam(0).lower() == MySet.Command)): 
+            # if user is not the bomb holder send message otherwise send the wrong command response
+            if data.UserName != MySet.BombHolder:
+                message = MySet.ActiveGameButNotBombHolderResponse.replace("$username", data.UserName)
+                SendResp(data, message)
+                return
+            else:
+                message = MySet.ActiveGameButWrongCommand.replace("$username", data.UserName).replace("$command", MySet.ActiveCommand)
+                SendResp(data, message)
+                return
 
     # check if command is command
     if data.IsChatMessage() and data.GetParam(0).lower() == MySet.ActiveCommand.lower():
