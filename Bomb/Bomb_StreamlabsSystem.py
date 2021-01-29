@@ -51,6 +51,9 @@ class Settings:
             self.Permission = "Everyone"
             self.PermissionInfo = ""
             self.Usage = "Stream Chat"
+            self.RandomPassCommands = False
+            self.EnableWrongCommandResponse = False
+            self.PassCommandsList = "!gift,!donotcopypasteme,!bomb123"
             self.UseCD = True
             self.Cooldown = 30
             self.OnCooldown = "$username the command is still on cooldown for $cooldown seconds!"
@@ -79,6 +82,10 @@ class Settings:
         self.Viewerlist = []
         # replace spaces from blacklist and put it into a list
         self.UserBlacklist = self.Blacklist.lower().replace(" ","").split(',')
+        # if RandomPassCommands is enabled put commands into a list
+        if self.RandomPassCommands == True:
+            self.ActiveCommandList = self.PassCommandsList.lower().replace(" ","").split(',')
+        self.ActiveCommand = self.Command
 
     # Reload settings on save through UI
     def ReloadSettings(self, data):
@@ -132,7 +139,7 @@ def Execute(data):
     """Required Execute data function"""
 
     # check if command is command
-    if data.IsChatMessage() and data.GetParam(0).lower() == MySet.Command.lower():
+    if data.IsChatMessage() and data.GetParam(0).lower() == MySet.ActiveCommand.lower():
 
         # if command is not from valid source -> quit
         if not IsFromValidSource(data, MySet.Usage):
@@ -179,8 +186,14 @@ def Execute(data):
                 MySet.LastBombHolder = MySet.BombHolder
                 MySet.BombHolder = Parent.GetDisplayName(targetname)
 
+                # if RandomPassCommands is enabled get new random command
+                if MySet.RandomPassCommands == True:
+                    LastActiveCommand = MySet.ActiveCommand
+                    while LastActiveCommand == MySet.ActiveCommand:
+                        MySet.ActiveCommand = MySet.ActiveCommandList[Parent.GetRandom(0,len(MySet.ActiveCommandList))]
+
                 # send pass response
-                message = MySet.PassResponse.replace("$username", data.UserName).replace("$targetname", MySet.BombHolder).replace("$command", MySet.Command)
+                message = MySet.PassResponse.replace("$username", data.UserName).replace("$targetname", MySet.BombHolder).replace("$command", MySet.ActiveCommand)
                 SendResp(data, message)
 
                 
@@ -225,8 +238,14 @@ def Execute(data):
 
                 MySet.BombHolder = Parent.GetDisplayName(targetname)
             
+                # if RandomPassCommands is enabled get new random command
+                if MySet.RandomPassCommands == True:
+                    LastActiveCommand = MySet.ActiveCommand
+                    while LastActiveCommand == MySet.ActiveCommand:
+                        MySet.ActiveCommand = MySet.ActiveCommandList[Parent.GetRandom(0,len(MySet.ActiveCommandList))]
+                
                 # send start message
-                message = MySet.StartResponse.replace("$username", data.UserName).replace("$targetname", MySet.BombHolder).replace("$command", MySet.Command)
+                message = MySet.StartResponse.replace("$username", data.UserName).replace("$targetname", MySet.BombHolder).replace("$command", MySet.ActiveCommand)
                 SendResp(data, message)
 
 
@@ -239,6 +258,7 @@ def Tick():
         #reset game times
         MySet.ActiveGame = False
         MySet.ActiveGameEnd = None
+        MySet.ActiveCommand = MySet.Command
 
         # get current points from the bomb holder and set the amount that will be lost
         targetcurrentpoints = int(Parent.GetPoints(MySet.BombHolder.lower()))
