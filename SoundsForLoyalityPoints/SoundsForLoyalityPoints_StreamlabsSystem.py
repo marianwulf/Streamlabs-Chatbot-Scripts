@@ -74,6 +74,23 @@ class Settings:
         
         self.soundsList = []
         self.soundsListString = ""
+        
+        for sound in os.listdir(soundsPath):
+            soundFile = sound.rsplit(".")
+            if soundFile[1] == "mp3":
+                costsFile = os.path.join(soundsPath, soundFile[0] + ".txt")
+                if costsFile and os.path.isfile(costsFile):
+                    with codecs.open(costsFile, encoding='utf-8-sig', mode='r') as f:
+                        soundCost = int(f.readline())
+                else:
+                    soundCost = self.Cost
+                
+                self.soundsList.append([soundFile[0],soundCost])
+                self.soundsListString += soundFile[0] + "("+ str(soundCost) + "), "
+        
+        self.soundsListString = self.soundsListString[:-2]
+        Parent.Log(ScriptName, "Init Sounds: " + str(self.soundsListString))
+
     # Reload settings on save through UI
     def ReloadSettings(self, data):
         """Reload settings on save through UI"""
