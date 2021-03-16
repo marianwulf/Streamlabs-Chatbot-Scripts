@@ -18,7 +18,7 @@ from array import *
 ScriptName = "Bomb"
 Website = "https://github.com/marianwulf"
 Creator = "Marox"
-Version = "1.0.2"
+Version = "1.0.3"
 Description = "Bomb command"
 #---------------------------------------
 # Versions
@@ -27,6 +27,7 @@ Description = "Bomb command"
 1.0.0 - Initial Release
 1.0.1 - fixed empty targetnames in active users viewerlist
 1.0.2 - added feature: random pass commands
+1.0.3 - added feature: opt out
 """
 #---------------------------------------
 # Variables

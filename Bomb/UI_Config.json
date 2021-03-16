@@ -51,6 +51,55 @@
     "tooltip": "List Users that can not take the bomb. Seperated with comma.",
   	"group": "General"
   },
+  "EnableOptOut": {
+    "type": "checkbox",
+    "value": true,
+  	"label": "Allow Opt Out",
+    "tooltip": "Enable or Disable the possibility to opt out the game.",
+  	"group": "Opt Out"
+  },
+  "OptOutCommand": {
+    "type": "textbox",
+    "value": "!bomb-optout",
+  	"label": "Opt Out Command Name",
+    "tooltip": "The command the to opt out the game",
+  	"group": "Opt Out"
+  },
+  "AlreadyOptedOutResponse": {
+    "type": "textbox",
+    "value": "$username you already opted out the bomb game.",
+  	"label": "Already Opted Out Response",
+    "tooltip": "The message that the bot will display when the user tries to opt out but already is opted out. \r\n $username",
+  	"group": "Opt Out"
+  },
+  "SuccessOptedOutResponse": {
+    "type": "textbox",
+    "value": "$username you successfully opted out the bomb game.",
+  	"label": "Successful Opted Out Response",
+    "tooltip": "The message that the bot will display when the user successfully opted out the game. \r\n $username",
+  	"group": "Opt Out"
+  },
+  "OptInCommand": {
+    "type": "textbox",
+    "value": "!bomb-optin",
+  	"label": "Opt In Command Name",
+    "tooltip": "The command the to opt in the game",
+  	"group": "Opt Out"
+  },
+  "AlreadyOptedInResponse": {
+    "type": "textbox",
+    "value": "$username you already opted in the bomb game.",
+  	"label": "Already Opted In Response",
+    "tooltip": "The message that the bot will display when the user tries to opt in but already is opted in. \r\n $username",
+  	"group": "Opt Out"
+  },
+  "SuccessOptedInResponse": {
+    "type": "textbox",
+    "value": "$username you successfully opted in the bomb game.",
+  	"label": "Successful Opted In Response",
+    "tooltip": "The message that the bot will display when the user successfully opted in the game. \r\n $username",
+  	"group": "Opt Out"
+  },
   "RandomPassCommands": {
     "type": "checkbox",
     "value": false,
