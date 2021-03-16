@@ -52,6 +52,7 @@ class Settings:
             self.Permission = "Everyone"
             self.PermissionInfo = ""
             self.Usage = "Stream Chat"
+            self.EnoughCurrencyCheck = True
             self.RandomPassCommands = False
             self.EnableWrongCommandResponse = False
             self.PassCommandsList = "!gift,!donotcopypasteme,!bomb123"
@@ -214,9 +215,10 @@ def Execute(data):
                 if not HasPermission(data):
                     return
                 
-                # check if user has more points than highest possible lost
-                if not HasEnoughPoints(data, MySet.Max):
-                    return
+                # if currency check is enabled check if user has more points than highest possible lost
+                if MySet.EnoughCurrencyCheck:
+                    if not HasEnoughPoints(data, MySet.Max):
+                        return
             
                 # enable bomb
                 MySet.ActiveGame = True
