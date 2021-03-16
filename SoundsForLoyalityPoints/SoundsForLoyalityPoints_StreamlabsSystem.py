@@ -170,6 +170,9 @@ def Execute(data):
             for sound in MySet.soundsList:
                 if triggeredSound == sound[0]:
                 
+                    # check if user has more points than the costs
+                    if not HasEnoughPoints(data, sound[1]):
+                        return
 def Tick():
     """Required tick function"""
 
