@@ -279,7 +279,10 @@ def Tick():
 
         # get current points from the bomb holder and set the amount that will be lost
         targetcurrentpoints = int(Parent.GetPoints(MySet.BombHolder.lower()))
-        randompoints = Parent.GetRandom(MySet.Min, MySet.Max + 1)
+        if MySet.Min == MySet.Max:
+            randompoints = MySet.Max
+        else:
+            randompoints = Parent.GetRandom(MySet.Min, MySet.Max + 1)
 
         # if current points are lower than the points that will be lost trigger another response
         if targetcurrentpoints < randompoints:
