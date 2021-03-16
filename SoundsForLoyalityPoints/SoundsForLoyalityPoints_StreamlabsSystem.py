@@ -53,6 +53,8 @@ class Settings:
             self.Permission = "Everyone"
             self.PermissionInfo = ""
             self.Usage = "Stream Both"
+            self.Volume = 25
+            self.MessageDelayOnWhisper = 5
             self.UseCD = True
             self.Cooldown = 30
             self.OnCooldown = "$username the command is still on cooldown for $cooldown seconds!"
@@ -61,6 +63,17 @@ class Settings:
             self.CasterIgnoreCD = False
             self.NotEnoughResponse = "$username you don't have enough $currency to attempt this! You will need atleast $points $currency."
             self.PermissionResponse = "$username -> only $permission ($permissioninfo) and higher can use this command"
+            self.AvailibleSoundsResponse = "Availible sounds: $sounds"
+            self.PlayedSoundResponse = "$username played Sound: $sound"
+            self.PlayedSoundviaWhisperResponse = "$username played Sound: $sound via whisper"
+            self.SoundNotFoundResponse = "$username the sound you requested to play does not exist."
+            
+        self.ActiveDelay = False
+        self.ActiveDelayTime = None
+        self.ActiveDelayVars = []
+        
+        self.soundsList = []
+        self.soundsListString = ""
     # Reload settings on save through UI
     def ReloadSettings(self, data):
         """Reload settings on save through UI"""
