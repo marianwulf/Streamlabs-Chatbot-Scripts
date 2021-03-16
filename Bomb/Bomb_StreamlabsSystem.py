@@ -222,7 +222,7 @@ def Execute(data):
             
                 # enable bomb
                 MySet.ActiveGame = True
-                MySet.ActiveGameEnd = time.time() + Parent.GetRandom((MySet.ActiveGameTime*0.8), (MySet.ActiveGameTime*1.2))
+                MySet.ActiveGameEnd = time.time() + Parent.GetRandom((MySet.ActiveGameTime*0.9), (MySet.ActiveGameTime*1.1))
                 MySet.LastBombHolder = data.UserName
                 
                 # get active users from viewerlist and delete empty strings returned from chatbot
