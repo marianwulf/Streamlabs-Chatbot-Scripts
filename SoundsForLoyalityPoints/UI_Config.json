@@ -1,0 +1,159 @@
+﻿{
+  "output_file": "settings.json",
+    "OnlyLive": {
+    "type": "checkbox",
+    "value": false,
+  	"label": "Only when live",
+    "tooltip": "Command is only active when stream is live",
+  	"group": "General"
+  },
+    "Command": {
+    "type": "textbox",
+    "value": "!sound",
+  	"label": "Command Name",
+    "tooltip": "The command the bot will respond to",
+  	"group": "General"
+  },
+  "Cost": {
+    "type": "numberbox",
+  	"label": "Default Cost",
+    "value": 50,
+    "tooltip": "Default Cost to use the command",
+  	"group": "General"
+  },
+    "Permission": {
+    "type": "dropdown",
+    "value": "Everyone",
+    "items": ["Everyone","Regular","Subscriber","GameWisp Subscriber","User_Specific","Min_Rank","Min_Points","Min_Hours","Moderator","Editor","Caster"],
+    "label": "Permission level",
+    "tooltip": "Set the permission level for the command",
+    "group": "General"
+  },
+    "PermissionInfo": {
+    "type": "textbox",
+    "value": "",
+    "label": "Permission level info",
+    "tooltip": "Set the user, rank or tier for permission",
+    "group": "General"
+  },
+  "Usage": {
+    "type": "dropdown",
+    "value": "Stream Both",
+    "items": ["Stream Chat","Stream Whisper","Stream Both","Discord Chat","Discord Whisper","Discord Both","Chat Both","Whisper Both","All"],
+    "label": "Usage",
+    "tooltip": "Usage for where the script can be used!",
+    "group": "General"
+  },
+  "MessageDelayOnWhisper": {
+    "type": "slider",
+    "label": "Message Delay on Whisper",
+    "value": 5,
+    "min": 0,
+    "max": 30,
+    "ticks": 1,
+    "tooltip": "The Message Delay in the Stream Chat if someone requests a sound via whisper",
+    "group": "General"
+  },
+  "Volume": {
+    "type": "slider",
+    "label": "Volume",
+    "value": 25,
+    "min": 1,
+    "max": 100,
+    "ticks": 1,
+    "tooltip": "Volume",
+    "group": "General"
+  },
+    "UseCD": {
+    "type": "checkbox",
+    "value": true,
+  	"label": "Use Cooldown Messages",
+    "tooltip": "Enable/Disable cooldown messages",
+  	"group": "Cooldown"
+  },
+    "Cooldown": {
+    "type": "numberbox",
+  	"label": "Cooldown (seconds)",
+    "value": 30,
+    "tooltip": "Cooldown in seconds.",
+  	"group": "Cooldown"
+  },
+  "OnCooldown": {
+    "type": "textbox",
+    "value": "$username the command is still on cooldown for $cooldown seconds!",
+  	"label": "Cooldown Response",
+    "tooltip": "The message that the bot will display when the command is on cooldown. \r\n $username \r\n $cooldown",
+  	"group": "Cooldown"
+  },
+    "UserCooldown": {
+    "type": "numberbox",
+  	"label": "User Cooldown (seconds)",
+    "value": 180,
+    "tooltip": "User cooldown in seconds.",
+  	"group": "Cooldown"
+  },
+  "OnUserCooldown": {
+    "type": "textbox",
+    "value": "$username the command is still on user cooldown for $cooldown seconds!",
+  	"label": "User Cooldown Response",
+    "tooltip": "The message that the bot will display when the command is on user cooldown. \r\n $username \r\n $cooldown",
+  	"group": "Cooldown"
+  },
+  "CasterIgnoreCD": {
+    "type": "checkbox",
+    "value": false,
+  	"label": "Caster ignores cooldown",
+    "tooltip": "Enable/Disable cooldown for caster",
+  	"group": "Cooldown"
+  },
+  "AvailibleSoundsResponse": {
+    "type": "textbox",
+    "value": "Availible sounds: $sounds",
+    "label": "Availible sounds response",
+    "tooltip": "Message sent when user enters the command without any sound \r\n $username \r\n $sounds",
+    "group": "Responses"
+  },
+  "PlayedSoundResponse": {
+    "type": "textbox",
+    "value": "$username played Sound: $sound",
+    "label": "Played sound response",
+    "tooltip": "Message sent when user plays a sound \r\n $username \r\n $sound",
+    "group": "Responses"
+  },
+  "PlayedSoundviaWhisperResponse": {
+    "type": "textbox",
+    "value": "$username played Sound: $sound via whisper",
+    "label": "Played sound via whisper response",
+    "tooltip": "Message sent to the stream chat when user plays a sound via whisper \r\n $username \r\n $sound",
+    "group": "Responses"
+  },
+  "SoundNotFoundResponse": {
+    "type": "textbox",
+    "value": "$username the sound you requested to play does not exist.",
+    "label": "Sound not found response",
+    "tooltip": "Message sent when user enters an invalid sound \r\n $username",
+    "group": "Responses"
+  },
+  "NotEnoughResponse": {
+    "type": "textbox",
+    "value": "$username you don't have enough $currency to attempt this! You will need atleast $points $currency.",
+    "label": "Not enough currency response",
+    "tooltip": "Message sent when user doesn't have enough points \r\n $username \r\n $currency \r\n $points",
+    "group": "Responses"
+  },
+  "PermissionResponse": {
+    "type": "textbox",
+    "value": "$username -> only $permission ($permissioninfo) and higher can use this command",
+    "label": "Permission denied response",
+    "tooltip": "Message sent when user doesn't select any valid wire. \r\n $username \r\n $permission \r\n $permissioninfo",
+    "group": "Responses"
+  },
+    "BtnDefaults": {
+    "type": "button",
+    "label": "Restore Default Settings",
+    "tooltip": "Reset settings back to defaults.\r\nReload Scripts afterwards to see the changes in the user interface!",
+    "function": "SetDefaults",
+    "wsevent": "",
+    "group": ""
+  }
+}
