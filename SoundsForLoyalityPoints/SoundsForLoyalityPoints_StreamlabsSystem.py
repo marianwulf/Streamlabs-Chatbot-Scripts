@@ -200,6 +200,16 @@ def Tick():
         if Parent.PlaySound(AudioQueue[0], MySet.Volume*0.01):
             AudioQueue.popleft()
             
+    # check if delay time is over
+    if MySet.ActiveDelay and time.time() >= MySet.ActiveDelayTime:
+        
+        for sound in MySet.ActiveDelayVars:
+            message = MySet.PlayedSoundviaWhisperResponse.replace("$username", sound[0]).replace("$sound", str(sound[1]))
+            Parent.SendStreamMessage(message)
+        del MySet.ActiveDelayVars[:]
+        MySet.ActiveDelay = False
+        MySet.ActiveDelayTime = None
+
 #---------------------------------------
 # [Optional] Functions for usage handling
 #---------------------------------------
