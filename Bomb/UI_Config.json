@@ -37,6 +37,13 @@
     "tooltip": "Usage for where the script can be used!",
     "group": "General"
   },
+  "EnoughCurrencyCheck": {
+    "type": "checkbox",
+    "value": true,
+  	"label": "Enough Currency Check",
+    "tooltip": "Check if the starting user has more points than the highest possible lost",
+  	"group": "General"
+  },
   "Blacklist": {
     "type": "textbox",
     "value": "Streamlabs,Nightbot,Anotherttvviewer,Soundalerts,Bebiyoda,Commanderroot",
