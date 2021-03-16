@@ -159,6 +159,11 @@ def Execute(data):
             if IsOnCooldown(data):
                 return
                 
+            
+            if data.GetParamCount() < 2:
+                message = MySet.AvailibleSoundsResponse.replace("$username", data.UserName).replace("$sounds", str(MySet.soundsListString))
+                SendResp(data, message)
+                return
 def Tick():
     """Required tick function"""
 
