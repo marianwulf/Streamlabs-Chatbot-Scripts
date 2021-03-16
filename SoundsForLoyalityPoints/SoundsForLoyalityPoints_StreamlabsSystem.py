@@ -196,6 +196,10 @@ def Execute(data):
 def Tick():
     """Required tick function"""
 
+    if AudioQueue:
+        if Parent.PlaySound(AudioQueue[0], MySet.Volume*0.01):
+            AudioQueue.popleft()
+            
 #---------------------------------------
 # [Optional] Functions for usage handling
 #---------------------------------------
