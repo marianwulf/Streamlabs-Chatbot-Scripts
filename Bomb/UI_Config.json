@@ -83,14 +83,14 @@
     "type": "numberbox",
   	"label": "Min value",
     "value": 10,
-    "tooltip": "Min value - a value in between will be taken",
+    "tooltip": "Min value - a value in between will be taken. It is also possible to set min and max to the same value.",
   	"group": "Outcomes"
   },
   "Max": {
     "type": "numberbox",
   	"label": "Max value",
     "value": 20,
-    "tooltip": "Max value - a value in between will be taken",
+    "tooltip": "Max value - a value in between will be taken. It is also possible to set min and max to the same value.",
   	"group": "Outcomes"
   },
   "WinPointsPercentage": {
