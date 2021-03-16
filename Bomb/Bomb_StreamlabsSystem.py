@@ -55,6 +55,12 @@ class Settings:
             self.Usage = "Stream Chat"
             self.EnoughCurrencyCheck = True
             self.EnableOptOut = True
+            self.OptOutCommand = "!bomb-optout"
+            self.AlreadyOptedOutResponse = "$username you already opted out the bomb game."
+            self.SuccessOptedOutResponse = "$username you successfully opted out the bomb game."
+            self.OptInCommand = "!bomb-optin"
+            self.AlreadyOptedInResponse = "$username you already opted in the bomb game."
+            self.SuccessOptedInResponse = "$username you successfully opted in the bomb game."
             self.RandomPassCommands = False
             self.EnableWrongCommandResponse = False
             self.PassCommandsList = "!gift,!donotcopypasteme,!bomb123"
@@ -167,6 +173,33 @@ def Execute(data):
                 SendResp(data, message)
                 return
 
+    # check if opt out/in feature is enabled
+    if MySet.EnableOptOut:
+        # if OptOutCommand is entered check if user is already opted out, otherwise add him to the list
+        if data.IsChatMessage() and data.GetParam(0).lower() == MySet.OptOutCommand.lower():
+            if data.User in MySet.OptOutList:
+                message = MySet.AlreadyOptedOutResponse.replace("$username", data.UserName)
+                SendResp(data, message)
+                return
+            else:
+                MySet.OptOutList.append(data.User)
+                message = MySet.SuccessOptedOutResponse.replace("$username", data.UserName)
+                SendResp(data, message)
+                MySet.SaveOptOut()
+                return
+        # if OptInCommand is entered check if user is already opted in, otherwise remove him from the list       
+        if data.IsChatMessage() and data.GetParam(0).lower() == MySet.OptInCommand.lower():
+            if data.User not in MySet.OptOutList:
+                message = MySet.AlreadyOptedInResponse.replace("$username", data.UserName)
+                SendResp(data, message)
+                return
+            else:
+                MySet.OptOutList.remove(data.User)
+                message = MySet.SuccessOptedInResponse.replace("$username", data.UserName)
+                SendResp(data, message)
+                MySet.SaveOptOut()
+                return
+    
     # check if command is command
     if data.IsChatMessage() and data.GetParam(0).lower() == MySet.ActiveCommand.lower():
 
@@ -195,7 +228,7 @@ def Execute(data):
                 
                 # if target is the same person as the bomb holder or blacklisted try again. if no other target is found send message
                 tries = 0
-                while targetname.lower() == MySet.BombHolder.lower() or targetname.lower() in MySet.UserBlacklist:
+                while targetname.lower() == MySet.BombHolder.lower() or targetname.lower() in MySet.UserBlacklist or targetname.lower() in MySet.OptOutList:
                     if tries >= 25:
                         message = MySet.NoTargetFoundResponse.replace("$username", data.UserName)
                         SendResp(data, message)
@@ -255,7 +288,7 @@ def Execute(data):
                 
                 # if target is the same person as the starting user or blacklisted try again. if no other target is found send message
                 tries = 0
-                while targetname.lower() == data.User or targetname.lower() in MySet.UserBlacklist:
+                while targetname.lower() == data.User or targetname.lower() in MySet.UserBlacklist or targetname.lower() in MySet.OptOutList:
                     if tries >= 25:
                         message = MySet.NoTargetFoundResponse.replace("$username", data.UserName)
                         SendResp(data, message)
