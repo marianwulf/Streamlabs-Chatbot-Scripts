@@ -188,6 +188,11 @@ def Execute(data):
                         MySet.ActiveDelayVars.append([data.UserName,sound[0]])
                     return
                 
+                
+            message = MySet.SoundNotFoundResponse.replace("$username", data.UserName)
+            SendResp(data, message)
+            return
+    
 def Tick():
     """Required tick function"""
 
