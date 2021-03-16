@@ -32,6 +32,7 @@ Description = "Bomb command"
 # Variables
 #---------------------------------------
 settingsFile = os.path.join(os.path.dirname(__file__), "settings.json")
+optOutFile = os.path.join(os.path.dirname(__file__), "optout.json")
 
 #---------------------------------------
 # Classes
@@ -53,6 +54,7 @@ class Settings:
             self.PermissionInfo = ""
             self.Usage = "Stream Chat"
             self.EnoughCurrencyCheck = True
+            self.EnableOptOut = True
             self.RandomPassCommands = False
             self.EnableWrongCommandResponse = False
             self.PassCommandsList = "!gift,!donotcopypasteme,!bomb123"
@@ -77,6 +79,13 @@ class Settings:
             self.NotEnoughResponse = "$username you don´t have enough $currency to attempt this! You will need atleast $points $currency."
             self.PermissionResponse = "$username -> only $permission ($permissioninfo) and higher can use this command"
             
+        
+        # load optOutFile if it exists
+        if optOutFile and os.path.isfile(optOutFile) and self.EnableOptOut:
+            with codecs.open(optOutFile, encoding='utf-8-sig', mode='r') as f:
+                self.OptOutList = json.load(f, encoding='utf-8-sig')
+        else:
+            self.OptOutList = []
         # load variables that do not need to be customisable from the ui
         self.ActiveGame = False
         self.ActiveGameEnd = None
@@ -104,6 +113,10 @@ class Settings:
         with codecs.open(settingsFile.replace("json", "js"), encoding='utf-8-sig', mode='w+') as f:
             f.write("var settings = {0};".format(json.dumps(self.__dict__, encoding='utf-8-sig', ensure_ascii=False)))
         return
+    
+    def SaveOptOut(self):        
+        with codecs.open(optOutFile, encoding='utf-8-sig', mode='w') as f:
+            json.dump(MySet.OptOutList, f, encoding='utf-8-sig')
 #---------------------------------------
 # [OPTIONAL] Settings functions
 #---------------------------------------
