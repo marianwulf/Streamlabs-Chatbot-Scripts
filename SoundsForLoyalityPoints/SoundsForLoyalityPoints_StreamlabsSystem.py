@@ -164,6 +164,12 @@ def Execute(data):
                 message = MySet.AvailibleSoundsResponse.replace("$username", data.UserName).replace("$sounds", str(MySet.soundsListString))
                 SendResp(data, message)
                 return
+            
+            triggeredSound = data.GetParam(1).lower()
+            
+            for sound in MySet.soundsList:
+                if triggeredSound == sound[0]:
+                
 def Tick():
     """Required tick function"""
 
