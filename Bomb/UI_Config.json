@@ -198,14 +198,14 @@
     "type": "textbox",
     "value": "The bomb exploded and $loser had only $pointslost $currency, so he lost everything. $winner was the last person to pass the bomb and won $pointswon $currency",
   	"label": "Target Lost and had not enough points",
-    "tooltip": "The message that the bot will display when the loser had not enough points. \r\n $winner \r\n $loser \r\n $pointswon \r\n $pointslost \r\n $currency",
+    "tooltip": "The message that the bot will display when the bomb explodes and the loser had not enough points. \r\n $winner \r\n $loser \r\n $pointswon \r\n $pointslost \r\n $currency",
   	"group": "Responses"
   },
   "TargetLost": {
     "type": "textbox",
-    "value": "The bomb exploded and $loser had only $pointslost $currency, so he lost everything. $winner was the last person to pass the bomb and won $pointswon $currency",
+    "value": "The bomb exploded and $loser lost $pointslost $currency. $winner was the last person to pass the bomb and won $pointswon $currency",
   	"label": "Target Lost",
-    "tooltip": "The message that the bot will display when the loser had not enough points. \r\n $winner \r\n $loser \r\n $pointswon \r\n $pointslost \r\n $currency",
+    "tooltip": "The message that the bot will display when the bomb explodes. \r\n $winner \r\n $loser \r\n $pointswon \r\n $pointslost \r\n $currency",
   	"group": "Responses"
   },
     "BtnDefaults": {
