@@ -173,6 +173,21 @@ def Execute(data):
                     # check if user has more points than the costs
                     if not HasEnoughPoints(data, sound[1]):
                         return
+                        
+                    soundFile = os.path.join(soundsPath, sound[0] + ".mp3")
+                    Parent.Log(ScriptName, "Played sound: " + soundFile)
+                    AudioQueue.append(soundFile)
+                    Parent.RemovePoints(data.User, data.UserName, sound[1])
+                    AddCooldown(data)
+                    if not data.IsFromDiscord() and not data.IsWhisper():
+                        message = MySet.PlayedSoundResponse.replace("$username", data.UserName).replace("$sound", str(sound[0]))
+                        Parent.SendStreamMessage(message)
+                    if not data.IsFromDiscord() and data.IsWhisper():
+                        MySet.ActiveDelay = True
+                        MySet.ActiveDelayTime = time.time() + MySet.MessageDelayOnWhisper
+                        MySet.ActiveDelayVars.append([data.UserName,sound[0]])
+                    return
+                
 def Tick():
     """Required tick function"""
 
