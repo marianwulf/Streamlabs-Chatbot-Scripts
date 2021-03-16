@@ -128,7 +128,7 @@
     "type": "numberbox",
   	"label": "Game time (seconds)",
     "value": 120,
-    "tooltip": "Game time till the bomb explodes (in seconds). Will be randomed from 80% to 120%",
+    "tooltip": "Game time till the bomb explodes (in seconds). Will be randomed from 90% to 110%",
   	"group": "Cooldown"
   },
     "Cooldown": {
